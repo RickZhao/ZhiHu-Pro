@@ -1,0 +1,69 @@
+﻿<Page
+    x:Class="Zhihu.View.SearchPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Zhihu.View"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{StaticResource PageBackBrush}"
+    xmlns:itemView="using:Zhihu.Controls.ItemView"
+    DataContext="{Binding Search, Mode=OneWay, Source={StaticResource Locator}}">
+
+    <Page.Resources>
+        <CollectionViewSource x:Name="ContentsSource" Source="{Binding Path=Contents, Mode=OneWay}"/>
+        <CollectionViewSource x:Name="PeopleSource" Source="{Binding Path=People, Mode=OneWay}"/>
+    </Page.Resources>
+
+    <Grid Background="{StaticResource PageBackBrush}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <TextBox x:Name="SearchBox" Margin="12 24 12 0" FontSize="24" Grid.Row="0"
+                 PlaceholderText="搜索问题、话题或人..."
+                 HorizontalAlignment="Stretch"
+                 Text="{Binding Keyword, Mode=TwoWay, UpdateSourceTrigger=Explicit}"
+                 TextChanged="SearchBox_OnTextChanged"/>
+
+        <ProgressBar Grid.Row="1" Background="{StaticResource ProgressBackBrush}" Foreground="{StaticResource ProgressForeBrush}" IsIndeterminate="{Binding Searching}"/>
+
+        <Pivot Grid.Row="2" FontSize="14"
+               HeaderTemplate="{StaticResource PivotHeaderTemplate}"
+               Style="{StaticResource PivotNormalStyle}">
+            <Pivot.Items>
+                <PivotItem Header="内容" Margin="0">
+                    <ListView IsItemClickEnabled="True"
+                          IncrementalLoadingThreshold="2"
+                          IncrementalLoadingTrigger="Edge"
+                          ItemsSource="{Binding Source={StaticResource ContentsSource}}"
+                          ItemContainerStyle="{StaticResource ListViewItemStyle}"
+                          SelectionMode="Single"
+                          ContainerContentChanging="Search_OnContainerContentChanging">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <itemView:SearchItemView/>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </PivotItem>
+                <PivotItem Header="用户" Margin="0">
+                    <ListView ItemsSource="{Binding Source={StaticResource PeopleSource}}"
+                          SelectionMode="Single" IsItemClickEnabled="True"
+                          IncrementalLoadingThreshold="2" 
+                          IncrementalLoadingTrigger="Edge"
+                          ItemContainerStyle="{StaticResource ListViewItemStyle}"
+                          ContainerContentChanging="Author_OnContainerContentChanging">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <itemView:AuthorView/>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </PivotItem>
+            </Pivot.Items>
+        </Pivot>
+    </Grid>
+</Page>

@@ -1,0 +1,74 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Blend for Visual Studio 14
+VisualStudioVersion = 14.0.24720.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zhihu", "Zhihu\Zhihu.csproj", "{5F7AC4D7-28B2-4C93-A899-816828524482}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zhihu.Common", "Zhihu.Common\Zhihu.Common.csproj", "{0DEE6BDB-E845-41A8-A5A8-683D9C78415B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|ARM = Debug|ARM
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		Release|Any CPU = Release|Any CPU
+		Release|ARM = Release|ARM
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5F7AC4D7-28B2-4C93-A899-816828524482}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{5F7AC4D7-28B2-4C93-A899-816828524482}.Debug|ARM.ActiveCfg = Debug|ARM
+		{5F7AC4D7-28B2-4C93-A899-816828524482}.Debug|ARM.Build.0 = Debug|ARM
+		{5F7AC4D7-28B2-4C93-A899-816828524482}.Debug|ARM.Deploy.0 = Debug|ARM
+		{5F7AC4D7-28B2-4C93-A899-816828524482}.Debug|x64.ActiveCfg = Debug|x64
+		{5F7AC4D7-28B2-4C93-A899-816828524482}.Debug|x64.Build.0 = Debug|x64
+		{5F7AC4D7-28B2-4C93-A899-816828524482}.Debug|x64.Deploy.0 = Debug|x64
+		{5F7AC4D7-28B2-4C93-A899-816828524482}.Debug|x86.ActiveCfg = Debug|x86
+		{5F7AC4D7-28B2-4C93-A899-816828524482}.Debug|x86.Build.0 = Debug|x86
+		{5F7AC4D7-28B2-4C93-A899-816828524482}.Debug|x86.Deploy.0 = Debug|x86
+		{5F7AC4D7-28B2-4C93-A899-816828524482}.Release|Any CPU.ActiveCfg = Release|x86
+		{5F7AC4D7-28B2-4C93-A899-816828524482}.Release|ARM.ActiveCfg = Release|ARM
+		{5F7AC4D7-28B2-4C93-A899-816828524482}.Release|ARM.Build.0 = Release|ARM
+		{5F7AC4D7-28B2-4C93-A899-816828524482}.Release|ARM.Deploy.0 = Release|ARM
+		{5F7AC4D7-28B2-4C93-A899-816828524482}.Release|x64.ActiveCfg = Release|x64
+		{5F7AC4D7-28B2-4C93-A899-816828524482}.Release|x64.Build.0 = Release|x64
+		{5F7AC4D7-28B2-4C93-A899-816828524482}.Release|x64.Deploy.0 = Release|x64
+		{5F7AC4D7-28B2-4C93-A899-816828524482}.Release|x86.ActiveCfg = Release|x86
+		{5F7AC4D7-28B2-4C93-A899-816828524482}.Release|x86.Build.0 = Release|x86
+		{5F7AC4D7-28B2-4C93-A899-816828524482}.Release|x86.Deploy.0 = Release|x86
+		{0DEE6BDB-E845-41A8-A5A8-683D9C78415B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0DEE6BDB-E845-41A8-A5A8-683D9C78415B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0DEE6BDB-E845-41A8-A5A8-683D9C78415B}.Debug|ARM.ActiveCfg = Debug|ARM
+		{0DEE6BDB-E845-41A8-A5A8-683D9C78415B}.Debug|ARM.Build.0 = Debug|ARM
+		{0DEE6BDB-E845-41A8-A5A8-683D9C78415B}.Debug|x64.ActiveCfg = Debug|x64
+		{0DEE6BDB-E845-41A8-A5A8-683D9C78415B}.Debug|x64.Build.0 = Debug|x64
+		{0DEE6BDB-E845-41A8-A5A8-683D9C78415B}.Debug|x86.ActiveCfg = Debug|x86
+		{0DEE6BDB-E845-41A8-A5A8-683D9C78415B}.Debug|x86.Build.0 = Debug|x86
+		{0DEE6BDB-E845-41A8-A5A8-683D9C78415B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0DEE6BDB-E845-41A8-A5A8-683D9C78415B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0DEE6BDB-E845-41A8-A5A8-683D9C78415B}.Release|ARM.ActiveCfg = Release|ARM
+		{0DEE6BDB-E845-41A8-A5A8-683D9C78415B}.Release|ARM.Build.0 = Release|ARM
+		{0DEE6BDB-E845-41A8-A5A8-683D9C78415B}.Release|x64.ActiveCfg = Release|x64
+		{0DEE6BDB-E845-41A8-A5A8-683D9C78415B}.Release|x64.Build.0 = Release|x64
+		{0DEE6BDB-E845-41A8-A5A8-683D9C78415B}.Release|x86.ActiveCfg = Release|x86
+		{0DEE6BDB-E845-41A8-A5A8-683D9C78415B}.Release|x86.Build.0 = Release|x86
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 3
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = https://xiaoq.visualstudio.com/defaultcollection
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = Zhihu\\Zhihu.csproj
+		SccProjectName1 = Zhihu
+		SccLocalPath1 = Zhihu
+		SccProjectUniqueName2 = Zhihu.Common\\Zhihu.Common.csproj
+		SccProjectName2 = Zhihu.Common
+		SccLocalPath2 = Zhihu.Common
+	EndGlobalSection
+EndGlobal

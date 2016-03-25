@@ -1,0 +1,31 @@
+﻿<UserControl
+    x:Class="Zhihu.Controls.RichBlock"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:itemView="using:Zhihu.Controls.ItemView"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    d:DesignHeight="300"
+    d:DesignWidth="400">
+
+    <ListView x:Name="ContentView" DataFetchSize="3"
+              HorizontalAlignment="Stretch" 
+              HorizontalContentAlignment="Stretch"
+              
+              IsItemClickEnabled="False"
+              IncrementalLoadingTrigger="Edge"
+              IncrementalLoadingThreshold="5"
+              ItemContainerStyle="{StaticResource ListViewItemStyle}"
+              
+              SelectionMode="Single"
+              
+              ContainerContentChanging="AnswerContent_OnContainerContentChanging">
+              <!--ItemsSource="{Binding Paras, Mode=OneWay}"-->
+        <ListView.ItemTemplate>
+            <DataTemplate>
+                <itemView:ParagraphView />
+            </DataTemplate>
+        </ListView.ItemTemplate>
+    </ListView>
+</UserControl>

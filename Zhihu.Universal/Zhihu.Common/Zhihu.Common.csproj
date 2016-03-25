@@ -1,0 +1,590 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{0DEE6BDB-E845-41A8-A5A8-683D9C78415B}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Zhihu.Common</RootNamespace>
+    <AssemblyName>Zhihu.Common</AssemblyName>
+    <DefaultLanguage>zh-CN</DefaultLanguage>
+    <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
+    <TargetPlatformVersion>10.0.10240.0</TargetPlatformVersion>
+    <TargetPlatformMinVersion>10.0.10240.0</TargetPlatformMinVersion>
+    <MinimumVisualStudioVersion>14</MinimumVisualStudioVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{A5A43C5B-DE2A-4C0C-9213-0A381AF9435A};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;NETFX_CORE;WINDOWS_UWP;METRO;</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE;NETFX_CORE;WINDOWS_UWP;METRO;</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|ARM'">
+    <PlatformTarget>ARM</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\ARM\Debug\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;NETFX_CORE;WINDOWS_UWP;METRO;</DefineConstants>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>full</DebugType>
+    <PlatformTarget>ARM</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|ARM'">
+    <PlatformTarget>ARM</PlatformTarget>
+    <OutputPath>bin\ARM\Release\</OutputPath>
+    <DefineConstants>TRACE;NETFX_CORE;WINDOWS_UWP;METRO;</DefineConstants>
+    <Optimize>true</Optimize>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>ARM</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <PlatformTarget>x64</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x64\Debug\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;NETFX_CORE;WINDOWS_UWP;METRO;</DefineConstants>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <PlatformTarget>x64</PlatformTarget>
+    <OutputPath>bin\x64\Release\</OutputPath>
+    <DefineConstants>TRACE;NETFX_CORE;WINDOWS_UWP;METRO;</DefineConstants>
+    <Optimize>true</Optimize>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x86\Debug\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;NETFX_CORE;WINDOWS_UWP;METRO;</DefineConstants>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <PlatformTarget>x86</PlatformTarget>
+    <OutputPath>bin\x86\Release\</OutputPath>
+    <DefineConstants>TRACE;NETFX_CORE;WINDOWS_UWP;METRO;</DefineConstants>
+    <Optimize>true</Optimize>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <!-- A reference to the entire .Net Framework and Windows SDK are automatically included -->
+    <None Include="project.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Cache\DbContext.cs" />
+    <Compile Include="Cache\CachedImage.cs" />
+    <Compile Include="Cache\CachedJson.cs" />
+    <Compile Include="Cache\SQLite.cs" />
+    <Compile Include="Cache\SQLiteAsync.cs" />
+    <Compile Include="Cache\UploadedImage.cs" />
+    <Compile Include="DataSource\IncrementalLoadingBase.cs" />
+    <Compile Include="DataSource\IncrementalLoading.cs" />
+    <Compile Include="DataSource\LazyLoading.cs" />
+    <Compile Include="DataSource\LazyLoadingBase.cs" />
+    <Compile Include="Helper\AvatarHelper.cs" />
+    <Compile Include="Helper\CacheHelper.cs" />
+    <Compile Include="Helper\DateTimeFormatHelper.cs" />
+    <Compile Include="Helper\FileUtility.cs" />
+    <Compile Include="Helper\HttpUtility.cs" />
+    <Compile Include="Helper\LocalSettingUtility.cs" />
+    <Compile Include="Helper\LocalStoreHelper.cs" />
+    <Compile Include="Helper\MessageTemplateSelector.cs" />
+    <Compile Include="Helper\ObservableDictionary.cs" />
+    <Compile Include="Helper\SuspensionManager.cs" />
+    <Compile Include="Helper\TiltEffect.cs" />
+    <Compile Include="Helper\UnicodeConverter.cs" />
+    <Compile Include="Helper\Utility.cs" />
+    <Compile Include="Helper\VerbModel.cs" />
+    <Compile Include="Helper\VerbModels.cs" />
+    <Compile Include="Helper\VisualTreeExtensions.cs" />
+    <Compile Include="Helper\VmHelper.cs" />
+    <Compile Include="HtmlAgilityPack\Crc32.cs" />
+    <Compile Include="HtmlAgilityPack\EncodingFoundException.cs" />
+    <Compile Include="HtmlAgilityPack\HtmlAttribute.cs" />
+    <Compile Include="HtmlAgilityPack\HtmlAttributeCollection.cs" />
+    <Compile Include="HtmlAgilityPack\HtmlCommentNode.cs" />
+    <Compile Include="HtmlAgilityPack\HtmlDocument.cs" />
+    <Compile Include="HtmlAgilityPack\HtmlDocumentLoadCompleted.cs" />
+    <Compile Include="HtmlAgilityPack\HtmlElementFlag.cs" />
+    <Compile Include="HtmlAgilityPack\HtmlEntity.cs" />
+    <Compile Include="HtmlAgilityPack\HtmlNameTable.cs" />
+    <Compile Include="HtmlAgilityPack\HtmlNode.cs" />
+    <Compile Include="HtmlAgilityPack\HtmlNodeCollection.cs" />
+    <Compile Include="HtmlAgilityPack\HtmlNodeType.cs" />
+    <Compile Include="HtmlAgilityPack\HtmlParseError.cs" />
+    <Compile Include="HtmlAgilityPack\HtmlParseErrorCode.cs" />
+    <Compile Include="HtmlAgilityPack\HtmlTextNode.cs" />
+    <Compile Include="HtmlAgilityPack\HtmlWeb.cs" />
+    <Compile Include="HtmlAgilityPack\HtmlWebException.cs" />
+    <Compile Include="HtmlAgilityPack\InvalidProgramException.cs" />
+    <Compile Include="HtmlAgilityPack\NameValuePair.cs" />
+    <Compile Include="HtmlAgilityPack\NameValuePairList.cs" />
+    <Compile Include="HtmlAgilityPack\ParseState.cs" />
+    <Compile Include="HtmlAgilityPack\Trace.cs" />
+    <Compile Include="HtmlAgilityPack\Utilities.cs" />
+    <Compile Include="Model\Activity\Activities.cs" />
+    <Compile Include="Model\Activity\Activity.cs" />
+    <Compile Include="Model\Anonymous.cs" />
+    <Compile Include="Model\Answer\Answer.cs" />
+    <Compile Include="Model\Answer\AnswerCanComment.cs" />
+    <Compile Include="Model\Answer\AnswerComments.cs" />
+    <Compile Include="Model\Answer\AnswerDetail.cs" />
+    <Compile Include="Model\Answer\AnswerHelped.cs" />
+    <Compile Include="Model\Answer\AnswerRelationship.cs" />
+    <Compile Include="Model\Answer\Answers.cs" />
+    <Compile Include="Model\Author\Author.cs" />
+    <Compile Include="Model\Author\Authors.cs" />
+    <Compile Include="Model\Banner.cs" />
+    <Compile Include="Model\Business.cs" />
+    <Compile Include="Model\Collection\CollectioinCreater.cs" />
+    <Compile Include="Model\Collection\Collection.cs" />
+    <Compile Include="Model\Collection\CollectionAnswers.cs" />
+    <Compile Include="Model\Collection\Collections.cs" />
+    <Compile Include="Model\Collection\HotCollection.cs" />
+    <Compile Include="Model\Collection\HotCollections.cs" />
+    <Compile Include="Model\Column\Article.cs" />
+    <Compile Include="Model\Column\Articles.cs" />
+    <Compile Include="Model\Column\Column.cs" />
+    <Compile Include="Model\Column\Columns.cs" />
+    <Compile Include="Model\Comment\Comment.cs" />
+    <Compile Include="Model\Comment\Comments.cs" />
+    <Compile Include="Model\EditorRecommends.cs" />
+    <Compile Include="Model\Education.cs" />
+    <Compile Include="Model\Employment.cs" />
+    <Compile Include="Model\Error.cs" />
+    <Compile Include="Model\ExplorePeople.cs" />
+    <Compile Include="Model\Favorite.cs" />
+    <Compile Include="Model\Feeds.cs" />
+    <Compile Include="Model\Followees.cs" />
+    <Compile Include="Model\Followers.cs" />
+    <Compile Include="Model\Following.cs" />
+    <Compile Include="Model\HotAnswers.cs" />
+    <Compile Include="Model\HotTopicsCollections.cs" />
+    <Compile Include="Model\Html\ParagraphModel.cs" />
+    <Compile Include="Model\ImageUploadResult.cs" />
+    <Compile Include="Model\Inbox\Chat.cs" />
+    <Compile Include="Model\Inbox\Chats.cs" />
+    <Compile Include="Model\Inbox\Message.cs" />
+    <Compile Include="Model\Inbox\Messages.cs" />
+    <Compile Include="Model\Inbox\Participant.cs" />
+    <Compile Include="Model\Inbox\Receiver.cs" />
+    <Compile Include="Model\Inbox\Sender.cs" />
+    <Compile Include="Model\Invite.cs" />
+    <Compile Include="Model\Location.cs" />
+    <Compile Include="Model\LoginUser.cs" />
+    <Compile Include="Model\Notify\Notification.cs" />
+    <Compile Include="Model\Notify\Notifies.cs" />
+    <Compile Include="Model\Notify\NotifyItem.cs" />
+    <Compile Include="Model\Operation.cs" />
+    <Compile Include="Model\Operator.cs" />
+    <Compile Include="Model\Paging.cs" />
+    <Compile Include="Model\PeopleFollowing.cs" />
+    <Compile Include="Model\Profile.cs" />
+    <Compile Include="Model\Question\Question.cs" />
+    <Compile Include="Model\Question\QuestionPut.cs" />
+    <Compile Include="Model\Question\QuestionRelationship.cs" />
+    <Compile Include="Model\Question\Questions.cs" />
+    <Compile Include="Model\ReportReason.cs" />
+    <Compile Include="Model\Result\ActivitiesResult.cs" />
+    <Compile Include="Model\Result\AnonymousResult.cs" />
+    <Compile Include="Model\Result\AnswerResult.cs" />
+    <Compile Include="Model\Result\ArticleResult.cs" />
+    <Compile Include="Model\Result\ArticlesResult.cs" />
+    <Compile Include="Model\Result\AuthorsResult.cs" />
+    <Compile Include="Model\Result\ChatsResult.cs" />
+    <Compile Include="Model\Result\CollectionResult.cs" />
+    <Compile Include="Model\Result\ColumnResult.cs" />
+    <Compile Include="Model\Result\ColumnsResult.cs" />
+    <Compile Include="Model\Result\CommentsResult.cs" />
+    <Compile Include="Model\Result\ExplorerResult.cs" />
+    <Compile Include="Model\Result\FavoriteResult.cs" />
+    <Compile Include="Model\Result\FolloweesResult.cs" />
+    <Compile Include="Model\Result\FollowersResult.cs" />
+    <Compile Include="Model\Result\FollowingResult.cs" />
+    <Compile Include="Model\Result\FollowResult.cs" />
+    <Compile Include="Model\Result\HotAnswersResult.cs" />
+    <Compile Include="Model\Result\InviteResult.cs" />
+    <Compile Include="Model\Result\LoginResult.cs" />
+    <Compile Include="Model\Result\MessageResult.cs" />
+    <Compile Include="Model\Result\MessagesResult.cs" />
+    <Compile Include="Model\Result\NotifiesResult.cs" />
+    <Compile Include="Model\Result\NotifyItemResult.cs" />
+    <Compile Include="Model\Result\ProfileResult.cs" />
+    <Compile Include="Model\Result\QuestionResult.cs" />
+    <Compile Include="Model\Result\Result.cs" />
+    <Compile Include="Model\Result\TableActivitiesResult.cs" />
+    <Compile Include="Model\Result\TableQuestionsResult.cs" />
+    <Compile Include="Model\Result\TableResult.cs" />
+    <Compile Include="Model\Result\SearchResult.cs" />
+    <Compile Include="Model\Result\ShareResult.cs" />
+    <Compile Include="Model\Result\TopicActivitiesResult.cs" />
+    <Compile Include="Model\Result\TopicResult.cs" />
+    <Compile Include="Model\Result\UnReadResult.cs" />
+    <Compile Include="Model\Result\UseTopStoryResult.cs" />
+    <Compile Include="Model\Result\VoteResult.cs" />
+    <Compile Include="Model\RoundTable\RoundTable.cs" />
+    <Compile Include="Model\RoundTable\TableQuestions.cs" />
+    <Compile Include="Model\Search\SearchItem.cs" />
+    <Compile Include="Model\Search\SearchItems.cs" />
+    <Compile Include="Model\Setting\UseTopStory.cs" />
+    <Compile Include="Model\Share\ShareTemplates.cs" />
+    <Compile Include="Model\SuggestEdit.cs" />
+    <Compile Include="Model\TableActivities.cs" />
+    <Compile Include="Model\Topic\Topic.cs" />
+    <Compile Include="Model\Topic\TopicActivities.cs" />
+    <Compile Include="Model\Topic\TopicActivity.cs" />
+    <Compile Include="Model\Topic\TopicBestAnswers.cs" />
+    <Compile Include="Model\Topic\Topics.cs" />
+    <Compile Include="Model\UnRead.cs" />
+    <Compile Include="Model\UserInfo.cs" />
+    <Compile Include="Model\Vote.cs" />
+    <Compile Include="Net\AnswerApi.cs" />
+    <Compile Include="Net\ArticleApi.cs" />
+    <Compile Include="Net\CollectionApi.cs" />
+    <Compile Include="Net\ColumnApi.cs" />
+    <Compile Include="Net\CommentApi.cs" />
+    <Compile Include="Net\HotApi.cs" />
+    <Compile Include="Net\MessageApi.cs" />
+    <Compile Include="Net\NotifyApi.cs" />
+    <Compile Include="Net\QuestionApi.cs" />
+    <Compile Include="Net\TablesApi.cs" />
+    <Compile Include="Net\SearchApi.cs" />
+    <Compile Include="Net\SettingApi.cs" />
+    <Compile Include="Net\ShareApi.cs" />
+    <Compile Include="Net\TopicApi.cs" />
+    <Compile Include="Net\UserApi.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Rtf\ImageFormat.cs" />
+    <Compile Include="Rtf\Interpreter\Converter\Image\IRtfConvertedImageInfo.cs" />
+    <Compile Include="Rtf\Interpreter\Converter\Image\IRtfConvertedImageInfoCollection.cs" />
+    <Compile Include="Rtf\Interpreter\Converter\Image\IRtfVisualImageAdapter.cs" />
+    <Compile Include="Rtf\Interpreter\Converter\Image\RtfConvertedImageInfo.cs" />
+    <Compile Include="Rtf\Interpreter\Converter\Image\RtfConvertedImageInfoCollection.cs" />
+    <Compile Include="Rtf\Interpreter\Converter\Image\RtfImageConverter.cs" />
+    <Compile Include="Rtf\Interpreter\Converter\Image\RtfImageConvertSettings.cs" />
+    <Compile Include="Rtf\Interpreter\Converter\Image\RtfVisualImageAdapter.cs" />
+    <Compile Include="Rtf\Interpreter\Converter\Text\RtfTextConverter.cs" />
+    <Compile Include="Rtf\Interpreter\Converter\Text\RtfTextConvertSettings.cs" />
+    <Compile Include="Rtf\Interpreter\interpreter\RtfColorTableBuilder.cs" />
+    <Compile Include="Rtf\Interpreter\interpreter\RtfDocumentInfoBuilder.cs" />
+    <Compile Include="Rtf\Interpreter\interpreter\RtfFontBuilder.cs" />
+    <Compile Include="Rtf\Interpreter\interpreter\RtfFontTableBuilder.cs" />
+    <Compile Include="Rtf\Interpreter\interpreter\RtfImageBuilder.cs" />
+    <Compile Include="Rtf\Interpreter\interpreter\RtfInterpreter.cs" />
+    <Compile Include="Rtf\Interpreter\interpreter\RtfInterpreterBase.cs" />
+    <Compile Include="Rtf\Interpreter\interpreter\RtfInterpreterContext.cs" />
+    <Compile Include="Rtf\Interpreter\interpreter\RtfInterpreterListenerBase.cs" />
+    <Compile Include="Rtf\Interpreter\interpreter\RtfInterpreterListenerDocumentBuilder.cs" />
+    <Compile Include="Rtf\Interpreter\interpreter\RtfInterpreterListenerLogger.cs" />
+    <Compile Include="Rtf\Interpreter\interpreter\RtfInterpreterLoggerSettings.cs" />
+    <Compile Include="Rtf\Interpreter\interpreter\RtfInterpreterSettings.cs" />
+    <Compile Include="Rtf\Interpreter\interpreter\RtfTextBuilder.cs" />
+    <Compile Include="Rtf\Interpreter\interpreter\RtfTimestampBuilder.cs" />
+    <Compile Include="Rtf\Interpreter\interpreter\RtfUserPropertyBuilder.cs" />
+    <Compile Include="Rtf\Interpreter\IRtfColor.cs" />
+    <Compile Include="Rtf\Interpreter\IRtfColorCollection.cs" />
+    <Compile Include="Rtf\Interpreter\IRtfDocument.cs" />
+    <Compile Include="Rtf\Interpreter\IRtfDocumentInfo.cs" />
+    <Compile Include="Rtf\Interpreter\IRtfDocumentProperty.cs" />
+    <Compile Include="Rtf\Interpreter\IRtfDocumentPropertyCollection.cs" />
+    <Compile Include="Rtf\Interpreter\IRtfFont.cs" />
+    <Compile Include="Rtf\Interpreter\IRtfFontCollection.cs" />
+    <Compile Include="Rtf\Interpreter\IRtfInterpreter.cs" />
+    <Compile Include="Rtf\Interpreter\IRtfInterpreterContext.cs" />
+    <Compile Include="Rtf\Interpreter\IRtfInterpreterListener.cs" />
+    <Compile Include="Rtf\Interpreter\IRtfInterpreterSettings.cs" />
+    <Compile Include="Rtf\Interpreter\IRtfTextFormat.cs" />
+    <Compile Include="Rtf\Interpreter\IRtfTextFormatCollection.cs" />
+    <Compile Include="Rtf\Interpreter\IRtfVisual.cs" />
+    <Compile Include="Rtf\Interpreter\IRtfVisualBreak.cs" />
+    <Compile Include="Rtf\Interpreter\IRtfVisualCollection.cs" />
+    <Compile Include="Rtf\Interpreter\IRtfVisualImage.cs" />
+    <Compile Include="Rtf\Interpreter\IRtfVisualSpecialChar.cs" />
+    <Compile Include="Rtf\Interpreter\IRtfVisualText.cs" />
+    <Compile Include="Rtf\Interpreter\IRtfVisualVisitor.cs" />
+    <Compile Include="Rtf\Interpreter\Model\RtfColor.cs" />
+    <Compile Include="Rtf\Interpreter\Model\RtfColorCollection.cs" />
+    <Compile Include="Rtf\Interpreter\Model\RtfDocument.cs" />
+    <Compile Include="Rtf\Interpreter\Model\RtfDocumentInfo.cs" />
+    <Compile Include="Rtf\Interpreter\Model\RtfDocumentProperty.cs" />
+    <Compile Include="Rtf\Interpreter\Model\RtfDocumentPropertyCollection.cs" />
+    <Compile Include="Rtf\Interpreter\Model\RtfFont.cs" />
+    <Compile Include="Rtf\Interpreter\Model\RtfFontCollection.cs" />
+    <Compile Include="Rtf\Interpreter\Model\RtfTextFormat.cs" />
+    <Compile Include="Rtf\Interpreter\Model\RtfTextFormatCollection.cs" />
+    <Compile Include="Rtf\Interpreter\Model\RtfVisual.cs" />
+    <Compile Include="Rtf\Interpreter\Model\RtfVisualBreak.cs" />
+    <Compile Include="Rtf\Interpreter\Model\RtfVisualCollection.cs" />
+    <Compile Include="Rtf\Interpreter\Model\RtfVisualImage.cs" />
+    <Compile Include="Rtf\Interpreter\Model\RtfVisualSpecialChar.cs" />
+    <Compile Include="Rtf\Interpreter\Model\RtfVisualText.cs" />
+    <Compile Include="Rtf\Interpreter\RtfColorException.cs" />
+    <Compile Include="Rtf\Interpreter\RtfColorTableFormatException.cs" />
+    <Compile Include="Rtf\Interpreter\RtfFontKind.cs" />
+    <Compile Include="Rtf\Interpreter\RtfFontPitch.cs" />
+    <Compile Include="Rtf\Interpreter\RtfFontTableFormatException.cs" />
+    <Compile Include="Rtf\Interpreter\RtfInterpreterException.cs" />
+    <Compile Include="Rtf\Interpreter\RtfInterpreterState.cs" />
+    <Compile Include="Rtf\Interpreter\RtfInvalidDataException.cs" />
+    <Compile Include="Rtf\Interpreter\RtfPropertyKind.cs" />
+    <Compile Include="Rtf\Interpreter\RtfTextAlignment.cs" />
+    <Compile Include="Rtf\Interpreter\RtfUndefinedColorException.cs" />
+    <Compile Include="Rtf\Interpreter\RtfUndefinedFontException.cs" />
+    <Compile Include="Rtf\Interpreter\RtfUnsupportedStructureException.cs" />
+    <Compile Include="Rtf\Interpreter\RtfVisualBreakKind.cs" />
+    <Compile Include="Rtf\Interpreter\RtfVisualImageFormat.cs" />
+    <Compile Include="Rtf\Interpreter\RtfVisualKind.cs" />
+    <Compile Include="Rtf\Interpreter\RtfVisualSpecialCharKind.cs" />
+    <Compile Include="Rtf\Interpreter\Support\RtfElementVisitorBase.cs" />
+    <Compile Include="Rtf\Interpreter\Support\RtfElementVisitorOrder.cs" />
+    <Compile Include="Rtf\Interpreter\Support\RtfInterpreterTool.cs" />
+    <Compile Include="Rtf\Interpreter\Support\RtfVisualVisitorBase.cs" />
+    <Compile Include="Rtf\Strings.cs" />
+    <Compile Include="Rtf\Strings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Strings.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Rtf\Parser\IRtfElement.cs" />
+    <Compile Include="Rtf\Parser\IRtfElementCollection.cs" />
+    <Compile Include="Rtf\Parser\IRtfElementVisitor.cs" />
+    <Compile Include="Rtf\Parser\IRtfGroup.cs" />
+    <Compile Include="Rtf\Parser\IRtfParser.cs" />
+    <Compile Include="Rtf\Parser\IRtfParserListener.cs" />
+    <Compile Include="Rtf\Parser\IRtfSource.cs" />
+    <Compile Include="Rtf\Parser\IRtfTag.cs" />
+    <Compile Include="Rtf\Parser\IRtfText.cs" />
+    <Compile Include="Rtf\Parser\Model\ReadOnlyBaseCollection.cs" />
+    <Compile Include="Rtf\Parser\Model\RtfElement.cs" />
+    <Compile Include="Rtf\Parser\Model\RtfElementCollection.cs" />
+    <Compile Include="Rtf\Parser\Model\RtfGroup.cs" />
+    <Compile Include="Rtf\Parser\Model\RtfTag.cs" />
+    <Compile Include="Rtf\Parser\Model\RtfText.cs" />
+    <Compile Include="Rtf\Parser\Parser\RtfParser.cs" />
+    <Compile Include="Rtf\Parser\Parser\RtfParserBase.cs" />
+    <Compile Include="Rtf\Parser\Parser\RtfParserListenerBase.cs" />
+    <Compile Include="Rtf\Parser\Parser\RtfParserListenerStructureBuilder.cs" />
+    <Compile Include="Rtf\Parser\Parser\RtfParserLoggerSettings.cs" />
+    <Compile Include="Rtf\Parser\RtfBraceNestingException.cs" />
+    <Compile Include="Rtf\Parser\RtfElementKind.cs" />
+    <Compile Include="Rtf\Parser\RtfEmptyDocumentException.cs" />
+    <Compile Include="Rtf\Parser\RtfEncodingException.cs" />
+    <Compile Include="Rtf\Parser\RtfException.cs" />
+    <Compile Include="Rtf\Parser\RtfHexEncodingException.cs" />
+    <Compile Include="Rtf\Parser\RtfMissingCharacterException.cs" />
+    <Compile Include="Rtf\Parser\RtfMultiByteEncodingException.cs" />
+    <Compile Include="Rtf\Parser\RtfParserException.cs" />
+    <Compile Include="Rtf\Parser\RtfSpec.cs" />
+    <Compile Include="Rtf\Parser\RtfStructureException.cs" />
+    <Compile Include="Rtf\Parser\RtfUnicodeEncodingException.cs" />
+    <Compile Include="Rtf\Parser\Support\RtfParserTool.cs" />
+    <Compile Include="Rtf\Parser\Support\RtfSource.cs" />
+    <Compile Include="Rtf\Sys\ArgumentCheck.cs" />
+    <Compile Include="Rtf\Sys\Collection\CollectionTool.cs" />
+    <Compile Include="Rtf\Sys\Collection\IStringCollection.cs" />
+    <Compile Include="Rtf\Sys\Collection\StringCollection.cs" />
+    <Compile Include="Rtf\Sys\CompareTool.cs" />
+    <Compile Include="Rtf\Sys\HashTool.cs" />
+    <Compile Include="Rtf\StringsBase.cs" />
+    <Compile Include="Rtf\Sys\StringTool.cs" />
+    <Compile Include="Service\Design\DesignAnswerService.cs" />
+    <Compile Include="Service\Design\DesignArticleService.cs" />
+    <Compile Include="Service\Design\DesignCollectionService.cs" />
+    <Compile Include="Service\Design\DesignColumnSerivce.cs" />
+    <Compile Include="Service\Design\DesignCommentService.cs" />
+    <Compile Include="Service\Design\DesignFeedService.cs" />
+    <Compile Include="Service\Design\DesignFindService.cs" />
+    <Compile Include="Service\Design\DesignLoginService.cs" />
+    <Compile Include="Service\Design\DesignMessageService.cs" />
+    <Compile Include="Service\Design\DesignNotifyService.cs" />
+    <Compile Include="Service\Design\DesignPersonService.cs" />
+    <Compile Include="Service\Design\DesignQuestionService.cs" />
+    <Compile Include="Service\Design\DesignSearchService.cs" />
+    <Compile Include="Service\Design\DesignSettingService.cs" />
+    <Compile Include="Service\Design\DesignSocialService.cs" />
+    <Compile Include="Service\Design\DesignTableService.cs" />
+    <Compile Include="Service\Design\DesignTopicService.cs" />
+    <Compile Include="Service\IAnswer.cs" />
+    <Compile Include="Service\IArticle.cs" />
+    <Compile Include="Service\ICollection.cs" />
+    <Compile Include="Service\IColumn.cs" />
+    <Compile Include="Service\IComment.cs" />
+    <Compile Include="Service\IFeed.cs" />
+    <Compile Include="Service\IFind.cs" />
+    <Compile Include="Service\ILogin.cs" />
+    <Compile Include="Service\IMessage.cs" />
+    <Compile Include="Service\INavigate.cs" />
+    <Compile Include="Service\INotify.cs" />
+    <Compile Include="Service\IPerson.cs" />
+    <Compile Include="Service\IQuestion.cs" />
+    <Compile Include="Service\ISearch.cs" />
+    <Compile Include="Service\ISetting.cs" />
+    <Compile Include="Service\ISocial.cs" />
+    <Compile Include="Service\ITable.cs" />
+    <Compile Include="Service\ITopic.cs" />
+    <Compile Include="Service\Runtime\AnswerService.cs" />
+    <Compile Include="Service\Runtime\ArticleService.cs" />
+    <Compile Include="Service\Runtime\CollectionService.cs" />
+    <Compile Include="Service\Runtime\ColumnService.cs" />
+    <Compile Include="Service\Runtime\CommentService.cs" />
+    <Compile Include="Service\Runtime\FeedService.cs" />
+    <Compile Include="Service\Runtime\FindService.cs" />
+    <Compile Include="Service\Runtime\LoginService.cs" />
+    <Compile Include="Service\Runtime\MessageService.cs" />
+    <Compile Include="Service\Runtime\NavigateService.cs" />
+    <Compile Include="Service\Runtime\NotifyService.cs" />
+    <Compile Include="Service\Runtime\PersonService.cs" />
+    <Compile Include="Service\Runtime\QuestionService.cs" />
+    <Compile Include="Service\Runtime\SearchService.cs" />
+    <Compile Include="Service\Runtime\SettingService.cs" />
+    <Compile Include="Service\Runtime\SocialService.cs" />
+    <Compile Include="Service\Runtime\TableService.cs" />
+    <Compile Include="Service\Runtime\TopicService.cs" />
+    <Content Include="Properties\Zhihu.Common.rd.xml" />
+    <Content Include="Resource\Image\abc_ic_menu_share_holo_dark.png" />
+    <Content Include="Resource\Image\align_top.png" />
+    <Content Include="Resource\Image\check.png" />
+    <Content Include="Resource\Image\default_banner.png" />
+    <Content Include="Resource\Image\disgusting.jpg" />
+    <Content Include="Resource\Image\expand_down.png" />
+    <Content Include="Resource\Image\expand_up.png" />
+    <Content Include="Resource\Image\Gender\ic_gender_f_g.png" />
+    <Content Include="Resource\Image\Gender\ic_gender_f_w.png" />
+    <Content Include="Resource\Image\Gender\ic_gender_m_g.png" />
+    <Content Include="Resource\Image\Gender\ic_gender_m_w.png" />
+    <Content Include="Resource\Image\ic_action_notify.png" />
+    <Content Include="Resource\Image\ic_collect.png" />
+    <Content Include="Resource\Image\ic_collected.png" />
+    <Content Include="Resource\Image\ic_comment.png" />
+    <Content Include="Resource\Image\ic_commented.png" />
+    <Content Include="Resource\Image\ic_comments.png" />
+    <Content Include="Resource\Image\ic_drawer_collect_normal.png" />
+    <Content Include="Resource\Image\ic_drawer_follow_normal.png" />
+    <Content Include="Resource\Image\ic_drawer_follow_pressed.png" />
+    <Content Include="Resource\Image\ic_drawer_oauth_qq_normal.png" />
+    <Content Include="Resource\Image\ic_drawer_oauth_qq_pressed.png" />
+    <Content Include="Resource\Image\ic_drawer_oauth_sina_normal.png" />
+    <Content Include="Resource\Image\ic_drawer_oauth_sina_pressed.png" />
+    <Content Include="Resource\Image\ic_followers.png" />
+    <Content Include="Resource\Image\ic_invited_answer.png" />
+    <Content Include="Resource\Image\ic_nohelp.png" />
+    <Content Include="Resource\Image\ic_nohelped.png" />
+    <Content Include="Resource\Image\ic_notification_content.png" />
+    <Content Include="Resource\Image\ic_notification_love.png" />
+    <Content Include="Resource\Image\ic_notification_message.png" />
+    <Content Include="Resource\Image\ic_shared.png" />
+    <Content Include="Resource\Image\ic_thank.png" />
+    <Content Include="Resource\Image\ic_thanked.png" />
+    <Content Include="Resource\Image\ic_topic_more_normal.png" />
+    <Content Include="Resource\Image\ic_vote_checked.png" />
+    <Content Include="Resource\Image\ic_vote_down_checked.png" />
+    <Content Include="Resource\Image\ic_vote_down_normal.png" />
+    <Content Include="Resource\Image\ic_vote_normal.png" />
+    <Content Include="Resource\Image\ic_vote_pressed.png" />
+    <Content Include="Resource\Image\ImageHolder.png" />
+    <Content Include="Resource\Image\image_holder.png" />
+    <Content Include="Resource\Image\img_empty_follow.png" />
+    <Content Include="Resource\Image\img_empty_notify_love.png" />
+    <Content Include="Resource\Image\img_empty_notify_message.png" />
+    <Content Include="Resource\Image\img_ooops.png" />
+    <Content Include="Resource\Image\Menu\ic_action_search.png" />
+    <Content Include="Resource\Image\Menu\ic_drawer_collect_normal.png" />
+    <Content Include="Resource\Image\Menu\ic_drawer_collect_pressed.png" />
+    <Content Include="Resource\Image\Menu\ic_drawer_explore_normal.png" />
+    <Content Include="Resource\Image\Menu\ic_drawer_explore_pressed.png" />
+    <Content Include="Resource\Image\Menu\ic_drawer_follow_normal.png" />
+    <Content Include="Resource\Image\Menu\ic_drawer_follow_pressed.png" />
+    <Content Include="Resource\Image\Menu\ic_drawer_question_normal.png" />
+    <Content Include="Resource\Image\Menu\ic_drawer_question_pressed.png" />
+    <Content Include="Resource\Image\Menu\ic_drawer_search_normal.png" />
+    <Content Include="Resource\Image\Menu\ic_drawer_search_pressed.png" />
+    <Content Include="Resource\Image\Menu\ic_drawer_setting_normal.png" />
+    <Content Include="Resource\Image\Menu\ic_drawer_setting_pressed.png" />
+    <Content Include="Resource\Image\Menu\ic_warning.png" />
+    <Content Include="Resource\Image\new_logo.png" />
+    <Content Include="Resource\Image\next.png" />
+    <Content Include="Resource\Image\play-icon.png" />
+    <Content Include="Resource\Image\Question\vote_down_checked.png" />
+    <Content Include="Resource\Image\Question\vote_down_normal.png" />
+    <Content Include="Resource\Image\Question\vote_down_pressed.png" />
+    <Content Include="Resource\Image\Question\vote_up_checked.png" />
+    <Content Include="Resource\Image\Question\vote_up_normal.png" />
+    <Content Include="Resource\Image\Question\vote_up_pressed.png" />
+    <Content Include="Resource\Image\share.png" />
+    <Content Include="Resource\Image\vip.png" />
+    <Content Include="Resource\Image\vote_down_checked.png" />
+    <Content Include="Resource\Image\vote_down_normal.png" />
+    <Content Include="Resource\Image\vote_down_pressed.png" />
+    <Content Include="Resource\Image\vote_up_checked.png" />
+    <Content Include="Resource\Image\vote_up_normal.png" />
+    <Content Include="Resource\Image\vote_up_pressed.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Model\Article\" />
+    <Folder Include="Rtf\ConverterHtml\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Rtf\Strings.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Strings.Designer.cs</LastGenOutput>
+      <DependentUpon>Strings.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
+    <VisualStudioVersion>14.0</VisualStudioVersion>
+  </PropertyGroup>
+  <Import Project="$(MSBuildExtensionsPath)\Microsoft\WindowsXaml\v$(VisualStudioVersion)\Microsoft.Windows.UI.Xaml.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

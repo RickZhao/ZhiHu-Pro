@@ -1,0 +1,257 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:converter="using:Zhihu.Converter"
+    xmlns:helper="using:Zhihu.Helper">
+
+    <ResourceDictionary.MergedDictionaries>
+        <helper:RumtimeResourceDictionary RuntimeSource="ms-appx:///Resource/Theme/Brush.xaml"/>
+        <ResourceDictionary Source="/Resource/Styles.xaml"/>
+    </ResourceDictionary.MergedDictionaries>
+
+    <converter:AnswerItemClickEventArgsConverter x:Name="AnswerItemConverter"/>
+    <converter:AvatarModeConverter x:Name="AvatarConverter"/>
+    <converter:BooleanToVoted x:Name="BooleanToVoted"/>
+    <converter:CountToStringConverter x:Name="CountConverter"/>
+    <converter:CommentItemClickEventArgsConverter x:Name="CommentItemConverter"/>
+    <converter:FavoritedConverter x:Name="FavoritedConverter"/>
+    <converter:FollowingConverter x:Name="FollowingConverter"/>
+    <converter:GenderToImageConverter x:Name="GenderToImageConverter"/>
+    <converter:GetCollectionIdFromBannerConverter x:Name="GetColleIdConverter"/>
+    <converter:HtmlConverter x:Name="HtmlConverter"/>
+    <converter:HtmlImageExtractConverter x:Name="ImageExtractConverter"/>
+    <converter:NullableInt32Converter x:Name="NullableInt32Converter"/>
+    <converter:RelativeTimeConverter x:Name="RelativeTimeConverter"/>
+    <converter:SubStringConverter x:Name="SubStringConverter"/>
+    <converter:StringToVisibleConverter x:Name="StringToVisibleConverter"/>
+    <converter:NoHelpeConverter x:Name="NoHelpConverter"/>
+    <converter:ThankedConverter x:Name="ThankedConverter"/>
+    <converter:CommentsCountConverter x:Name="CommentsCountConverter"/>
+    <converter:VotingToImageConverter x:Name="VotingToImageConverter"/>
+    <converter:RandomColorConverter x:Name="RandomColorConverter"/>
+    <converter:LineHeightConverter x:Name="LineHeightConverter"/>
+    <converter:BannerHeightConverter x:Name="BannerHeightConverter"/>
+    <converter:VoteupCountingConverter x:Name="VoteupCountingConverter"/>
+    <converter:NightModeConverter x:Name="NightModeConverter"/>
+    <converter:BoolToVisiableConverter x:Name="BoolToVisiableConverter"/>
+    <converter:BoolToHighlightConverter x:Name="BoolToHighlightConverter"/>
+    <converter:VotingToHighlightConverter x:Name="VotingToHighlightConverter"/>
+    <converter:UnixTimeStampConverter x:Key="UnixTimeStampConverter"/>
+    <converter:UnixTimeStampFormatConverter x:Key="UnixTimeStampFormatConverter"/>
+
+    <Style x:Name="AuthorStyle" TargetType="TextBlock">
+        <Setter Property="Foreground" Value="{StaticResource AuthorBrush}"/>
+        <Setter Property="TextWrapping" Value="WrapWholeWords"/>
+        <Setter Property="HorizontalAlignment" Value="Left"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+    </Style>
+
+    <Style x:Name="AuthorHeadLineStyle" TargetType="TextBlock">
+        <Setter Property="Foreground" Value="{StaticResource ThirdForeBrush}"/>
+        <Setter Property="Margin" Value="0 3 0 0"/>
+        <Setter Property="TextWrapping" Value="Wrap"/>
+        <Setter Property="HorizontalAlignment" Value="Stretch"/>
+        <Setter Property="VerticalAlignment" Value="Bottom"/>
+    </Style>
+
+    <Style x:Name="VerbStyle" TargetType="TextBlock">
+        <Setter Property="Foreground" Value="{StaticResource FeedVerbBrush}"/>
+        <Setter Property="Margin" Value="10 0 0 0"/>
+        <Setter Property="HorizontalAlignment" Value="Stretch"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+    </Style>
+
+    <Style x:Name="AvatarStyle" TargetType="Ellipse">
+        <Setter Property="Stretch" Value="UniformToFill" />
+        <Setter Property="Width" Value="40"/>
+        <Setter Property="Height" Value="40"/>
+        <Setter Property="HorizontalAlignment" Value="Center"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+    </Style>
+
+    <Style x:Name="FeedTitleStyle" TargetType="TextBlock">
+        <Setter Property="Foreground" Value="{StaticResource FeedTitleBrush}"/>
+        <Setter Property="Margin" Value="0 0 24 12"/>
+        <Setter Property="TextWrapping" Value="Wrap"/>
+        <Setter Property="HorizontalAlignment" Value="Stretch"/>
+    </Style>
+
+    <Style x:Name="TitleStyle" TargetType="TextBlock">
+        <Setter Property="Foreground" Value="{StaticResource VoteForeBrush}"/>
+        <Setter Property="TextWrapping" Value="Wrap"/>
+        <Setter Property="HorizontalAlignment" Value="Stretch"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+    </Style>
+
+    <Style x:Name="QuestionTitleStyle" TargetType="TextBlock">
+        <Setter Property="Foreground" Value="{StaticResource VoteForeBrush}"/>
+        <Setter Property="Margin" Value="0 10 0 5"/>
+        <Setter Property="TextWrapping" Value="Wrap"/>
+        <Setter Property="HorizontalAlignment" Value="Stretch"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+    </Style>
+
+    <Style x:Name="QuestionTitleBorderStyle" TargetType="StackPanel">
+        <Setter Property="Background" Value="{StaticResource VoteBackBrush}"/>
+        <Setter Property="HorizontalAlignment" Value="Stretch"/>
+        <Setter Property="VerticalAlignment" Value="Stretch"/>
+        <Setter Property="Margin" Value="0 0 0 0"/>
+        <Setter Property="MinHeight" Value="120"/>
+        <Setter Property="Orientation" Value="Horizontal"/>
+    </Style>
+
+    <Style x:Name="QuestionerStyle" TargetType="TextBlock">
+        <Setter Property="Margin" Value="0 5 0 5"/>
+        <Setter Property="Foreground" Value="{StaticResource VoteSecondForeColor}"/>
+        <Setter Property="TextWrapping" Value="WrapWholeWords"/>
+        <Setter Property="HorizontalAlignment" Value="Left"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+    </Style>
+
+    <Style x:Name="QuestionAuthorStyle" TargetType="TextBlock">
+        <Setter Property="Foreground" Value="{StaticResource VoteSecondForeColor}"/>
+        <Setter Property="Margin" Value="10 5 0 5"/>
+        <Setter Property="TextWrapping" Value="WrapWholeWords"/>
+        <Setter Property="HorizontalAlignment" Value="Left"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+    </Style>
+
+    <Style x:Name="PageTitleStyle" TargetType="TextBlock">
+        <Setter Property="Foreground" Value="{StaticResource VoteForeBrush}"/>
+        <Setter Property="TextWrapping" Value="Wrap"/>
+        <Setter Property="FontSize" Value="42"/>
+        <Setter Property="FontStyle" Value="Normal"/>
+        <Setter Property="FontWeight" Value="Normal"/>
+        <Setter Property="HorizontalAlignment" Value="Stretch"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+    </Style>
+
+    <Style x:Name="TitleBorderStyle" TargetType="Border">
+        <Setter Property="Background" Value="{StaticResource VoteBackBrush}"/>
+        <Setter Property="HorizontalAlignment" Value="Stretch"/>
+        <Setter Property="VerticalAlignment" Value="Top"/>
+        <Setter Property="MinHeight" Value="70"/>
+        <Setter Property="Padding" Value="3 10 3 10"/>
+        <Setter Property="Margin" Value="0 10 0 10"/>
+    </Style>
+
+    <Style x:Name="VoteStyle" TargetType="TextBlock">
+        <Setter Property="Margin" Value="2 1 1 2"/>
+        <Setter Property="Foreground" Value="{StaticResource VoteForeBrush}"/>
+        <Setter Property="FontWeight" Value="Normal" />
+        <Setter Property="TextWrapping" Value="Wrap"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="HorizontalAlignment" Value="Center"/>
+    </Style>
+
+    <Style x:Name="NoteTextStyle" TargetType="TextBlock">
+        <Setter Property="Foreground" Value="{StaticResource QuesNoteForeBrush}"/>
+        <Setter Property="FontWeight" Value="Normal"/>
+        <Setter Property="Margin" Value="5 0 0 0"/>
+        <Setter Property="TextWrapping" Value="Wrap"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="HorizontalAlignment" Value="Center"/>
+    </Style>
+
+    <Style x:Name="UpdateTimeStyle" TargetType="TextBlock">
+        <Setter Property="Foreground" Value="{StaticResource SecondForeBrush}"/>
+        <Setter Property="Margin" Value="0 5 0 5"/>
+        <Setter Property="TextWrapping" Value="Wrap"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="HorizontalAlignment" Value="Left"/>
+    </Style>
+
+    <Style x:Name="VoteBorderStyle" TargetType="Border">
+        <Setter Property="Background" Value="{StaticResource VoteBackBrush}"/>
+        <Setter Property="HorizontalAlignment" Value="Stretch"/>
+        <Setter Property="VerticalAlignment" Value="Top"/>
+    </Style>
+
+    <Style x:Name="SummaryStyle" TargetType="TextBlock">
+        <Setter Property="Foreground" Value="{StaticResource FeedSummaryBrush}"/>
+        <Setter Property="Margin" Value="10 0 10 5"/>
+        <Setter Property="TextWrapping" Value="Wrap"/>
+        <Setter Property="HorizontalAlignment" Value="Stretch"/>
+        <Setter Property="VerticalAlignment" Value="Top" />
+    </Style>
+
+    <Style x:Name="QuestionSummaryStyle" TargetType="TextBlock">
+        <Setter Property="Foreground" Value="{StaticResource QuesContentForeBrush}"/>
+        <Setter Property="Margin" Value="10 0 10 5"/>
+        <Setter Property="TextWrapping" Value="Wrap"/>
+        <Setter Property="HorizontalAlignment" Value="Stretch"/>
+        <Setter Property="VerticalAlignment" Value="Top" />
+    </Style>
+
+    <Style x:Name="QuestionDetailStyle" TargetType="RichTextBlock">
+        <Setter Property="Foreground" Value="{StaticResource QuesContentForeBrush}"/>
+        <Setter Property="Margin" Value="0 5 0 5"/>
+        <Setter Property="TextWrapping" Value="WrapWholeWords"/>
+        <Setter Property="HorizontalAlignment" Value="Stretch"/>
+        <Setter Property="VerticalAlignment" Value="Stretch"/>
+    </Style>
+    
+    <Style x:Name="AnswerDetailStyle" TargetType="RichTextBlock">
+        <Setter Property="Foreground" Value="{StaticResource AnswerContentForeBrush}"/>
+        <Setter Property="Margin" Value="0 5 0 5"/>
+        <Setter Property="TextWrapping" Value="WrapWholeWords"/>
+        <Setter Property="HorizontalAlignment" Value="Stretch"/>
+        <Setter Property="VerticalAlignment" Value="Stretch"/>
+    </Style>
+    
+    <Style x:Name="LineStyle" TargetType="Border">
+        <Setter Property="BorderBrush" Value="{StaticResource LineBrush}"/>
+        <Setter Property="BorderThickness" Value="0 1 0 0" />
+        <Setter Property="VerticalAlignment" Value="Top"/>
+        <Setter Property="HorizontalAlignment" Value="Stretch"/>
+    </Style>
+
+    <Style x:Name="VerticalLineStyle" TargetType="Border">
+        <Setter Property="BorderBrush" Value="{StaticResource LineBrush}"/>
+        <Setter Property="BorderThickness" Value="1 0 0 0" />
+        <Setter Property="VerticalAlignment" Value="Stretch"/>
+        <Setter Property="HorizontalAlignment" Value="Center"/>
+    </Style>
+
+    <Style x:Name="UpLightStyle" TargetType="TextBlock">
+        <Setter Property="Foreground" Value="{StaticResource QuesNoteForeBrush}"/>
+        <Setter Property="Margin" Value="0 8 0 2"/>
+        <Setter Property="TextWrapping" Value="Wrap"/>
+        <Setter Property="HorizontalAlignment" Value="Stretch"/>
+    </Style>
+
+    <Style x:Name="DownDarkStyle" TargetType="TextBlock">
+        <Setter Property="Foreground" Value="{StaticResource QuesNoteForeBrush}"/>
+        <Setter Property="Margin" Value="0 2 0 8"/>
+        <Setter Property="TextWrapping" Value="Wrap"/>
+        <Setter Property="HorizontalAlignment" Value="Stretch"/>
+    </Style>
+
+    <DataTemplate x:Key="TextBoxHeader">
+        <Border>
+            <TextBlock Text="{Binding}" FontSize="{Binding Source={StaticResource ThemeHelper}, Path=Theme.FeedTitle}" Style="{StaticResource UpLightStyle}"/>
+        </Border>
+    </DataTemplate>
+
+    <Style x:Name="HeaderStyle" TargetType="TextBlock">
+        <Setter Property="Foreground" Value="{StaticResource SecondForeBrush}"/>
+        <Setter Property="Margin" Value="10 10 10 10"/>
+        <Setter Property="TextWrapping" Value="Wrap"/>
+        <Setter Property="HorizontalAlignment" Value="Left"/>
+        <Setter Property="VerticalAlignment" Value="Bottom"/>
+    </Style>
+
+    <Style x:Key="FlyoutPresenterStyle" TargetType="FlyoutPresenter">
+        <Setter Property="ScrollViewer.ZoomMode" Value="Enabled"/>
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="MinHeight" Value="300"/>
+        <Setter Property="MinWidth" Value="300"/>
+    </Style>
+
+    <Style TargetType="Button">
+        <Setter Property="BorderBrush" Value="{StaticResource SecondForeBrush}"/>
+        <Setter Property="Foreground" Value="{StaticResource SecondForeBrush}"/>
+    </Style>
+
+</ResourceDictionary>

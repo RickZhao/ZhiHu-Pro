@@ -1,0 +1,203 @@
+﻿<Page
+    x:Class="Zhihu.View.Table.TablePage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Zhihu.View.Table"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
+    xmlns:core="using:Microsoft.Xaml.Interactions.Core"
+    xmlns:itemView="using:Zhihu.Controls.ItemView"
+    mc:Ignorable="d"
+    Background="{StaticResource PageBackBrush}"
+    NavigationCacheMode="Enabled"
+    DataContext="{Binding Table, Mode=OneWay, Source={StaticResource Locator}}">
+
+    <interactivity:Interaction.Behaviors>
+        <core:EventTriggerBehavior EventName="Loaded">
+            <core:InvokeCommandAction Command="{Binding GetDetail, Mode=OneWay}"/>
+        </core:EventTriggerBehavior>
+    </interactivity:Interaction.Behaviors>
+
+    <Page.Resources>
+        <CollectionViewSource x:Name="ActivitiesSource" Source="{Binding Path=Activities, Mode=OneWay}"/>
+        <CollectionViewSource x:Name="CommentsSource" Source="{Binding Path=Comments, Mode=OneWay}"/>
+        <CollectionViewSource x:Name="QuestionsSource" Source="{Binding Path=Questions, Mode=OneWay}"/>
+    </Page.Resources>
+
+    <Grid Background="{StaticResource PageBackBrush}">
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup x:Name="AdaptiveStates" CurrentStateChanged="VisualStateGroup_CurrentStateChanged">
+                <VisualState x:Name="DefaultState">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="900"/>
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="MasterColumn.Width" Value="*"/>
+                        <Setter Target="MasterColumn.MinWidth" Value="450"/>
+                        <Setter Target="MasterColumn.MaxWidth" Value="650"/>
+                        <Setter Target="DetailColumn.Width" Value="1.6*"/>
+                        <!--<Setter Target="FrameContainer.Margin" Value="30 30 30 30"/>-->
+                        <Setter Target="FrameContainer.Visibility" Value="Visible"/>
+                    </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="NarrowState">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="0" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="MasterColumn.Width" Value="*"/>
+                        <Setter Target="DetailColumn.Width" Value="0"/>
+                        <Setter Target="FrameContainer.Visibility" Value="Collapsed"/>
+                    </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition x:Name="MasterColumn" Width="*"/>
+            <ColumnDefinition x:Name="DetailColumn" Width="0"/>
+        </Grid.ColumnDefinitions>
+        
+        <Grid Grid.Column="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <ProgressBar Grid.Row="0" IsIndeterminate="{Binding Loading}"
+                         Background="{StaticResource ProgressBackBrush}"
+                         Foreground="{StaticResource ProgressForeBrush}" />
+            <ScrollViewer Grid.Row="1" ZoomMode="Disabled" HorizontalScrollMode="Disabled" VerticalScrollMode="Auto">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Grid Grid.Row="0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Grid Grid.Row="0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <Ellipse Margin="10 10 0 10" Height="50" Width="50" Style="{StaticResource AvatarStyle}">
+                                <Ellipse.Fill>
+                                    <ImageBrush ImageSource="{Binding Detail.Logo}" Stretch="Fill"/>
+                                </Ellipse.Fill>
+                            </Ellipse>
+                            <StackPanel Grid.Column="1" Margin="10 0 0 0" Orientation="Vertical">
+                                <TextBlock Text="{Binding Detail.Name}" Margin="0 5 0 0" FontWeight="Bold" 
+                                           FontSize="24" 
+                                           Style="{StaticResource AuthorStyle}"/>
+                                <TextBlock Text="{Binding Detail.CountDown}" Margin="0 5 0 5"
+                                           FontSize="20"
+                                           MaxLines="1" TextTrimming="WordEllipsis" 
+                                           Style="{StaticResource AuthorHeadLineStyle}"/>
+                            </StackPanel>
+                            <Button Grid.Column="2" Padding="10 5 10 5" Margin="0 0 10 0" BorderThickness="0"
+                                    Foreground="{StaticResource FollowForeBrush}"
+                                    Background="{StaticResource FollowBackBrush}"
+                                    Content="{Binding Detail.IsFollowing, Converter={StaticResource FollowingConverter}}">
+                                <interactivity:Interaction.Behaviors>
+                                    <core:EventTriggerBehavior EventName="Tapped">
+                                        <core:InvokeCommandAction Command="{Binding FollowUnfollowQuestion, Mode=OneWay}"/>
+                                    </core:EventTriggerBehavior>
+                                </interactivity:Interaction.Behaviors>
+                            </Button>
+                        </Grid>
+                        <TextBlock Grid.Row="1" Margin="10 10 10 10" Text="{Binding Detail.Description}"
+                                   TextWrapping="Wrap" MaxLines="5" TextTrimming="CharacterEllipsis"
+                                   Foreground="{StaticResource QuesContentForeBrush}"
+                                   FontSize="{Binding Source={StaticResource ThemeHelper}, Path=Theme.FeedSummary}"
+                                   LineHeight="{Binding Source={StaticResource ThemeHelper}, Path=Theme.FeedSummary, Converter={StaticResource LineHeightConverter}}"/>
+                        <Border Grid.Row="2" Margin="0 5 0 10" Style="{StaticResource LineStyle}"/>
+                    </Grid>
+                    <Pivot x:Name="Pivot" Grid.Row="1" HeaderTemplate="{StaticResource PivotHeaderTemplate}"
+                           Style="{StaticResource PivotNormalStyle}">
+                        <Pivot.Items>
+                            <PivotItem Header="动态" Margin="0">
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="*"/>
+                                    </Grid.RowDefinitions>
+                                    <ProgressBar Grid.Row="0" Grid.Column="0" Background="{StaticResource ProgressBackBrush}" Foreground="{StaticResource ProgressForeBrush}" IsIndeterminate="{Binding ActivitiesLoading}"/>
+
+                                    <ListView Grid.Row="1" Grid.Column="0"
+                                          ItemsSource="{Binding Source={StaticResource ActivitiesSource}}"
+                                          SelectionMode="Single" IsItemClickEnabled="True"
+                                          IncrementalLoadingThreshold="2" IncrementalLoadingTrigger="Edge"
+                                          ItemContainerStyle="{StaticResource ListViewItemStyle}"
+                                          ContainerContentChanging="Activity_OnContainerContentChanging">
+                                    <ListView.ItemTemplate>
+                                        <DataTemplate>
+                                                <itemView:TableActivityView />
+                                        </DataTemplate>
+                                    </ListView.ItemTemplate>
+                                </ListView>
+                                </Grid>
+                            </PivotItem>
+                            <PivotItem Header="问题" Margin="0">
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="*"/>
+                                    </Grid.RowDefinitions>
+                                    <ProgressBar Grid.Row="0" IsIndeterminate="{Binding QuestionsLoading}"
+                                                 Background="{StaticResource ProgressBackBrush}" 
+                                                 Foreground="{StaticResource ProgressForeBrush}"/>
+                                    <ListView Grid.Row="1" 
+                                              ItemsSource="{Binding Source={StaticResource QuestionsSource}}"
+                                              SelectionMode="Single" IsItemClickEnabled="True"
+                                              IncrementalLoadingThreshold="2" IncrementalLoadingTrigger="Edge"
+                                              ItemContainerStyle="{StaticResource ListViewItemStyle}"
+                                              ContainerContentChanging="QuestionAcitivity_OnContainerContentChanging">
+                                        <ListView.ItemTemplate>
+                                            <DataTemplate>
+                                                <itemView:TableQuestionView />
+                                            </DataTemplate>
+                                        </ListView.ItemTemplate>
+                                    </ListView>
+                                </Grid>
+                            </PivotItem>
+                            <PivotItem Header="讨论" Margin="0">
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="*"/>
+                                    </Grid.RowDefinitions>
+
+                                    <ProgressBar Grid.Row="0" IsIndeterminate="{Binding CommentsLoading}"
+                                                 Background="{StaticResource ProgressBackBrush}" 
+                                                 Foreground="{StaticResource ProgressForeBrush}"/>
+
+                                    <ListView Grid.Row="1" SelectionMode="Single" IsItemClickEnabled="True"
+                                              IncrementalLoadingThreshold="2" IncrementalLoadingTrigger="Edge"
+                                              HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch"
+                                              ItemsSource="{Binding Source={StaticResource CommentsSource}}"
+                                              ContainerContentChanging="Comment_OnContainerContentChanging"
+                                              ItemContainerStyle="{StaticResource ListViewItemStyle}">
+                                        <ListView.ItemTemplate>
+                                            <DataTemplate>
+                                                <itemView:CommentView/>
+                                            </DataTemplate>
+                                        </ListView.ItemTemplate>
+                                    </ListView>
+                                </Grid>
+                            </PivotItem>
+                        </Pivot.Items>
+                    </Pivot>
+                </Grid>
+            </ScrollViewer>
+        </Grid>
+
+        <Grid x:Name="FrameContainer" Grid.Column="1">
+            <Frame x:Name="PreviewFrame" CacheSize="50" />
+        </Grid>
+    </Grid>
+</Page>

@@ -1,0 +1,39 @@
+﻿<UserControl
+    x:Class="Zhihu.Controls.ItemView.QuestionActivityView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Zhihu.Controls.ItemView"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    d:DesignHeight="300"
+    d:DesignWidth="400">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock x:Name="Title" Margin="10 5 10 5" Grid.Row="0" 
+                   FontSize="{Binding Source={StaticResource ThemeHelper}, Path=Theme.FeedTitle}" 
+                   Style="{StaticResource FeedTitleStyle}"/>
+
+        <StackPanel x:Name="OverView" Grid.Row="1" Orientation="Horizontal">
+            <TextBlock x:Name="Followers" Margin="10 5 0 0" FontSize="18" FontWeight="Bold" Foreground="{StaticResource SecondForeBrush}"
+                       Style="{StaticResource NoteTextStyle}"/>
+           
+            <TextBlock Text="人关注" Margin="5 5 0 0" FontSize="18" Foreground="{StaticResource ThirdForeBrush}"
+                       Style="{StaticResource NoteTextStyle}"/>
+
+            <TextBlock x:Name="Answers" Margin="10 5 0 0" FontSize="18" FontWeight="Bold" Foreground="{StaticResource SecondForeBrush}"
+                       Style="{StaticResource NoteTextStyle}"/>
+
+            <TextBlock Text="个回答" Margin="5 5 0 0" FontSize="18" Foreground="{StaticResource ThirdForeBrush}"                      
+                       Style="{StaticResource NoteTextStyle}"/>
+        </StackPanel>
+
+        <Border Grid.Row="2" Margin="0 5 0 5" Style="{StaticResource LineStyle}"/>
+    </Grid>
+</UserControl>

@@ -1,0 +1,44 @@
+﻿<Page
+    x:Class="Zhihu.View.Profile.FolloweesPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Zhihu.View.Profile"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:itemView="using:Zhihu.Controls.ItemView"
+    mc:Ignorable="d"
+    Background="{StaticResource PageBackBrush}"
+    NavigationCacheMode="Enabled">
+
+    <Page.Resources>
+        <CollectionViewSource x:Name="FolloweesSource" Source="{Binding Path=Followees, Mode=OneWay}"/>
+    </Page.Resources>
+
+    <Grid Background="{StaticResource PageBackBrush}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!--Page Title-->
+        <Border Grid.Row="0" BorderThickness="0 0 0 0" Visibility="Collapsed" Background="{StaticResource VoteBackBrush}" BorderBrush="{StaticResource TitleBorder}">
+            <TextBlock Text="关注的人" Margin="10 10 10 10" Style="{StaticResource PageTitleStyle}"/>
+        </Border>
+
+        <ProgressBar Grid.Row="1" Background="{StaticResource ProgressBackBrush}" Foreground="{StaticResource ProgressForeBrush}" IsIndeterminate="{Binding FolloweesLoading}"/>
+
+        <ListView Margin="12 24 12 36" Grid.Row="2"
+                  ItemsSource="{Binding Source={StaticResource FolloweesSource}}"
+                  SelectionMode="Single" IsItemClickEnabled="True"
+                  IncrementalLoadingThreshold="2" IncrementalLoadingTrigger="Edge"
+                  ItemContainerStyle="{StaticResource ListViewItemStyle}"
+                  ContainerContentChanging="Author_OnContainerContentChanging">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <itemView:ProfileView />
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </Grid>
+</Page>

@@ -1,0 +1,100 @@
+﻿<Page
+    x:Class="Zhihu.View.Answer.AnswerCommentsPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
+    xmlns:core="using:Microsoft.Xaml.Interactions.Core"
+    xmlns:local="using:Zhihu.View"
+    mc:Ignorable="d"
+    xmlns:itemView="using:Zhihu.Controls.ItemView" 
+    Background="{StaticResource PageBackBrush}"
+    NavigationCacheMode="Enabled">
+
+    <Page.Resources>
+        <CollectionViewSource x:Name="CommentsSource" Source="{Binding Path=Comments, Mode=OneWay}"/>
+        <MenuFlyout x:Name="CommentFlyout" Placement="Bottom">
+            <MenuFlyoutItem Text="{Binding Voting, Converter={StaticResource BooleanToVoted}, ConverterParameter='赞评论'}"
+                            Tapped="VoteupComment_Tapped">
+                <!--<interactivity:Interaction.Behaviors>
+                    <core:EventTriggerBehavior EventName="Click">
+                        <core:InvokeCommandAction CommandParameter="{Binding}" Command="{Binding VoteUpComment, RelativeSource={RelativeSource Mode=TemplatedParent}}"/>
+                    </core:EventTriggerBehavior>
+                </interactivity:Interaction.Behaviors>-->
+            </MenuFlyoutItem>
+            <MenuFlyoutItem Text="回复" Tapped="ReplyComment_Tapped"/>
+            <MenuFlyoutSeparator />
+            <MenuFlyoutItem Text="广告等垃圾信息" Tapped="ReportJunk_Tapped">
+                <!--<interactivity:Interaction.Behaviors>
+                    <core:EventTriggerBehavior EventName="Click">
+                        <core:InvokeCommandAction CommandParameter="{Binding}" Command="{Binding DataContext.ReportJunkComment, RelativeSource={RelativeSource Mode=TemplatedParent}}"/>
+                    </core:EventTriggerBehavior>
+                </interactivity:Interaction.Behaviors>-->
+            </MenuFlyoutItem>
+            <MenuFlyoutItem Text="不友善内容" Tapped="ReportUnFridenly_Tapped">
+                <!--<interactivity:Interaction.Behaviors>
+                    <core:EventTriggerBehavior EventName="Click">
+                        <core:InvokeCommandAction CommandParameter="{Binding}" Command="{Binding DataContext.ReportUnFridenlyComment, RelativeSource={RelativeSource Mode=TemplatedParent}}"/>
+                    </core:EventTriggerBehavior>
+                </interactivity:Interaction.Behaviors>-->
+            </MenuFlyoutItem>
+            <MenuFlyoutItem Text="违反法律法规的内容" Tapped="ReportIllegal_Tapped">
+                <!--<interactivity:Interaction.Behaviors>
+                    <core:EventTriggerBehavior EventName="Click">
+                        <core:InvokeCommandAction CommandParameter="{Binding}" Command="{Binding DataContext.ReportIllegalComment, RelativeSource={RelativeSource Mode=TemplatedParent}}"/>
+                    </core:EventTriggerBehavior>
+                </interactivity:Interaction.Behaviors>-->
+            </MenuFlyoutItem>
+            <MenuFlyoutItem Text="不宜公开讨论的政治内容" Tapped="ReportPolitical_Tapped">
+                <!--<interactivity:Interaction.Behaviors>
+                    <core:EventTriggerBehavior EventName="Click">
+                        <core:InvokeCommandAction CommandParameter="{Binding}" Command="{Binding DataContext.ReportPoliticalComment, RelativeSource={RelativeSource Mode=TemplatedParent}}"/>
+                    </core:EventTriggerBehavior>
+                </interactivity:Interaction.Behaviors>-->
+            </MenuFlyoutItem>
+        </MenuFlyout>
+
+        <DataTemplate x:Key="CommentsHeader">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Grid.Column="0" Grid.ColumnSpan="2" Text="评论" FontSize="22" Foreground="{StaticResource FeedTitleBrush}" HorizontalAlignment="Center"/>
+                <TextBlock Grid.Column="1" Margin="0 0 20 0" Text="写评论" FontSize="22" Foreground="{StaticResource FeedSummaryBrush}"
+                           Tapped="CommentButton_Tapped"/>
+            </Grid>
+        </DataTemplate>
+    </Page.Resources>
+    
+    <Grid Background="{StaticResource PageBackBrush}">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+       
+            <ProgressBar Grid.Row="0" Background="{StaticResource ProgressBackBrush}" Foreground="{StaticResource ProgressForeBrush}" 
+                                     IsIndeterminate="{Binding CommentsLoading}"/>
+
+            <ListView Grid.Row="1" x:Name="CommentsList"
+                      IncrementalLoadingThreshold="2" 
+                      IncrementalLoadingTrigger="Edge"
+                      IsItemClickEnabled="True"
+                      ItemsSource="{Binding Source={StaticResource CommentsSource}}"
+                      ItemContainerStyle="{StaticResource ListViewItemStyle}" 
+                      HeaderTemplate="{StaticResource CommentsHeader}"
+                      HorizontalAlignment="Stretch" 
+                      HorizontalContentAlignment="Stretch"
+                      SelectionMode="Single"
+                      ContainerContentChanging="Comment_OnContainerContentChanging">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <itemView:CommentView Tapped="CommentView_OnTapped" FlyoutBase.AttachedFlyout="{StaticResource CommentFlyout}"/>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </Grid>
+    </Grid>
+</Page>

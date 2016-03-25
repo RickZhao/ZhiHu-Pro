@@ -1,0 +1,55 @@
+﻿<UserControl
+    x:Class="Zhihu.Controls.UgcPad"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Zhihu.Controls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    d:DesignHeight="300"
+    d:DesignWidth="400">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <RichEditBox x:Name="RichBox" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Margin="0 20 0 20" MinHeight="120"
+                     HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                     Foreground="{StaticResource FeedTitleBrush}"/>
+
+        <ProgressRing x:Name="ProgressRing" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" IsActive="False"
+                      Foreground="{StaticResource FeedTitleBrush}"
+                      HorizontalAlignment="Center" VerticalAlignment="Center"/>
+
+        <Grid Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <CheckBox x:Name="Anonymity" Grid.Row="1" Grid.Column="0" Content="匿名" Foreground="{StaticResource FeedTitleBrush}"/>
+
+            <Button x:Name="AtButton" Content="&#x0040;" Grid.Row="1" Grid.Column="2" 
+                    Foreground="{StaticResource FeedTitleBrush}" 
+                    Style="{StaticResource FlatButtonStyle}" 
+                    Tapped="AtPersonButton_Tapped"/>
+
+            <Button x:Name="ImgButton" Content="&#x0026;" Grid.Row="1" Grid.Column="3" 
+                    Foreground="{StaticResource FeedTitleBrush}" 
+                    Style="{StaticResource FlatButtonStyle}" 
+                    Tapped="PostImageButton_Tapped"/>
+        </Grid>
+        <Button Content="发布" Grid.Row="2"  Grid.Column="0" Foreground="{StaticResource FeedTitleBrush}" HorizontalAlignment="Center" 
+                Tapped="ButtonOk_Tapped"/>
+        <Button Content="取消" Grid.Row="2" Grid.Column="1" Foreground="{StaticResource FeedTitleBrush}" HorizontalAlignment="Center"
+                Tapped="ButtonCancel_Tapped"/>
+    </Grid>
+</UserControl>

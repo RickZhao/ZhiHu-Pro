@@ -1,0 +1,40 @@
+﻿<Page
+    x:Class="Zhihu.View.Topic.QuestionsPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Zhihu.View.Topic"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    xmlns:itemView="using:Zhihu.Controls.ItemView"
+    Background="{StaticResource PageBackBrush}"
+    NavigationCacheMode="Enabled" 
+    DataContext="{Binding Topic, Mode=OneWay, Source={StaticResource Locator}}">
+
+    <Page.Resources>
+        <CollectionViewSource x:Name="QuestionsSource" Source="{Binding Path=Questions, Mode=OneWay}"/>
+    </Page.Resources>
+
+    <Grid Background="{StaticResource PageBackBrush}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <ProgressBar Grid.Row="0" Background="{StaticResource ProgressBackBrush}" Foreground="{StaticResource ProgressForeBrush}"
+                     IsIndeterminate="{Binding QuestionsLoading}"/>
+
+        <ListView Margin="0 0 0 0" Grid.Row="1"
+                  ItemsSource="{Binding Source={StaticResource QuestionsSource}}"
+                  SelectionMode="Single" IsItemClickEnabled="True"
+                  IncrementalLoadingThreshold="2" IncrementalLoadingTrigger="Edge"
+                  ItemContainerStyle="{StaticResource ListViewItemStyle}"
+                  ContainerContentChanging="Question_OnContainerContentChanging">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <itemView:QuestionView />
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </Grid>
+</Page>

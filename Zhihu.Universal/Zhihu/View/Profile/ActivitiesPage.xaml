@@ -1,0 +1,79 @@
+﻿<Page
+    x:Class="Zhihu.View.Profile.ActivitiesPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Zhihu.View.Profile"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:itemView="using:Zhihu.Controls.ItemView"
+    mc:Ignorable="d"
+    Background="{StaticResource PageBackBrush}"
+    NavigationCacheMode="Enabled">
+
+    <Page.Resources>
+        <CollectionViewSource x:Name="ActivitiesSource" Source="{Binding Path=Activities, Mode=OneWay}"/>
+    </Page.Resources>
+
+    <Grid Background="{StaticResource PageBackBrush}">
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup x:Name="AdaptiveStates" CurrentStateChanged="VisualStateGroup_CurrentStateChanged">
+                <VisualState x:Name="DefaultState">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="900"/>
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="MasterColumn.Width" Value="*"/>
+                        <Setter Target="MasterColumn.MinWidth" Value="450"/>
+                        <Setter Target="MasterColumn.MaxWidth" Value="650"/>
+                        <Setter Target="DetailColumn.Width" Value="1.6*"/>
+                        <!--<Setter Target="FrameContainer.Margin" Value="30 30 30 30"/>-->
+                        <Setter Target="FrameContainer.Visibility" Value="Visible"/>
+                    </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="NarrowState">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="0" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="MasterColumn.Width" Value="*"/>
+                        <Setter Target="DetailColumn.Width" Value="0"/>
+                        <Setter Target="FrameContainer.Visibility" Value="Collapsed"/>
+                    </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition x:Name="MasterColumn" Width="*"/>
+            <ColumnDefinition x:Name="DetailColumn" Width="0"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!--Page Title-->
+        <Border Grid.Row="0" Visibility="Collapsed" BorderThickness="0 0 0 0" Background="{StaticResource VoteBackBrush}" BorderBrush="{StaticResource TitleBorder}">
+            <TextBlock Text="全部动态" Margin="10 10 10 10" Style="{StaticResource PageTitleStyle}"/>
+        </Border>
+
+        <ProgressBar Grid.Row="1" Grid.Column="0" Background="{StaticResource ProgressBackBrush}" Foreground="{StaticResource ProgressForeBrush}" IsIndeterminate="{Binding ActivitiesLoading}"/>
+
+        <ListView Margin="0 10 0 0" Grid.Row="2" Grid.Column="0"
+                  ItemsSource="{Binding Source={StaticResource ActivitiesSource}}"
+                  SelectionMode="Single" IsItemClickEnabled="True"
+                  IncrementalLoadingThreshold="2" IncrementalLoadingTrigger="Edge"
+                  ItemContainerStyle="{StaticResource ListViewItemStyle}"
+                  ContainerContentChanging="Activity_OnContainerContentChanging">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <itemView:ActivityView />
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
+        <Grid x:Name="FrameContainer" Grid.Row="0" Grid.RowSpan="3" Grid.Column="1">
+            <Frame x:Name="PreviewFrame" CacheSize="50" />
+        </Grid>
+    </Grid>
+</Page>

@@ -1,0 +1,62 @@
+﻿<UserControl
+    x:Class="Zhihu.Controls.ItemView.TopicActivityView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Zhihu.Controls.ItemView"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    d:DesignHeight="300"
+    d:DesignWidth="400">
+
+    <StackPanel Orientation="Vertical" HorizontalAlignment="Stretch">
+        <TextBlock x:Name="Title" Margin="10 5 10 10" FontSize="{Binding Source={StaticResource ThemeHelper}, Path=Theme.FeedTitle}" Style="{StaticResource FeedTitleStyle}"/>
+
+        <Grid x:Name="Answer1" Visibility="Collapsed">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="40"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <Border Grid.Column="0" Margin="10 20 0 0" Style="{StaticResource VoteBorderStyle}">
+                <TextBlock x:Name="Answer1VoteCount" FontSize="{Binding Source={StaticResource ThemeHelper}, Path=Theme.VoteCount}" Style="{StaticResource VoteStyle}"/>
+            </Border>
+
+            <TextBlock x:Name="Answer1Summary" Grid.Row="0" Grid.Column="1" 
+                       LineHeight="{Binding Source={StaticResource ThemeHelper}, Path=Theme.FeedSummary, Converter={StaticResource LineHeightConverter}}"
+                       FontSize="{Binding Source={StaticResource ThemeHelper}, Path=Theme.FeedSummary}" Style="{StaticResource SummaryStyle}"/>
+        </Grid>
+
+        <Border x:Name="Answer1Sperator" Margin="10 5 10 5" Visibility="Collapsed" Style="{StaticResource LineStyle}"/>
+
+        <Grid x:Name="Answer2" Visibility="Collapsed">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="40"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <Border Grid.Column="0" Margin="10 20 0 0" Style="{StaticResource VoteBorderStyle}">
+                <TextBlock x:Name="Answer2VoteCount" FontSize="{Binding Source={StaticResource ThemeHelper}, Path=Theme.VoteCount}" Style="{StaticResource VoteStyle}"/>
+            </Border>
+
+            <TextBlock x:Name="Answer2Summary" Grid.Row="0" Grid.Column="1" FontSize="{Binding Source={StaticResource ThemeHelper}, Path=Theme.FeedSummary}" Style="{StaticResource SummaryStyle}"/>
+        </Grid>
+
+        <Border x:Name="Answer2Sperator" Margin="10 5 10 5" Visibility="Collapsed" Style="{StaticResource LineStyle}"/>
+
+        <Grid x:Name="Answer3" Visibility="Collapsed">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="40"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <Border Grid.Column="0" Margin="10 20 0 0" Style="{StaticResource VoteBorderStyle}">
+                <TextBlock x:Name="Answer3VoteCount" FontSize="{Binding Source={StaticResource ThemeHelper}, Path=Theme.VoteCount}" Style="{StaticResource VoteStyle}"/>
+            </Border>
+
+            <TextBlock x:Name="Answer3Summary" Grid.Column="1" FontSize="{Binding Source={StaticResource ThemeHelper}, Path=Theme.FeedSummary}" Style="{StaticResource SummaryStyle}"/>
+        </Grid>
+        
+        <Border Margin="0 5 0 5" Style="{StaticResource LineStyle}"/>
+    </StackPanel>
+</UserControl>

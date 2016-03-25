@@ -1,0 +1,319 @@
+﻿<Page
+    x:Class="Zhihu.View.Answer.AnswerPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Zhihu.View"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
+    xmlns:core="using:Microsoft.Xaml.Interactions.Core" 
+    xmlns:controls="using:Zhihu.Controls"
+    mc:Ignorable="d"
+    Background="{StaticResource PageBackBrush}"
+    NavigationCacheMode="Disabled">
+
+    <Page.Resources>
+        <CollectionViewSource x:Name="CollectionSource" Source="{Binding Path=Collections, Mode=OneWay}"/>
+
+        <DataTemplate x:Key="FooterTemplate">
+            <RichTextBlock Margin="0 40 40 60" HorizontalAlignment="Right" FontSize="16" Foreground="{StaticResource AnswerContentForeBrush}">
+                <RichTextBlock.Blocks>
+                    <Paragraph Margin="10 5 10 5">
+                        <Run Text="编辑于"/>
+                        <Run Text="{Binding Detail.UpdatedTime, Converter={StaticResource UnixTimeStampFormatConverter}}"/>
+                        <LineBreak/>
+                        <Run Text="著作权归作者所有"/>
+                    </Paragraph>
+                </RichTextBlock.Blocks>
+            </RichTextBlock>
+        </DataTemplate>
+        
+        <DataTemplate x:Key="AnswerHeader">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+
+                <!--Question Title-->
+                <Grid Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <ProgressBar Grid.Row="0" Background="{StaticResource ProgressBackBrush}" Foreground="{StaticResource ProgressForeBrush}"                                  
+                                 IsIndeterminate="{Binding Loading}"/>
+
+                    <TextBlock Margin="10 10 10 5" Grid.Row="1" Text="{Binding Detail.Question.Title}"
+                               MaxLines="2" TextLineBounds="TrimToBaseline" TextTrimming="CharacterEllipsis"
+                               LineHeight="{Binding Source={StaticResource ThemeHelper}, Path=Theme.FeedTitle, Converter={StaticResource LineHeightConverter}}"
+                               FontSize="{Binding Source={StaticResource ThemeHelper}, Path=Theme.FeedTitle}"
+                               Foreground="{StaticResource AnswerTitleForeBrush}"
+                               Style="{StaticResource TitleStyle}">    
+                        <interactivity:Interaction.Behaviors>
+                            <core:EventTriggerBehavior EventName="Tapped">
+                                <core:InvokeCommandAction Command="{Binding NavToQuestion, Mode=OneWay}"/>
+                            </core:EventTriggerBehavior>
+                        </interactivity:Interaction.Behaviors>
+                    </TextBlock>
+
+                    <Border Grid.Row="2" Grid.Column="0" Background="{StaticResource AnswerTitleBackBrush}" 
+                            Tapped="AnswerTitle_OnTapped" Visibility="Collapsed">
+                        <TextBlock Margin="10 10 10 10" Text="{Binding Detail.Question.Title}"
+                                   FontSize="{Binding Source={StaticResource ThemeHelper}, Path=Theme.FeedTitle}"
+                                   Foreground="{StaticResource AnswerTitleForeBrush}"
+                                   Style="{StaticResource TitleStyle}"/>
+                    </Border>
+                </Grid>
+
+                <Border Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" Margin="0 0 0 5" Style="{StaticResource LineStyle}"/>
+
+                <!--Author-->
+                <Grid Grid.Row="2" Grid.Column="0" Tapped="AnswerAuthor_OnTapped">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Ellipse Grid.Row="0" Grid.RowSpan="2" Grid.Column="0" Margin="10 0 0 0" Style="{StaticResource AvatarStyle}">
+                        <Ellipse.Fill>
+                            <ImageBrush Stretch="Fill">
+                                <ImageBrush.ImageSource>
+                                    <Binding Path="Detail.Author.AvatarUrl" Converter="{StaticResource AvatarConverter}" ConverterParameter='l'/>
+                                </ImageBrush.ImageSource>
+                            </ImageBrush>
+                        </Ellipse.Fill>
+                    </Ellipse>
+                    <TextBlock Grid.Row="0" Grid.Column="1" Margin="10 5 0 0" FontWeight="Bold" 
+                               Text="{Binding Detail.Author.Name}"
+                               FontSize="{Binding Source={StaticResource ThemeHelper}, Path=Theme.FeedVerb}" 
+                               Style="{StaticResource AuthorStyle}"/>
+                    <TextBlock Grid.Row="1" Grid.Column="1" Margin="10 5 0 5"
+                               Text="{Binding Detail.Author.Headline}"
+                               FontSize="{Binding Source={StaticResource ThemeHelper}, Path=Theme.FeedVerb}"
+                               MaxLines="1" TextTrimming="CharacterEllipsis" 
+                               Style="{StaticResource AuthorHeadLineStyle}"/>
+                </Grid>
+
+                <Border Grid.Row="2" Grid.Column="1" Margin="10 5 10 5" Style="{StaticResource VerticalLineStyle}"/>
+
+                <Button Grid.Row="2" Grid.Column="2" Margin="10 0 15 0" Style="{StaticResource FlatButtonStyle}">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Image Grid.Row="0" Grid.Column="0" Height="18" Margin="0 0 0 0" VerticalAlignment="Bottom" Source="{Binding Path=Relationship.Voting, Converter={StaticResource VotingToImageConverter}, ConverterParameter=up}"/>
+                        <Image Grid.Row="1" Grid.Column="0" Height="18" Margin="0 0 0 0" VerticalAlignment="Top" Source="{Binding Path=Relationship.Voting, Converter={StaticResource VotingToImageConverter}, ConverterParameter=down}"/>
+
+                        <TextBlock Grid.Row="0" Grid.RowSpan="2" Grid.Column="1" MinWidth="30"
+                                                   Margin="10 0 0 0"
+                                                   Text="{Binding Detail.VoteupCount, Converter={StaticResource CountConverter}}" 
+                                                   FontWeight="Bold" 
+                                                   FontSize="{Binding Source={StaticResource ThemeHelper}, Path=Theme.FeedSummary}" 
+                                                   Foreground="{StaticResource QuesNoteForeBrush}"
+                                                   Style="{StaticResource VoteStyle}"/>
+                    </Grid>
+                    <Button.Flyout>
+                        <Flyout x:Name="VoteFlyout" Placement="Full" FlyoutPresenterStyle="{StaticResource FlyoutPresenterStyle}">
+                            <Grid Background="{StaticResource FlyoutBackBrush}" HorizontalAlignment="Center" VerticalAlignment="Center"
+                                                  Tapped="VoteFlyout_OnTapped">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="40"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="40"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="40"/>
+                                </Grid.ColumnDefinitions>
+
+                                <TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="5" Text="为答案投票" HorizontalAlignment="Center" Margin="12" FontSize="{Binding Source={StaticResource ThemeHelper}, Path=Theme.FeedTitle}" Style="{StaticResource FeedTitleStyle}"/>
+
+                                <Button Grid.Row="1" Grid.Column="1" Style="{StaticResource FlatButtonStyle}">
+                                    <StackPanel Orientation="Vertical">
+                                        <Image Height="90" VerticalAlignment="Bottom" Source="{Binding Path=Relationship.Voting, Converter={StaticResource VotingToImageConverter}, ConverterParameter=up}"/>
+                                        <TextBlock Text="赞同" HorizontalAlignment="Center" FontSize="{Binding Source={StaticResource ThemeHelper}, Path=Theme.FeedSummary}" Style="{StaticResource SummaryStyle}"/>
+                                    </StackPanel>
+                                    <interactivity:Interaction.Behaviors>
+                                        <core:EventTriggerBehavior EventName="Tapped">
+                                            <core:InvokeCommandAction Command="{Binding VoteUpTapped, Mode=OneWay}"/>
+                                        </core:EventTriggerBehavior>
+                                    </interactivity:Interaction.Behaviors>
+                                </Button>
+
+                                <Button Grid.Row="1" Grid.Column="3" Style="{StaticResource FlatButtonStyle}">
+                                    <StackPanel>
+                                        <Image Height="90" VerticalAlignment="Top" Source="{Binding Path=Relationship.Voting, Converter={StaticResource VotingToImageConverter}, ConverterParameter=down}"/>
+                                        <TextBlock Text="反对" HorizontalAlignment="Center" FontSize="{Binding Source={StaticResource ThemeHelper}, Path=Theme.FeedSummary}" Style="{StaticResource SummaryStyle}"/>
+                                    </StackPanel>
+                                    <interactivity:Interaction.Behaviors>
+                                        <core:EventTriggerBehavior EventName="Tapped">
+                                            <core:InvokeCommandAction Command="{Binding VoteDownTapped, Mode=OneWay}"/>
+                                        </core:EventTriggerBehavior>
+                                    </interactivity:Interaction.Behaviors>
+                                </Button>
+                            </Grid>
+                        </Flyout>
+                    </Button.Flyout>
+                </Button>
+
+                <Border Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="3" Margin="0 5 0 0" Style="{StaticResource LineStyle}"/>
+            </Grid>
+        </DataTemplate>
+
+        <Flyout x:Name="CollectionFlyout" Placement="Full" FlyoutPresenterStyle="{StaticResource FlyoutPresenterStyle}">
+            <StackPanel Orientation="Vertical" Background="{StaticResource FlyoutBackBrush}" HorizontalAlignment="Stretch" VerticalAlignment="Center">
+                <Button HorizontalAlignment="Center" Style="{StaticResource FlatButtonStyle}">
+                    <TextBlock Margin="12 18 12 18" Text="+ 添加收藏夹" Foreground="{StaticResource FirstForeBrush}" FontSize="{Binding Source={StaticResource ThemeHelper}, Path=Theme.VoteCount}" Style="{StaticResource NoteTextStyle}"/>
+
+                    <interactivity:Interaction.Behaviors>
+                        <core:EventTriggerBehavior EventName="Tapped">
+                            <core:InvokeCommandAction Command="{Binding NavToCreateCollection, Mode=OneWay}"/>
+                        </core:EventTriggerBehavior>
+                    </interactivity:Interaction.Behaviors>
+                </Button>
+
+                <ListView ItemsSource="{Binding Source={StaticResource CollectionSource}}"	
+                          SelectionMode="Single" 
+                          IsItemClickEnabled="True"
+                          IncrementalLoadingThreshold="2" 
+                          IncrementalLoadingTrigger="Edge"
+                          ItemContainerStyle="{StaticResource ListViewItemStyle}">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <Grid Margin="12 0 20 0">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Text="{Binding Title}" FontSize="24" Style="{StaticResource UpLightStyle}"/>
+                                <StackPanel Grid.Row="1" Grid.Column="0" Orientation="Horizontal">
+                                    <TextBlock Text="{Binding AnswerCount}" FontSize="20" Style="{StaticResource DownDarkStyle}"/>
+                                    <TextBlock Text="个答案" FontSize="20" Style="{StaticResource DownDarkStyle}"/>
+                                </StackPanel>
+                                <CheckBox Grid.Row="0" Grid.RowSpan="2" Grid.Column="1" IsChecked="{Binding IsFavorited, Mode=TwoWay}" HorizontalAlignment="Left" MinWidth="30"/>
+                            </Grid>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+
+                <Grid Margin="0 24 0 36">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Button Grid.Column="0" BorderThickness="0" MinHeight="30" MinWidth="45" Content="取消" HorizontalAlignment="Center"
+                            Foreground="{StaticResource FollowForeBrush}"
+                            Background="{StaticResource FollowBackBrush}"
+                            Tapped="CollectCancel_OnTapped"/>
+                    <Button Grid.Column="1" BorderThickness="0" MinHeight="30" MinWidth="45" Content="完成" HorizontalAlignment="Center"
+                            Foreground="{StaticResource FollowForeBrush}"
+                            Background="{StaticResource FollowBackBrush}"
+                            Tapped="CollectDo_OnTapped"/>
+                </Grid>
+            </StackPanel>
+        </Flyout>
+
+    </Page.Resources>
+
+    <interactivity:Interaction.Behaviors>
+        <core:EventTriggerBehavior EventName="Loaded">
+            <core:InvokeCommandAction Command="{Binding GetDetail, Mode=OneWay}"/>
+            <core:InvokeCommandAction Command="{Binding GetRelation, Mode=OneWay}"/>
+            <core:InvokeCommandAction Command="{Binding CheckFavorite, Mode=OneWay}"/>
+        </core:EventTriggerBehavior>
+    </interactivity:Interaction.Behaviors>
+
+    <Grid Background="{StaticResource PageBackBrush}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <controls:ImageViewerHelper Grid.Row="0" ImageRuns="{Binding Detail.Content, Converter={StaticResource ImageExtractConverter}}"/>
+
+        <!--Answer Content-->
+        <controls:RichBlock Grid.Row="0" HeaderTemplate="{StaticResource AnswerHeader}" 
+                            FooterTemplate="{StaticResource FooterTemplate}"
+                            HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  
+                            Paragraphs="{Binding Detail.Content, Converter={StaticResource HtmlConverter}, ConverterParameter='True'}" />
+
+        <!--没有帮助 感谢 收藏 评论数-->
+        <CommandBar Grid.Row="1" ClosedDisplayMode="Compact" 
+                    IsTapEnabled="True" IsOpen="False" IsSticky="False"
+                    Background="{StaticResource AppBarBackBrush}"
+                    Foreground="{StaticResource AppBarForeBrush}"
+                    HorizontalAlignment="Stretch" 
+                    HorizontalContentAlignment="Stretch">
+            <AppBarButton Icon="Like" Label="{Binding Path=Relationship.IsThanked, Converter={StaticResource ThankedConverter}}">
+                <AppBarButton.Foreground>
+                    <SolidColorBrush Color="{Binding Path=Relationship.IsThanked, Converter={StaticResource BoolToHighlightConverter}}"/>
+                </AppBarButton.Foreground>
+                <interactivity:Interaction.Behaviors>
+                    <core:EventTriggerBehavior EventName="Tapped">
+                        <core:InvokeCommandAction Command="{Binding AnswerThankTapped, Mode=OneWay}"/>
+                    </core:EventTriggerBehavior>
+                </interactivity:Interaction.Behaviors>
+            </AppBarButton>
+            <AppBarButton Icon="Flag" Label="{Binding Path=Relationship.IsNotHelp, Converter={StaticResource NoHelpConverter}}">
+                <AppBarButton.Foreground>
+                    <SolidColorBrush Color="{Binding Path=Relationship.IsNotHelp, Converter={StaticResource BoolToHighlightConverter}}"/>
+                </AppBarButton.Foreground>
+                <interactivity:Interaction.Behaviors>
+                    <core:EventTriggerBehavior EventName="Tapped">
+                        <core:InvokeCommandAction Command="{Binding AnswerNoHelpTapped, Mode=OneWay}"/>
+                    </core:EventTriggerBehavior>
+                </interactivity:Interaction.Behaviors>
+            </AppBarButton>
+            <AppBarButton Icon="OutlineStar" Label="加入收藏" Flyout="{StaticResource CollectionFlyout}">
+                <AppBarButton.Foreground>
+                    <SolidColorBrush Color="{Binding Path=Relationship.IsFavorited, Converter={StaticResource BoolToHighlightConverter}}"/>
+                </AppBarButton.Foreground>
+            </AppBarButton>
+            <AppBarButton Icon="Comment" Label="{Binding Path=Detail.CommentCount, Converter={StaticResource CommentsCountConverter}}"
+                          Foreground="{StaticResource AppBarForeBrush}"
+                          Tapped="ShowComments_OnTapped"/>
+
+            <CommandBar.SecondaryCommands>
+                <AppBarButton Icon="Globe" Label="分享至微信">
+                    <interactivity:Interaction.Behaviors>
+                        <core:EventTriggerBehavior EventName="Tapped">
+                            <core:InvokeCommandAction Command="{Binding ShareViaWeChat, Mode=OneWay}"/>
+                        </core:EventTriggerBehavior>
+                    </interactivity:Interaction.Behaviors>
+                </AppBarButton>
+                <AppBarButton Icon="NewWindow" Label="Open with Edge">
+                    <interactivity:Interaction.Behaviors>
+                        <core:EventTriggerBehavior EventName="Tapped">
+                            <core:InvokeCommandAction Command="{Binding OpenWithEdge, Mode=OneWay}"/>
+                        </core:EventTriggerBehavior>
+                    </interactivity:Interaction.Behaviors>
+                </AppBarButton>
+            </CommandBar.SecondaryCommands>
+        </CommandBar>
+    </Grid>
+</Page>

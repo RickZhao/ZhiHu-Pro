@@ -1,0 +1,239 @@
+﻿<Page
+    x:Class="Zhihu.View.Profile.DetailsPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Zhihu.View.Profile"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
+    xmlns:core="using:Microsoft.Xaml.Interactions.Core"
+    mc:Ignorable="d" 
+    Background="{StaticResource PageBackBrush}"
+    NavigationCacheMode="Enabled">
+
+    <Page.Resources>
+        <DataTemplate x:Key="ItemDataTemplate">
+            <Grid Tapped="Item_Tapped">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="60"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <Ellipse Grid.Column="0" Margin="20 10 10 10" Width="30" Height="30" Style="{StaticResource AvatarStyle}">
+                    <Ellipse.Fill>
+                        <ImageBrush Stretch="Fill">
+                            <ImageBrush.ImageSource>
+                                <Binding Path="AvatarUrl" Converter="{StaticResource AvatarConverter}" ConverterParameter='xl' />
+                            </ImageBrush.ImageSource>
+                        </ImageBrush>
+                    </Ellipse.Fill>
+                </Ellipse>
+
+                <TextBlock Grid.Column="1" Text="{Binding Name}" FontSize="18" Style="{StaticResource AuthorStyle}"/>
+            </Grid>
+        </DataTemplate>
+    </Page.Resources>
+
+    <ScrollViewer>
+        <Grid Background ="{StaticResource PageBackBrush}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <!--Page Title-->
+            <Border Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" BorderThickness="0 0 0 0" Visibility="Collapsed" Background="{StaticResource VoteBackBrush}" BorderBrush="{StaticResource TitleBorder}">
+                <TextBlock Text="详细信息" Margin="10 10 10 10" Style="{StaticResource PageTitleStyle}"/>
+            </Border>
+
+            <ProgressBar Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Background="{StaticResource ProgressBackBrush}" Foreground="{StaticResource ProgressForeBrush}" IsIndeterminate="{Binding Loading}"/>
+
+            <!--Avatar-->
+            <Ellipse Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Margin="0 24 0 0" Width="120" Height="120" Style="{StaticResource AvatarStyle}">
+                <Ellipse.Fill>
+                    <ImageBrush Stretch="Fill">
+                        <ImageBrush.ImageSource>
+                            <Binding Path="Profile.AvatarUrl" Converter="{StaticResource AvatarConverter}" ConverterParameter='xl'/>
+                        </ImageBrush.ImageSource>
+                    </ImageBrush>
+                </Ellipse.Fill>
+            </Ellipse>
+
+            <!--Name & Gender-->
+            <Grid Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" Margin="40 0 0 10" HorizontalAlignment="Center">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Grid.Column="0" Text="{Binding Profile.Name}" Margin="0 5 0 5"
+                           Foreground="{StaticResource QuesNoteForeBrush}"
+                           FontSize="{Binding Source={StaticResource ThemeHelper}, Path=Theme.FeedSummary}"
+                           Style="{StaticResource AuthorStyle}"/>
+                <Image Grid.Column="1" Margin="5 5 0 0" Width="30" VerticalAlignment="Center" Stretch="UniformToFill">
+                    <Image.Source>
+                        <Binding Path="Profile.Gender" Converter="{StaticResource GenderToImageConverter}"/>
+                    </Image.Source>
+                </Image>
+            </Grid>
+
+            <!--成就-->
+            <Grid Margin="0 0 0 20" Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2" Background="{StaticResource LightBackBrush}">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Border Grid.Row="0" Grid.Column="0" BorderThickness="0 1 1 1" BorderBrush="{StaticResource LineBrush}">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="60"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Image Grid.Row="0" Grid.RowSpan="2" Grid.Column="0" Source="/Resource/Images/Public/ic_vote_normal.png" Width="25" VerticalAlignment="Center"/>
+                        <TextBlock Grid.Row="0" Grid.Column="1" Text="{Binding Profile.VoteupCount}" 
+                                   FontSize="16" FontWeight="Bold"
+                                   Style="{StaticResource UpLightStyle}"/>
+                        <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding VoteupTip}"
+                                   FontSize="12" 
+                                   Style="{StaticResource DownDarkStyle}"/>
+                    </Grid>
+                </Border>
+                <Border Grid.Row="0" Grid.Column="1" BorderThickness="0 1 0 1" BorderBrush="{StaticResource LineBrush}">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="60"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Image Grid.Row="0" Grid.RowSpan="2" Grid.Column="0" Source="/Resource/Images/Public/ic_thank.png" Width="25" VerticalAlignment="Center"/>
+                        <TextBlock Grid.Row="0" Grid.Column="1" Text="{Binding Profile.ThankedCount}"
+                                   FontSize="16" FontWeight="Bold"
+                                   Style="{StaticResource UpLightStyle}"/>
+                        <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding ThankedCountTip}" 
+                                   FontSize="12" 
+                                   Style="{StaticResource DownDarkStyle}"/>
+                    </Grid>
+                </Border>
+                <Border Grid.Row="1" Grid.Column="0" BorderThickness="0 0 1 1" BorderBrush="{StaticResource LineBrush}">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="60"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Image Grid.Row="0" Grid.RowSpan="2" Grid.Column="0" Source="/Resource/Images/Public/ic_collect.png" Width="25" VerticalAlignment="Center"/>
+                        <TextBlock Grid.Row="0" Grid.Column="1" Text="{Binding Profile.FavoritedCount}"
+                                   FontSize="16" FontWeight="Bold"
+                                   Style="{StaticResource UpLightStyle}"/>
+                        <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding AnswerCollectedTip}" 
+                                   FontSize="12"
+                                   Style="{StaticResource DownDarkStyle}"/>
+                    </Grid>
+                </Border>
+                <Border Grid.Row="1" Grid.Column="1" BorderThickness="0 0 0 1" BorderBrush="{StaticResource LineBrush}">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="60"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Image Grid.Row="0" Grid.RowSpan="2" Grid.Column="0" Source="/Resource/Images/Public/ic_shared.png" Width="25" VerticalAlignment="Center"/>
+                        <TextBlock Grid.Row="0" Grid.Column="1" Text="{Binding Profile.SharedCount}"
+                                   FontSize="16" FontWeight="Bold"
+                                   Style="{StaticResource UpLightStyle}"/>
+                        <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding AnswerSharedTip}"
+                                   FontSize="12" 
+                                   Style="{StaticResource DownDarkStyle}"/>
+                    </Grid>
+                </Border>
+            </Grid>
+
+            <!--Business-->
+            <StackPanel Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2" Orientation="Vertical" Visibility="{Binding BusinessVisibility}">
+                <Border Background="{StaticResource LightBackBrush}">
+                    <TextBlock Text="从事行业" Margin="20 10 0 10" FontSize="22"
+                               Foreground="{StaticResource QuesNoteForeBrush}"
+                               Style="{StaticResource HeaderStyle}"/>
+                </Border>
+                <Grid Tapped="Business_Tapped">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="60"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Ellipse Grid.Column="0" Width="30" Height="30" Margin="20 10 10 10" Style="{StaticResource AvatarStyle}">
+                        <Ellipse.Fill>
+                            <ImageBrush Stretch="Fill">
+                                <ImageBrush.ImageSource>
+                                    <Binding Path="Profile.Business.AvatarUrl" Converter="{StaticResource AvatarConverter}" ConverterParameter='xl'/>
+                                </ImageBrush.ImageSource>
+                            </ImageBrush>
+                        </Ellipse.Fill>
+                    </Ellipse>
+
+                    <TextBlock Grid.Column="1" Text="{Binding Profile.Business.Name}" FontSize="18" Style="{StaticResource AuthorStyle}"/>
+                </Grid>
+            </StackPanel>
+
+            <!--Location-->
+            <StackPanel Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="2" Orientation="Vertical" Visibility="{Binding LocationVisibility}">
+                <Border Background="{StaticResource LightBackBrush}">
+                    <TextBlock Text="居住地" Margin="20 12 0 10"  FontSize="22"
+                               Foreground="{StaticResource QuesNoteForeBrush}"
+                               Style="{StaticResource HeaderStyle}"/>
+                </Border>
+                <ItemsControl ItemsSource="{Binding Profile.Locations}" ItemTemplate="{StaticResource ItemDataTemplate}"/>
+            </StackPanel>
+
+            <!--Employment-->
+            <StackPanel Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="2" Orientation="Vertical" Visibility="{Binding EmploymentVisibility}">
+                <Border Background="{StaticResource LightBackBrush}">
+                    <TextBlock Text="工作经历" Margin="20 12 0 10"  FontSize="22"
+                               Foreground="{StaticResource QuesNoteForeBrush}"
+                               Style="{StaticResource HeaderStyle}"/>
+                </Border>
+                <ItemsControl ItemsSource="{Binding Profile.Employments[0]}" ItemTemplate="{StaticResource ItemDataTemplate}"/>
+            </StackPanel>
+
+            <!--Education-->
+            <StackPanel Grid.Row="8" Grid.Column="0" Grid.ColumnSpan="2" Orientation="Vertical" Visibility="{Binding EducationVisibility}">
+                <Border Background="{StaticResource LightBackBrush}">
+                    <TextBlock Text="教育经历" Margin="20 12 0 10"  FontSize="22"
+                               Foreground="{StaticResource QuesNoteForeBrush}" Style="{StaticResource HeaderStyle}"/>
+                </Border>
+                <ItemsControl ItemsSource="{Binding Profile.Education}" ItemTemplate="{StaticResource ItemDataTemplate}"/>
+            </StackPanel>
+
+            <!--<Border Grid.Row="9" Grid.Column="0" Grid.ColumnSpan="2" Height="16" Background="{StaticResource LightBackBrush}"
+                        HorizontalAlignment="Stretch" VerticalAlignment="Top"/>-->
+
+        </Grid>
+    </ScrollViewer>
+</Page>

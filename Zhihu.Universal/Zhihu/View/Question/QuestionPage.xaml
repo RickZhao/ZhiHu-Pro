@@ -1,0 +1,230 @@
+﻿<Page
+    x:Class="Zhihu.View.Question.QuestionPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Zhihu.View"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    
+    xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
+    xmlns:core="using:Microsoft.Xaml.Interactions.Core"
+    xmlns:controls="using:Zhihu.Controls"
+    xmlns:itemView="using:Zhihu.Controls.ItemView"
+    xmlns:helper="using:Zhihu.Helper"
+    Background="{StaticResource PageBackBrush}"
+    mc:Ignorable="d">
+
+    <Page.Resources>
+        <CollectionViewSource x:Name="AnswersViewSource" Source="{Binding Path=Answers, Mode=OneWay}"/>
+
+        <DataTemplate x:Key="QuestionTopicItemTemplate">
+            <Border Margin="0 0 5 0" Style="{StaticResource VoteBorderStyle}" Background="{StaticResource TopicBackBrush}" Tapped="Topic_Tapped">
+                <TextBlock Margin="5 3 5 3" Text="{Binding Name}" HorizontalAlignment="Stretch" 
+                           FontSize="14"
+                           Foreground="{StaticResource TopicForeBrush}"
+                           Style="{StaticResource VoteStyle}"/>
+            </Border>
+        </DataTemplate>
+
+        <DataTemplate x:Key="AnswerItemTemplate">
+            <itemView:AnswerView />
+        </DataTemplate>
+
+        <DataTemplate x:Key="QuestionHeaderTemplate">
+            <StackPanel Orientation="Vertical">
+                <!--Question　Relative Topics-->
+                <ScrollViewer ZoomMode="Disabled">
+                    <ItemsControl Margin="10 10 10 0" ItemsSource="{Binding Detail.Topics}" ItemTemplate="{StaticResource QuestionTopicItemTemplate}">
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <ItemsStackPanel Orientation="Horizontal" />
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                    </ItemsControl>
+                </ScrollViewer>
+
+                <Border Margin="0 10 0 0" Style="{StaticResource LineStyle}"/>
+
+                <!--Question　Title-->
+                <TextBlock Text="{Binding Detail.Title}"  Margin="10 5 10 0" Style="{StaticResource TitleStyle}"
+                           Foreground="{StaticResource QuesTitleForeBrush}"       
+                           FontSize="{Binding Source={StaticResource ThemeHelper}, Path=Theme.FeedTitle}"/>
+
+                <!--Question Detial-->
+                <ItemsControl Margin="10 10 10 20" ItemsSource="{Binding Detail.Detail, Converter={StaticResource HtmlConverter}}">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <RichTextBlock Margin="0 5 0 5" 
+                                           helper:ParagraphBuilder.Content="{Binding}"
+                                           LineHeight="{Binding Source={StaticResource ThemeHelper}, Path=Theme.FeedSummary, Converter={StaticResource LineHeightConverter}}"
+                                           FontSize="{Binding Source={StaticResource ThemeHelper}, Path=Theme.FeedSummary}"
+                                           IsTextSelectionEnabled="{Binding Source={StaticResource ThemeHelper}, Path=Theme.TextSelectionEnable}" 
+                                           Style="{StaticResource QuestionDetailStyle}"/>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <VirtualizingStackPanel/>
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                </ItemsControl>
+
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <StackPanel Grid.Column="0" Orientation="Horizontal">
+                        <TextBlock FontWeight="Bold" Margin="10 0 0 0" Text="{Binding Detail.FollowerCount, Converter={StaticResource CountConverter}}"
+                               FontSize="{Binding Source={StaticResource ThemeHelper}, Path=Theme.FeedVerb}" 
+                               Style="{StaticResource NoteTextStyle}"/>
+
+                        <TextBlock Margin="5 0 10 0" Text="人关注"
+                               FontSize="{Binding Source={StaticResource ThemeHelper}, Path=Theme.FeedVerb}"
+                               Style="{StaticResource NoteTextStyle}"/>
+
+                        <TextBlock FontWeight="Bold" Margin="5 0 10 0"  Tapped="QuestionComments_Tapped"
+                                   Text="{Binding Detail.CommentCount, Converter={StaticResource CountConverter}}"
+                                   FontSize="{Binding Source={StaticResource ThemeHelper}, Path=Theme.FeedVerb}" 
+                                   Style="{StaticResource NoteTextStyle}"/>
+
+                        <TextBlock Margin="5 0 10 0" Text="条评论" Tapped="QuestionComments_Tapped"
+                                   FontSize="{Binding Source={StaticResource ThemeHelper}, Path=Theme.FeedVerb}" 
+                                   Style="{StaticResource NoteTextStyle}"/>
+                    </StackPanel>
+                    <Button Grid.Column="1" Padding="5 5 5 5" Margin="0 0 10 0" BorderThickness="0" MinHeight="30" MinWidth="45"
+                            Foreground="{StaticResource FollowForeBrush}"
+                            Background="{StaticResource FollowBackBrush}"
+                            Content="{Binding Relationship.IsFollowing, Converter={StaticResource FollowingConverter}}">
+                        <interactivity:Interaction.Behaviors>
+                            <core:EventTriggerBehavior EventName="Tapped">
+                                <core:InvokeCommandAction Command="{Binding FollowUnfollowQuestion, Mode=OneWay}"/>
+                            </core:EventTriggerBehavior>
+                        </interactivity:Interaction.Behaviors>
+                    </Button>
+                </Grid>
+
+                <Border Margin="0 10 0 10" Style="{StaticResource LineStyle}"/>
+
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Button Content="邀请回答" Grid.Column="0" Foreground="{StaticResource QuesNoteForeBrush}" Style="{StaticResource FlatButtonStyle}" Tapped="Invite_Tapped"/>
+
+                    <Border Grid.Column="1" Margin="10 5 10 5" Style="{StaticResource VerticalLineStyle}"/>
+
+                    <Button Content="添加答案" Grid.Column="2" Foreground="{StaticResource QuesNoteForeBrush}" Style="{StaticResource FlatButtonStyle}" Tapped="Answer_Tapped"/>
+                </Grid>
+
+                <Border Margin="0 5 0 10" Style="{StaticResource LineStyle}"/>
+
+            </StackPanel>
+        </DataTemplate>
+    </Page.Resources>
+
+    <interactivity:Interaction.Behaviors>
+        <core:EventTriggerBehavior EventName="Loaded">
+            <core:InvokeCommandAction Command="{Binding GetDetail, Mode=OneWay}"/>
+            <core:InvokeCommandAction Command="{Binding GetRelation, Mode=OneWay}"/>
+        </core:EventTriggerBehavior>
+    </interactivity:Interaction.Behaviors>
+
+    <Page.Transitions>
+        <TransitionCollection>
+            <NavigationThemeTransition/>
+        </TransitionCollection>
+    </Page.Transitions>
+
+    <Grid Background="{StaticResource PageBackBrush}">
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup x:Name="AdaptiveStates" CurrentStateChanged="VisualStateGroup_CurrentStateChanged">
+                <VisualState x:Name="DefaultState">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="900"/>
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="MasterColumn.Width" Value="*"/>
+                        <Setter Target="MasterColumn.MinWidth" Value="450"/>
+                        <Setter Target="MasterColumn.MaxWidth" Value="650"/>
+                        <Setter Target="DetailColumn.Width" Value="1.6*"/>
+                        <!--<Setter Target="FrameContainer.Margin" Value="30 30 30 30"/>-->
+                        <Setter Target="FrameContainer.Visibility" Value="Visible"/>
+                    </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="NarrowState">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="0" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="MasterColumn.Width" Value="*"/>
+                        <Setter Target="DetailColumn.Width" Value="0"/>
+                        <Setter Target="FrameContainer.Visibility" Value="Collapsed"/>
+                    </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition x:Name="MasterColumn" Width="*"/>
+            <ColumnDefinition x:Name="DetailColumn" Width="0"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid Grid.Column="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <ProgressBar Grid.Row="0" IsIndeterminate="{Binding AnswersLoading}"
+                         Background="{StaticResource ProgressBackBrush}"
+                         Foreground="{StaticResource ProgressForeBrush}" />
+            
+            <ListView x:Name="AnswerList" Grid.Row="1" SelectionMode="Single" 
+                      HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch"
+                      IncrementalLoadingThreshold="2" 
+                      IncrementalLoadingTrigger="Edge"
+                      IsItemClickEnabled="True"
+                      HeaderTemplate="{StaticResource QuestionHeaderTemplate}"
+                      ItemTemplate="{StaticResource AnswerItemTemplate}"
+                      ItemsSource="{Binding Source={StaticResource AnswersViewSource}}"
+                      ItemContainerStyle="{StaticResource ListViewItemStyle}"
+                      ContainerContentChanging="Answer_OnContainerContentChanging">
+            </ListView>
+
+            <CommandBar Grid.Row="2" ClosedDisplayMode="Minimal" 
+                        IsTapEnabled="True" IsOpen="False" IsSticky="False"
+                        Background="{StaticResource AppBarBackBrush}"
+                        Foreground="{StaticResource AppBarForeBrush}"
+                        HorizontalAlignment="Stretch"
+                        HorizontalContentAlignment="Stretch">
+                <CommandBar.SecondaryCommands>
+                    <AppBarButton Icon="GoToStart" Label="返回顶部" Tapped="AnswerListGoToTop_Tapped"/>
+                    <AppBarButton Icon="Globe" Label="分享至微信">
+                        <interactivity:Interaction.Behaviors>
+                            <core:EventTriggerBehavior EventName="Tapped">
+                                <core:InvokeCommandAction Command="{Binding ShareViaWeChat, Mode=OneWay}"/>
+                            </core:EventTriggerBehavior>
+                        </interactivity:Interaction.Behaviors>
+                    </AppBarButton>
+                    <AppBarButton Icon="NewWindow" Label="Open with Edge">
+                        <interactivity:Interaction.Behaviors>
+                            <core:EventTriggerBehavior EventName="Tapped">
+                                <core:InvokeCommandAction Command="{Binding OpenWithEdge, Mode=OneWay}"/>
+                            </core:EventTriggerBehavior>
+                        </interactivity:Interaction.Behaviors>
+                    </AppBarButton>
+                </CommandBar.SecondaryCommands>
+            </CommandBar>
+
+        </Grid>
+
+        <Grid x:Name="FrameContainer" Grid.Column="1">
+            <Frame x:Name="PreviewFrame" CacheSize="50" />
+        </Grid>
+
+        <controls:ImageViewerHelper Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" ImageRuns="{Binding Detail.Content, Converter={StaticResource ImageExtractConverter}}"/>
+    </Grid>
+</Page>

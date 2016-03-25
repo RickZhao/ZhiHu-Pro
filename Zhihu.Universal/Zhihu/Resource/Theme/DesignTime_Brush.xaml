@@ -1,0 +1,73 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:helper="using:Zhihu.Helper">
+    
+    <helper:ThemeHelper x:Name="ThemeHelper"/>
+
+    <SolidColorBrush x:Key="StatusBarForeBrush" Color="#FF4C566C"/>
+    <SolidColorBrush x:Key="StatusBarBackBrush" Color="#FFFFFFFF"/>
+
+    <SolidColorBrush x:Key="PageBackBrush" Color="#FFFFFFFF"/>
+
+    <SolidColorBrush x:Key="AppBarForeBrush" Color="#FF222222"/>
+    <SolidColorBrush x:Key="AppBarBackBrush" Color="#FFDDDDDD"/>
+
+    <SolidColorBrush x:Key="FeedTitleBrush" Color="#FF4C566C"/>
+    <SolidColorBrush x:Key="FeedSummaryBrush" Color="#FF646464"/>
+    <SolidColorBrush x:Key="FeedVerbBrush" Color="#FF9A9A9A"/>
+
+    <SolidColorBrush x:Key="AuthorBrush" Color="#FF9596AB"/>
+
+    <SolidColorBrush x:Key="TitleBorder" Color="#FF044E97"/>
+    <SolidColorBrush x:Key="TitleForeground" Color="#FF0767C8"/>
+    <SolidColorBrush x:Key="TitleBackground" Color="#FFFFFFFF"/>
+
+    <SolidColorBrush x:Key="VoteForeBrush" Color="#FFFFFFFF"/>
+    <SolidColorBrush x:Key="VoteSecondForeColor" Color="#FFDDDDDD"/>
+    <SolidColorBrush x:Key="VoteBackBrush" Color="#FF64B3F1"/>
+
+    <SolidColorBrush x:Key="TopicForeBrush" Color="#FFE8F0FE"/>
+    <SolidColorBrush x:Key="TopicBackBrush" Color="#FF8DAAB8"/>
+
+    <SolidColorBrush x:Key="QuesTitleForeBrush" Color="#FF4C566C"/>
+    <SolidColorBrush x:Key="QuesContentForeBrush" Color="#FF6E6E6E"/>
+    <SolidColorBrush x:Key="QuesNoteForeBrush" Color="#FF6A7480"/>
+
+    <SolidColorBrush x:Key="FollowForeBrush" Color="#FF45CB7F"/>
+    <SolidColorBrush x:Key="FollowBackBrush" Color="#FFFFFFFF"/>
+
+    <SolidColorBrush x:Key="AnswerTitleForeBrush" Color="#FF4C566C"/>
+    <SolidColorBrush x:Key="AnswerTitleBackBrush" Color="#FFEFEFF4"/>
+
+    <SolidColorBrush x:Key="AnswerContentForeBrush" Color="#FF444444"/>
+
+
+    <SolidColorBrush x:Key="FollowerForeBrush" Color="#FFCCCCCC"/>
+
+    <SolidColorBrush x:Key="LightBackBrush" Color="#FFEEEEEE"/>
+
+    <SolidColorBrush x:Key="FlyoutBackBrush" Color="#FFEEEEEE"/>
+
+    <SolidColorBrush x:Key="BorderForeBrush" Color="#FFFFFFFF"/>
+    <SolidColorBrush x:Key="BorderBackBrush" Color="#FF0767C8"/>
+
+    <SolidColorBrush x:Key="ProgressBackBrush" Color="#FFFFFFFF"/>
+    <SolidColorBrush x:Key="ProgressForeBrush" Color="#FF0767C8"/>
+
+    <SolidColorBrush x:Key="ToastForeBrush" Color="#FFFFFFFF"/>
+    <SolidColorBrush x:Key="ToastBackBrush" Color="#FD3D7096"/>
+
+    <SolidColorBrush x:Key="LinkForeBrush" Color="#FF0767C8"/>
+
+    <SolidColorBrush x:Key="FirstForeBrush" Color="#FF000000"/>
+    <SolidColorBrush x:Key="SecondForeBrush" Color="#FF666666"/>
+    <SolidColorBrush x:Key="ThirdForeBrush" Color="#FFAAAAAA"/>
+
+    <SolidColorBrush x:Key="AuthorForeBrush" Color="#FF0767C8"/>
+
+    <SolidColorBrush x:Key="LineBrush" Color="#FFD8D8D9"/>
+
+    <SolidColorBrush x:Key="BoldForeground" Color="#FF555555"/>
+
+</ResourceDictionary>

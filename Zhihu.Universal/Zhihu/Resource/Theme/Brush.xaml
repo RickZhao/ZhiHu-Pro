@@ -1,0 +1,73 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:helper="using:Zhihu.Helper">
+    
+    <helper:ThemeHelper x:Name="ThemeHelper"/>
+
+    <SolidColorBrush x:Key="StatusBarForeBrush" Color="{Binding Path=Theme.FeedTitleColor, Source={StaticResource ThemeHelper}}"/>
+    <SolidColorBrush x:Key="StatusBarBackBrush" Color="{Binding Path=Theme.PageBackColor, Source={StaticResource ThemeHelper}}"/>
+
+    <SolidColorBrush x:Key="PageBackBrush" Color="{Binding Path=Theme.PageBackColor, Source={StaticResource ThemeHelper}}"/>
+    
+    <SolidColorBrush x:Key="AppBarForeBrush" Color="{Binding Path=Theme.AppBarForeColor, Source={StaticResource ThemeHelper}}"/>
+    <SolidColorBrush x:Key="AppBarBackBrush" Color="{Binding Path=Theme.AppBarBackColor, Source={StaticResource ThemeHelper}}"/>
+    
+    <SolidColorBrush x:Key="FeedTitleBrush" Color="{Binding Path=Theme.FeedTitleColor, Source={StaticResource ThemeHelper}}"/>
+    <SolidColorBrush x:Key="FeedSummaryBrush" Color="{Binding Path=Theme.FeedSummaryColor, Source={StaticResource ThemeHelper}}"/>
+    <SolidColorBrush x:Key="FeedVerbBrush" Color="{Binding Path=Theme.FeedVerbColor, Source={StaticResource ThemeHelper}}"/>
+
+    <SolidColorBrush x:Key="AuthorBrush" Color="{Binding Path=Theme.FeedVerbColor, Source={StaticResource ThemeHelper}}"/>
+
+    <SolidColorBrush x:Key="TitleBorder" Color="{Binding Path=Theme.TitleBorderColor, Source={StaticResource ThemeHelper}}"/>
+    <SolidColorBrush x:Key="TitleForeground" Color="{Binding Path=Theme.TitleForeColor, Source={StaticResource ThemeHelper}}"/>
+    <SolidColorBrush x:Key="TitleBackground" Color="{Binding Path=Theme.TitleBackColor, Source={StaticResource ThemeHelper}}"/>
+
+    <SolidColorBrush x:Key="VoteForeBrush" Color="{Binding Path=Theme.VoteForeColor, Source={StaticResource ThemeHelper}}"/>
+    <SolidColorBrush x:Key="VoteSecondForeColor" Color="{Binding Path=Theme.VoteSecondForeColor, Source={StaticResource ThemeHelper}}"/>
+    <SolidColorBrush x:Key="VoteBackBrush" Color="{Binding Path=Theme.VoteBackColor, Source={StaticResource ThemeHelper}}"/>
+
+    <SolidColorBrush x:Key="TopicForeBrush" Color="{Binding Path=Theme.TopicForeColor, Source={StaticResource ThemeHelper}}"/>
+    <SolidColorBrush x:Key="TopicBackBrush" Color="{Binding Path=Theme.TopicBackColor, Source={StaticResource ThemeHelper}}"/>
+
+    <SolidColorBrush x:Key="QuesTitleForeBrush" Color="{Binding Path=Theme.QueTitleForeColor, Source={StaticResource ThemeHelper}}"/>
+    <SolidColorBrush x:Key="QuesContentForeBrush" Color="{Binding Path=Theme.QueContentForeColor, Source={StaticResource ThemeHelper}}"/>
+    <SolidColorBrush x:Key="QuesNoteForeBrush" Color="{Binding Path=Theme.NoteForeColor, Source={StaticResource ThemeHelper}}"/>
+
+    <SolidColorBrush x:Key="FollowForeBrush" Color="{Binding Path=Theme.FollowForeColor, Source={StaticResource ThemeHelper}}"/>
+    <SolidColorBrush x:Key="FollowBackBrush" Color="{Binding Path=Theme.FollowBackColor, Source={StaticResource ThemeHelper}}"/>
+
+    <SolidColorBrush x:Key="AnswerTitleForeBrush" Color="{Binding Path=Theme.AnswerTitleForeColor, Source={StaticResource ThemeHelper}}"/>
+    <SolidColorBrush x:Key="AnswerTitleBackBrush" Color="{Binding Path=Theme.AnswerTitleBackColor, Source={StaticResource ThemeHelper}}"/>
+
+    <SolidColorBrush x:Key="AnswerContentForeBrush" Color="{Binding Path=Theme.AnswerContentForeColor, Source={StaticResource ThemeHelper}}"/>
+   
+
+    <SolidColorBrush x:Key="FollowerForeBrush" Color="{Binding Path=Theme.FollowerForeColor, Source={StaticResource ThemeHelper}}"/>
+
+    <SolidColorBrush x:Key="LightBackBrush" Color="{Binding Path=Theme.LightBackColor, Source={StaticResource ThemeHelper}}"/>
+
+    <SolidColorBrush x:Key="FlyoutBackBrush" Color="{Binding Path=Theme.FlyoutBackColor, Source={StaticResource ThemeHelper}}"/>
+
+    <SolidColorBrush x:Key="BorderForeBrush" Color="{Binding Path=Theme.BorderForeColor, Source={StaticResource ThemeHelper}}"/>
+    <SolidColorBrush x:Key="BorderBackBrush" Color="{Binding Path=Theme.BorderBackColor, Source={StaticResource ThemeHelper}}"/>
+
+    <SolidColorBrush x:Key="ProgressBackBrush" Color="{Binding Path=Theme.ProgressBackColor, Source={StaticResource ThemeHelper}}"/>
+    <SolidColorBrush x:Key="ProgressForeBrush" Color="{Binding Path=Theme.ProgressForeColor, Source={StaticResource ThemeHelper}}"/>
+
+    <SolidColorBrush x:Key="ToastForeBrush" Color="{Binding Path=Theme.ToastForeColor, Source={StaticResource ThemeHelper}}"/>
+    <SolidColorBrush x:Key="ToastBackBrush" Color="{Binding Path=Theme.ToastBackColor, Source={StaticResource ThemeHelper}}"/>
+
+    <SolidColorBrush x:Key="LinkForeBrush" Color="{Binding Path=Theme.LinkForeColor, Source={StaticResource ThemeHelper}}"/>
+
+    <SolidColorBrush x:Key="FirstForeBrush" Color="{Binding Path=Theme.FirstForeColor, Source={StaticResource ThemeHelper}}"/>
+    <SolidColorBrush x:Key="SecondForeBrush" Color="{Binding Path=Theme.SecondForeColor, Source={StaticResource ThemeHelper}}"/>
+    <SolidColorBrush x:Key="ThirdForeBrush" Color="{Binding Path=Theme.ThirdForeColor, Source={StaticResource ThemeHelper}}"/>
+
+    <SolidColorBrush x:Key="AuthorForeBrush" Color="{Binding Path=Theme.AuthorForeColor, Source={StaticResource ThemeHelper}}"/>
+
+    <SolidColorBrush x:Key="LineBrush" Color="{Binding Path=Theme.LineColor, Source={StaticResource ThemeHelper}}"/>
+
+    <SolidColorBrush x:Key="BoldForeground" Color="{Binding Path=Theme.BoldForeColor, Source={StaticResource ThemeHelper}}"/>
+
+</ResourceDictionary>
