@@ -107,76 +107,77 @@
                                Style="{StaticResource AuthorHeadLineStyle}"/>
                 </Grid>
 
-                <Border Grid.Row="2" Grid.Column="1" Margin="10 5 10 5" Style="{StaticResource VerticalLineStyle}"/>
-
-                <Button Grid.Row="2" Grid.Column="2" Margin="10 0 15 0" Style="{StaticResource FlatButtonStyle}">
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto"/>
-                            <ColumnDefinition Width="Auto"/>
-                        </Grid.ColumnDefinitions>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="*"/>
-                            <RowDefinition Height="*"/>
-                        </Grid.RowDefinitions>
-                        <Image Grid.Row="0" Grid.Column="0" Height="18" Margin="0 0 0 0" VerticalAlignment="Bottom" Source="{Binding Path=Relationship.Voting, Converter={StaticResource VotingToImageConverter}, ConverterParameter=up}"/>
-                        <Image Grid.Row="1" Grid.Column="0" Height="18" Margin="0 0 0 0" VerticalAlignment="Top" Source="{Binding Path=Relationship.Voting, Converter={StaticResource VotingToImageConverter}, ConverterParameter=down}"/>
-
-                        <TextBlock Grid.Row="0" Grid.RowSpan="2" Grid.Column="1" MinWidth="30"
-                                                   Margin="10 0 0 0"
-                                                   Text="{Binding Detail.VoteupCount, Converter={StaticResource CountConverter}}" 
-                                                   FontWeight="Bold" 
-                                                   FontSize="{Binding Source={StaticResource ThemeHelper}, Path=Theme.FeedSummary}" 
-                                                   Foreground="{StaticResource QuesNoteForeBrush}"
-                                                   Style="{StaticResource VoteStyle}"/>
-                    </Grid>
-                    <Button.Flyout>
-                        <Flyout x:Name="VoteFlyout" Placement="Full" FlyoutPresenterStyle="{StaticResource FlyoutPresenterStyle}">
-                            <Grid Background="{StaticResource FlyoutBackBrush}" HorizontalAlignment="Center" VerticalAlignment="Center"
-                                                  Tapped="VoteFlyout_OnTapped">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition/>
-                                    <RowDefinition/>
-                                    <RowDefinition/>
-                                </Grid.RowDefinitions>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="40"/>
-                                    <ColumnDefinition Width="Auto"/>
-                                    <ColumnDefinition Width="40"/>
-                                    <ColumnDefinition Width="Auto"/>
-                                    <ColumnDefinition Width="40"/>
-                                </Grid.ColumnDefinitions>
-
-                                <TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="5" Text="为答案投票" HorizontalAlignment="Center" Margin="12" FontSize="{Binding Source={StaticResource ThemeHelper}, Path=Theme.FeedTitle}" Style="{StaticResource FeedTitleStyle}"/>
-
-                                <Button Grid.Row="1" Grid.Column="1" Style="{StaticResource FlatButtonStyle}">
-                                    <StackPanel Orientation="Vertical">
-                                        <Image Height="90" VerticalAlignment="Bottom" Source="{Binding Path=Relationship.Voting, Converter={StaticResource VotingToImageConverter}, ConverterParameter=up}"/>
-                                        <TextBlock Text="赞同" HorizontalAlignment="Center" FontSize="{Binding Source={StaticResource ThemeHelper}, Path=Theme.FeedSummary}" Style="{StaticResource SummaryStyle}"/>
-                                    </StackPanel>
-                                    <interactivity:Interaction.Behaviors>
-                                        <core:EventTriggerBehavior EventName="Tapped">
-                                            <core:InvokeCommandAction Command="{Binding VoteUpTapped, Mode=OneWay}"/>
-                                        </core:EventTriggerBehavior>
-                                    </interactivity:Interaction.Behaviors>
-                                </Button>
-
-                                <Button Grid.Row="1" Grid.Column="3" Style="{StaticResource FlatButtonStyle}">
-                                    <StackPanel>
-                                        <Image Height="90" VerticalAlignment="Top" Source="{Binding Path=Relationship.Voting, Converter={StaticResource VotingToImageConverter}, ConverterParameter=down}"/>
-                                        <TextBlock Text="反对" HorizontalAlignment="Center" FontSize="{Binding Source={StaticResource ThemeHelper}, Path=Theme.FeedSummary}" Style="{StaticResource SummaryStyle}"/>
-                                    </StackPanel>
-                                    <interactivity:Interaction.Behaviors>
-                                        <core:EventTriggerBehavior EventName="Tapped">
-                                            <core:InvokeCommandAction Command="{Binding VoteDownTapped, Mode=OneWay}"/>
-                                        </core:EventTriggerBehavior>
-                                    </interactivity:Interaction.Behaviors>
-                                </Button>
-                            </Grid>
-                        </Flyout>
-                    </Button.Flyout>
-                </Button>
-
+<!--                this is commented out, because the vote up and vote down button is moved to command bar-->
+<!--                <Border Grid.Row="2" Grid.Column="1" Margin="10 5 10 5" Style="{StaticResource VerticalLineStyle}"/>-->
+<!---->
+<!--~1~                vote@1@-->
+<!--                <Button Grid.Row="2" Grid.Column="2" Margin="10 0 15 0" Style="{StaticResource FlatButtonStyle}">-->
+<!--                    <Grid>-->
+<!--                        <Grid.ColumnDefinitions>-->
+<!--                            <ColumnDefinition Width="Auto"/>-->
+<!--                            <ColumnDefinition Width="Auto"/>-->
+<!--                        </Grid.ColumnDefinitions>-->
+<!--                        <Grid.RowDefinitions>-->
+<!--                            <RowDefinition Height="*"/>-->
+<!--                            <RowDefinition Height="*"/>-->
+<!--                        </Grid.RowDefinitions>-->
+<!--                        <Image Grid.Row="0" Grid.Column="0" Height="18" Margin="0 0 0 0" VerticalAlignment="Bottom" Source="{Binding Path=Relationship.Voting, Converter={StaticResource VotingToImageConverter}, ConverterParameter=up}"/>-->
+<!--                        <Image Grid.Row="1" Grid.Column="0" Height="18" Margin="0 0 0 0" VerticalAlignment="Top" Source="{Binding Path=Relationship.Voting, Converter={StaticResource VotingToImageConverter}, ConverterParameter=down}"/>-->
+<!---->
+<!--                        <TextBlock Grid.Row="0" Grid.RowSpan="2" Grid.Column="1" MinWidth="30"-->
+<!--                                                   Margin="10 0 0 0"-->
+<!--                                                   Text="{Binding Detail.VoteupCount, Converter={StaticResource CountConverter}}" -->
+<!--                                                   FontWeight="Bold" -->
+<!--                                                   FontSize="{Binding Source={StaticResource ThemeHelper}, Path=Theme.FeedSummary}" -->
+<!--                                                   Foreground="{StaticResource QuesNoteForeBrush}"-->
+<!--                                                   Style="{StaticResource VoteStyle}"/>-->
+<!--                    </Grid>-->
+<!--                    <Button.Flyout>-->
+<!--                        <Flyout x:Name="VoteFlyout" Placement="Full" FlyoutPresenterStyle="{StaticResource FlyoutPresenterStyle}">-->
+<!--                            <Grid Background="{StaticResource FlyoutBackBrush}" HorizontalAlignment="Center" VerticalAlignment="Center"-->
+<!--                                                  Tapped="VoteFlyout_OnTapped">-->
+<!--                                <Grid.RowDefinitions>-->
+<!--                                    <RowDefinition/>-->
+<!--                                    <RowDefinition/>-->
+<!--                                    <RowDefinition/>-->
+<!--                                </Grid.RowDefinitions>-->
+<!--                                <Grid.ColumnDefinitions>-->
+<!--                                    <ColumnDefinition Width="40"/>-->
+<!--                                    <ColumnDefinition Width="Auto"/>-->
+<!--                                    <ColumnDefinition Width="40"/>-->
+<!--                                    <ColumnDefinition Width="Auto"/>-->
+<!--                                    <ColumnDefinition Width="40"/>-->
+<!--                                </Grid.ColumnDefinitions>-->
+<!---->
+<!--                                <TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="5" Text="为答案投票" HorizontalAlignment="Center" Margin="12" FontSize="{Binding Source={StaticResource ThemeHelper}, Path=Theme.FeedTitle}" Style="{StaticResource FeedTitleStyle}"/>-->
+<!---->
+<!--                                <Button Grid.Row="1" Grid.Column="1" Style="{StaticResource FlatButtonStyle}">-->
+<!--                                    <StackPanel Orientation="Vertical">-->
+<!--                                        <Image Height="90" VerticalAlignment="Bottom" Source="{Binding Path=Relationship.Voting, Converter={StaticResource VotingToImageConverter}, ConverterParameter=up}"/>-->
+<!--                                        <TextBlock Text="赞同" HorizontalAlignment="Center" FontSize="{Binding Source={StaticResource ThemeHelper}, Path=Theme.FeedSummary}" Style="{StaticResource SummaryStyle}"/>-->
+<!--                                    </StackPanel>-->
+<!--                                    <interactivity:Interaction.Behaviors>-->
+<!--                                        <core:EventTriggerBehavior EventName="Tapped">-->
+<!--                                            <core:InvokeCommandAction Command="{Binding VoteUpTapped, Mode=OneWay}"/>-->
+<!--                                        </core:EventTriggerBehavior>-->
+<!--                                    </interactivity:Interaction.Behaviors>-->
+<!--                                </Button>-->
+<!---->
+<!--                                <Button Grid.Row="1" Grid.Column="3" Style="{StaticResource FlatButtonStyle}">-->
+<!--                                    <StackPanel>-->
+<!--                                        <Image Height="90" VerticalAlignment="Top" Source="{Binding Path=Relationship.Voting, Converter={StaticResource VotingToImageConverter}, ConverterParameter=down}"/>-->
+<!--                                        <TextBlock Text="反对" HorizontalAlignment="Center" FontSize="{Binding Source={StaticResource ThemeHelper}, Path=Theme.FeedSummary}" Style="{StaticResource SummaryStyle}"/>-->
+<!--                                    </StackPanel>-->
+<!--                                    <interactivity:Interaction.Behaviors>-->
+<!--                                        <core:EventTriggerBehavior EventName="Tapped">-->
+<!--                                            <core:InvokeCommandAction Command="{Binding VoteDownTapped, Mode=OneWay}"/>-->
+<!--                                        </core:EventTriggerBehavior>-->
+<!--                                    </interactivity:Interaction.Behaviors>-->
+<!--                                </Button>-->
+<!--                            </Grid>-->
+<!--                        </Flyout>-->
+<!--                    </Button.Flyout>-->
+<!--                </Button>-->
                 <Border Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="3" Margin="0 5 0 0" Style="{StaticResource LineStyle}"/>
             </Grid>
         </DataTemplate>
