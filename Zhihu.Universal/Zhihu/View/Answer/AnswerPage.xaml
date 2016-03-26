@@ -262,38 +262,34 @@
                             HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  
                             Paragraphs="{Binding Detail.Content, Converter={StaticResource HtmlConverter}, ConverterParameter='True'}" />
 
-        <!--没有帮助 感谢 收藏 评论数-->
+        <!-- command bar with up vote, down vote and comment as primary item; like, share, add to collection ect. as secondary item -->
         <CommandBar Grid.Row="1" ClosedDisplayMode="Compact" 
                     IsTapEnabled="True" IsOpen="False" IsSticky="False"
                     Background="{StaticResource AppBarBackBrush}"
                     Foreground="{StaticResource AppBarForeBrush}"
                     HorizontalAlignment="Stretch" 
                     HorizontalContentAlignment="Stretch">
-            <AppBarButton Icon="Like" Label="{Binding Path=Relationship.IsThanked, Converter={StaticResource ThankedConverter}}">
+            <AppBarButton Icon="Like" Label="{Binding Detail.VoteupCount, Converter={StaticResource CountConverter}}" >
                 <AppBarButton.Foreground>
-                    <SolidColorBrush Color="{Binding Path=Relationship.IsThanked, Converter={StaticResource BoolToHighlightConverter}}"/>
+                    <SolidColorBrush Color="{Binding Path=Relationship.Voting, ConverterParameter=1, Converter={StaticResource VotingToHighlightConverter}}"/>
                 </AppBarButton.Foreground>
                 <interactivity:Interaction.Behaviors>
                     <core:EventTriggerBehavior EventName="Tapped">
-                        <core:InvokeCommandAction Command="{Binding AnswerThankTapped, Mode=OneWay}"/>
+                        <core:InvokeCommandAction Command="{Binding VoteUpTapped, Mode=OneWay}"/>
                     </core:EventTriggerBehavior>
                 </interactivity:Interaction.Behaviors>
             </AppBarButton>
-            <AppBarButton Icon="Flag" Label="{Binding Path=Relationship.IsNotHelp, Converter={StaticResource NoHelpConverter}}">
+            <AppBarButton Icon="Dislike" Label="反对">
                 <AppBarButton.Foreground>
-                    <SolidColorBrush Color="{Binding Path=Relationship.IsNotHelp, Converter={StaticResource BoolToHighlightConverter}}"/>
+                    <SolidColorBrush Color="{Binding Path=Relationship.Voting, ConverterParameter=-1, Converter={StaticResource VotingToHighlightConverter}}"/>
                 </AppBarButton.Foreground>
                 <interactivity:Interaction.Behaviors>
                     <core:EventTriggerBehavior EventName="Tapped">
-                        <core:InvokeCommandAction Command="{Binding AnswerNoHelpTapped, Mode=OneWay}"/>
+                        <core:InvokeCommandAction Command="{Binding VoteDownTapped, Mode=OneWay}"/>
                     </core:EventTriggerBehavior>
                 </interactivity:Interaction.Behaviors>
-            </AppBarButton>
-            <AppBarButton Icon="OutlineStar" Label="加入收藏" Flyout="{StaticResource CollectionFlyout}">
-                <AppBarButton.Foreground>
-                    <SolidColorBrush Color="{Binding Path=Relationship.IsFavorited, Converter={StaticResource BoolToHighlightConverter}}"/>
-                </AppBarButton.Foreground>
-            </AppBarButton>
+            </AppBarButton>           
+                      
             <AppBarButton Icon="Comment" Label="{Binding Path=Detail.CommentCount, Converter={StaticResource CommentsCountConverter}}"
                           Foreground="{StaticResource AppBarForeBrush}"
                           Tapped="ShowComments_OnTapped"/>
@@ -313,7 +309,31 @@
                         </core:EventTriggerBehavior>
                     </interactivity:Interaction.Behaviors>
                 </AppBarButton>
+                <AppBarButton Icon="Like" Label="{Binding Path=Relationship.IsThanked, Converter={StaticResource ThankedConverter}}">
+<!--                   <AppBarButton.Foreground>-->
+<!--                       <SolidColorBrush Color="{Binding Path=Relationship.IsThanked, Converter={StaticResource BoolToHighlightConverter}}"/>-->
+<!--                   </AppBarButton.Foreground>-->
+                   <interactivity:Interaction.Behaviors>
+                       <core:EventTriggerBehavior EventName="Tapped">
+                           <core:InvokeCommandAction Command="{Binding AnswerThankTapped, Mode=OneWay}"/>
+                       </core:EventTriggerBehavior>
+                   </interactivity:Interaction.Behaviors>
+                </AppBarButton>
+                <AppBarButton Icon="Flag" Label="{Binding Path=Relationship.IsNotHelp, Converter={StaticResource NoHelpConverter}}">
+<!--                    <AppBarButton.Foreground>-->
+<!--                        <SolidColorBrush Color="{Binding Path=Relationship.IsNotHelp, Converter={StaticResource BoolToHighlightConverter}}"/>-->
+<!--                    </AppBarButton.Foreground>-->
+                    <interactivity:Interaction.Behaviors>
+                        <core:EventTriggerBehavior EventName="Tapped">
+                            <core:InvokeCommandAction Command="{Binding AnswerNoHelpTapped, Mode=OneWay}"/>
+                        </core:EventTriggerBehavior>
+                    </interactivity:Interaction.Behaviors>
+                </AppBarButton>
+                <AppBarButton Icon="OutlineStar" Label="加入收藏" Flyout="{StaticResource CollectionFlyout}">
+<!--                    <AppBarButton.Foreground>-->
+<!--                        <SolidColorBrush Color="{Binding Path=Relationship.IsFavorited, Converter={StaticResource BoolToHighlightConverter}}"/>-->
+<!--                    </AppBarButton.Foreground>-->
+                </AppBarButton>
             </CommandBar.SecondaryCommands>
-        </CommandBar>
-    </Grid>
+        </CommandBar>   </Grid>
 </Page>
