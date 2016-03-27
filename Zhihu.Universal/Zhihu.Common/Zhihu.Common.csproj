@@ -129,6 +129,7 @@
     <Compile Include="DataSource\LazyLoadingBase.cs" />
     <Compile Include="Helper\AvatarHelper.cs" />
     <Compile Include="Helper\CacheHelper.cs" />
+    <Compile Include="Helper\Constant.cs" />
     <Compile Include="Helper\DateTimeFormatHelper.cs" />
     <Compile Include="Helper\FileUtility.cs" />
     <Compile Include="Helper\HttpUtility.cs" />

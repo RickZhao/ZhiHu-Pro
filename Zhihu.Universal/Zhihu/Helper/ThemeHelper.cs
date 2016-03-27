@@ -606,7 +606,7 @@ namespace Zhihu.Helper
                 }
 
                 if (_pageTitle < 10)
-                    _pageTitle = 36.0;
+                    _pageTitle = Constant.DefaultFontSize.PageTitle;
 
                 return _pageTitle;
             }
@@ -633,7 +633,7 @@ namespace Zhihu.Helper
                 }
 
                 if (_feedTitle < 6)
-                    _feedTitle = 24;
+                    _feedTitle = Constant.DefaultFontSize.FeedTitle;
 
                 return _feedTitle;
             }
@@ -659,7 +659,7 @@ namespace Zhihu.Helper
                 }
 
                 if (_feedSummary < 6)
-                    _feedSummary = 20;
+                    _feedSummary = Constant.DefaultFontSize.FeedSummary;
 
                 return _feedSummary;
             }
@@ -685,7 +685,7 @@ namespace Zhihu.Helper
                 }
 
                 if (_feedVerb < 6)
-                    _feedVerb = 18;
+                    _feedVerb = Constant.DefaultFontSize.FeedVerb;
 
                 return _feedVerb;
             }
@@ -711,7 +711,7 @@ namespace Zhihu.Helper
                 }
 
                 if (_voteCount < 6)
-                    _voteCount = 14;
+                    _voteCount = Constant.DefaultFontSize.VoteCount;
 
                 return _voteCount;
             }
@@ -800,14 +800,11 @@ namespace Zhihu.Helper
 
         internal void ResetFontSize()
         {
-            PageTitle = 36.0;
-            FeedTitle = 24.0;
-
-            FeedSummary = 20.0;
-
-            FeedVerb = 18.0;
-
-            VoteCount = 14.0;
+            PageTitle = Constant.DefaultFontSize.PageTitle;
+            FeedTitle = Constant.DefaultFontSize.FeedTitle;
+            FeedSummary = Constant.DefaultFontSize.FeedSummary;
+            FeedVerb = Constant.DefaultFontSize.FeedVerb;
+            VoteCount = Constant.DefaultFontSize.VoteCount;
         }
 
         private void LoadTheme()
