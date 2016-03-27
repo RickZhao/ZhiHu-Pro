@@ -726,65 +726,7 @@ namespace Zhihu.Helper
         }
 
         #endregion
-
-        #region Timeline Item Size
-
-        private Double _itemWidth;
-
-        public Double ItemWidth
-        {
-            get
-            {
-                if (_itemWidth < 1.0)
-                {
-                    Double.TryParse(LocalSettingUtility.Instance.Read<String>("ItemWidth"), out _itemWidth);
-                }
-
-                if (_itemWidth < 10)
-                    _itemWidth = 380.0;
-
-                return _itemWidth;
-            }
-            set
-            {
-                _itemWidth = value;
-
-                RaisePropertyChanged();
-
-                LocalSettingUtility.Instance.Add("ItemWidth", value.ToString());
-            }
-        }
-
-
-        private Double _itemHeight;
-
-        public Double ItemHeight
-        {
-            get
-            {
-                if (_itemHeight < 1.0)
-                {
-                    Double.TryParse(LocalSettingUtility.Instance.Read<String>("ItemHeight"), out _itemHeight);
-                }
-
-                if (_itemHeight < 6)
-                    _itemHeight = 260.0;
-
-                return _itemHeight;
-            }
-            set
-            {
-                _itemHeight = value;
-
-                RaisePropertyChanged();
-
-                LocalSettingUtility.Instance.Add("ItemHeight", value.ToString());
-            }
-        }
-
-
-        #endregion
-
+        
         #region Singleton
 
         private static Theme _instance;
