@@ -68,6 +68,19 @@
                               HorizontalAlignment="Stretch"
                               IsOn="{Binding Path=Theme.NoImage, Mode=TwoWay, Source={StaticResource ThemeHelper}}"
                               Visibility="Visible"/>
+                <ToggleSwitch Margin="10 10 10 10" Foreground="{StaticResource FeedTitleBrush}"
+                              Header="切换主题" OnContent="黑色" OffContent="白色"
+                              FontSize="{Binding Source={StaticResource ThemeHelper}, Path=Theme.FeedSummary}"
+                              HorizontalAlignment="Stretch"
+                              IsOn="{Binding Path=Theme.BlackTheme,Mode=TwoWay,Source={StaticResource ThemeHelper}}"
+                              Visibility="Visible">
+                <interactivity:Interaction.Behaviors>
+                    <core:EventTriggerBehavior EventName="Toggled">
+                        <core:InvokeCommandAction Command="{Binding SwitchTopStory, Mode=OneWay}"/>
+                    </core:EventTriggerBehavior>
+                </interactivity:Interaction.Behaviors>
+                </ToggleSwitch>
+
 
 
                 <ToggleSwitch Margin="10 10 10 10" Foreground="{StaticResource FeedTitleBrush}"
@@ -116,6 +129,7 @@
                         </core:EventTriggerBehavior>
                     </interactivity:Interaction.Behaviors>
                 </AppBarButton>
+                
             </CommandBar>
         </Grid>
     </ScrollViewer>

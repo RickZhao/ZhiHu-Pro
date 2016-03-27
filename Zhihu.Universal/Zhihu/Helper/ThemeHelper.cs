@@ -764,7 +764,37 @@ namespace Zhihu.Helper
                 LoadDark();
             }
         }
-
+        private Boolean _blackTheme = false;
+        public Boolean BlackTheme
+        {
+            set
+            {
+                _blackTheme = value;
+                
+                if (_blackTheme)
+                {
+                    TurnDark();
+                }
+                else
+                {
+                    TurnLight();
+                }
+            }
+            get
+            {
+                var currentTheme = LocalSettingUtility.Instance.Read<String>(Utility.Instance.CurrentThemeKey);
+                if(String.IsNullOrEmpty(currentTheme) || currentTheme == "Light")
+                {
+                    _blackTheme = false;
+                    return _blackTheme;
+                }
+                else
+                {
+                    _blackTheme = true;
+                    return _blackTheme;
+                }
+            }
+        }
         public void UpdateRequestedTheme(Page page)
         {
             if (page == null) return;
