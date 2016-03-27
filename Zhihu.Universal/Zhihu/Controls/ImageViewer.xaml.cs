@@ -79,7 +79,7 @@ namespace Zhihu.Controls
 
         public void Close()
         {
-            _imageSets.Clear();
+            //_imageSets.Clear();
             _popup.IsOpen = false;
         }
 
