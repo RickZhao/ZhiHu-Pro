@@ -77,9 +77,10 @@ namespace Zhihu.Controls
             _imageSets.Add(new List<ImageRun>(imageSet), false);
         }
 
-        public void Clear()
+        public void Close()
         {
             _imageSets.Clear();
+            _popup.IsOpen = false;
         }
 
         public Boolean IsOpen

@@ -336,5 +336,6 @@
 <!--                    </AppBarButton.Foreground>-->
                 </AppBarButton>
             </CommandBar.SecondaryCommands>
-        </CommandBar>   </Grid>
+        </CommandBar>   
+    </Grid>
 </Page>
