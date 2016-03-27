@@ -1,4 +1,4 @@
-﻿namespace Zhihu.Helper
+﻿namespace Zhihu.Common.Helper
 {
     public class Constant
     {
