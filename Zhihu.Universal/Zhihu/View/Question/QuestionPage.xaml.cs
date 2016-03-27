@@ -12,7 +12,7 @@ using Windows.UI.Xaml.Media.Animation;
 using Windows.UI.Xaml.Navigation;
 
 using GalaSoft.MvvmLight.Command;
-
+using Zhihu.Controls;
 using Zhihu.Controls.ItemView;
 using Zhihu.Helper;
 
@@ -94,6 +94,11 @@ namespace Zhihu.View.Question
         
         private void OnBackRequested()
         {
+            if (ImageViewerPopup.Instance.IsOpen == true)
+            {
+                ImageViewerPopup.Instance.Close();
+                return;
+            }
             if (this.PreviewFrame.BackStack.Count > 0) return;
 
             this.Frame.GoBack(new DrillInNavigationTransitionInfo());

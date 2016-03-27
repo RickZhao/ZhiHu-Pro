@@ -12,7 +12,7 @@ using GalaSoft.MvvmLight.Ioc;
 using Zhihu.Helper;
 using Zhihu.ViewModel;
 using Zhihu.Common.Helper;
-
+using Zhihu.Controls;
 
 
 namespace Zhihu.View.Article
@@ -71,6 +71,12 @@ namespace Zhihu.View.Article
 
         private void OnBackRequested()
         {
+            if (ImageViewerPopup.Instance.IsOpen == true)
+            {
+                ImageViewerPopup.Instance.Close();
+                return;
+            }
+
             if (this.Frame != null && this.Frame.CanGoBack) this.Frame.GoBack(new DrillInNavigationTransitionInfo());
 
             UpdateBackButton();
