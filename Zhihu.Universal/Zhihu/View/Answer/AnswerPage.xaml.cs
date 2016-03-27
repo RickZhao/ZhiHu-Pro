@@ -7,6 +7,7 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media.Animation;
 using Windows.UI.Xaml.Navigation;
 
+using Zhihu.Controls;
 using Zhihu.Helper;
 using Zhihu.ViewModel;
 
@@ -72,6 +73,12 @@ namespace Zhihu.View.Answer
 
         private void OnBackRequested()
         {
+            if (ImageViewerPopup.Instance.IsOpen == true)
+            {
+                ImageViewerPopup.Instance.Close();
+                return;
+            }
+
             if (this.Frame != null && this.Frame.CanGoBack) this.Frame.GoBack(new DrillInNavigationTransitionInfo());
 
             UpdateBackButton();
