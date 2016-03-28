@@ -65,6 +65,7 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
             <ColumnDefinition x:Name="MasterColumn" Width="*"/>
             <ColumnDefinition x:Name="DetailColumn" Width="0"/>
         </Grid.ColumnDefinitions>
@@ -80,8 +81,7 @@
                         <Setter Target="MasterColumn.MinWidth" Value="450"/>
                         <Setter Target="MasterColumn.MaxWidth" Value="650"/>
                         <Setter Target="DetailColumn.Width" Value="1.6*"/>
-                        <Setter Target="SplitView.DisplayMode" Value="CompactOverlay" />
-                        <Setter Target="SplitView.Visibility" Value="Visible"/>
+                        <Setter Target="NavMenuList.Visibility" Value="Visible"/>
                         <!--<Setter Target="FrameContainer.Margin" Value="30 30 30 30"/>-->
                         <Setter Target="NavCommandBar.Visibility" Value="Collapsed"/>
                         <Setter Target="FrameContainer.Visibility" Value="Visible"/>
@@ -94,8 +94,7 @@
                     <VisualState.Setters>
                         <Setter Target="MasterColumn.Width" Value="*"/>
                         <Setter Target="DetailColumn.Width" Value="0"/>
-                        <Setter Target="SplitView.DisplayMode" Value="Overlay"/>
-                        <Setter Target="SplitView.Visibility" Value="Collapsed"/>
+                        <Setter Target="NavMenuList.Visibility" Value="Collapsed"/>
                         <Setter Target="NavCommandBar.Visibility" Value="Visible"/>
                         <Setter Target="FrameContainer.Visibility" Value="Collapsed"/>
                     </VisualState.Setters>
@@ -103,29 +102,23 @@
             </VisualStateGroup>
         </VisualStateManager.VisualStateGroups>
 
-        <controls:SwipeableSplitView x:Name="SplitView" Grid.Row="0" Grid.Column="0"
-                                 IsSwipeablePaneOpen="{Binding IsSplitViewPaneOpen, Mode=TwoWay}">
-            <SplitView.Pane>
-                <ListBox ItemsSource="{Binding MenuItems}" 
+        <ListBox x:Name="NavMenuList" ItemsSource="{Binding MenuItems}" Grid.Row="0" Grid.Column="0"
                          SelectedItem="{Binding SelectedMenuItem, Mode=TwoWay, Converter={StaticResource ObjectToMenuItemConverter}}"
                          ItemContainerStyle="{StaticResource MenuListBoxItemStyle}"
                          SelectionChanged="ListBox_SelectionChanged">
-                    <ListBox.ItemTemplate>
-                        <DataTemplate x:DataType="controls:MenuItem">
-                            <StackPanel Orientation="Horizontal" Height="48">
-                                <TextBlock Grid.RowSpan="2" Text="{Binding Icon, Mode=OneWay}" Style="{StaticResource IconTextBlockStyle}" />
-                                <TextBlock Grid.Column="1" Text="{Binding Title, Mode=OneWay}" Style="{StaticResource MenuTitleTextBlockStyle}" />
-                            </StackPanel>
-                        </DataTemplate>
-                    </ListBox.ItemTemplate>
-                </ListBox>
-            </SplitView.Pane>
-            <SplitView.Content>
-                <Frame x:Name="MasterFrame" Grid.Row="0" Grid.Column="0" SourcePageType="{Binding SelectedPageType, Mode=TwoWay}" />
-            </SplitView.Content>
-        </controls:SwipeableSplitView>
+            <ListBox.ItemTemplate>
+                <DataTemplate x:DataType="controls:MenuItem">
+                    <StackPanel Orientation="Horizontal" Height="48">
+                        <TextBlock Grid.RowSpan="2" Text="{Binding Icon, Mode=OneWay}" Style="{StaticResource IconTextBlockStyle}" />
+                        <!--<TextBlock Grid.Column="1" Text="{Binding Title, Mode=OneWay}" Style="{StaticResource MenuTitleTextBlockStyle}" />-->
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
 
-        <CommandBar x:Name="NavCommandBar" Visibility="Visible" Grid.Row="1" Grid.Column="0" ClosedDisplayMode="Compact"
+        <Frame x:Name="MasterFrame" Grid.Row="0" Grid.Column="1" SourcePageType="{Binding SelectedPageType, Mode=TwoWay}" />
+
+        <CommandBar x:Name="NavCommandBar" Visibility="Visible" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" ClosedDisplayMode="Compact"
                     HorizontalAlignment="Stretch" HorizontalContentAlignment="Center"
                     IsOpen="False" IsSticky="False"
                     Background="{StaticResource AppBarBackBrush}"
@@ -182,12 +175,12 @@
             </CommandBar.SecondaryCommands>
         </CommandBar>
 
-        <Grid x:Name="FrameContainer" Grid.Row="0" Grid.RowSpan="2" Grid.Column="1"
+        <Grid x:Name="FrameContainer" Grid.Row="0" Grid.RowSpan="2" Grid.Column="2"
                       HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
             <Frame x:Name="PreviewFrame" CacheSize="50"/>
         </Grid>
 
-        <Border Grid.Row="0" Grid.RowSpan="2" Grid.Column="0" Grid.ColumnSpan="2"
+        <Border Grid.Row="0" Grid.RowSpan="2" Grid.Column="0" Grid.ColumnSpan="3"
                 HorizontalAlignment="Center" VerticalAlignment="Center" 
                 BorderBrush="{StaticResource LineBrush}" 
                 Visibility="{Binding RemindReviewVisible}">
@@ -238,7 +231,7 @@
             </Grid>
         </Border>
 
-        <ScrollViewer Grid.Row="0" Grid.RowSpan="2" Grid.Column="0" Grid.ColumnSpan="2"
+        <ScrollViewer Grid.Row="0" Grid.RowSpan="2" Grid.Column="0" Grid.ColumnSpan="3"
                       BorderBrush="{StaticResource LineBrush}"
                       HorizontalAlignment="Center"
                       VerticalAlignment="Center"
@@ -282,7 +275,7 @@
             </StackPanel>
         </ScrollViewer>
 
-        <Border x:Name="LeaveTip" Grid.Row="0" Grid.RowSpan="2" Grid.Column="0" Grid.ColumnSpan="2"
+        <Border x:Name="LeaveTip" Grid.Row="0" Grid.RowSpan="2" Grid.Column="0" Grid.ColumnSpan="3"
                 Visibility="Collapsed" HorizontalAlignment="Center" VerticalAlignment="Center" 
                 Style="{StaticResource TitleBorderStyle}">
             <TextBlock Text="再按一次离开" Margin="12" FontSize="22" HorizontalAlignment="Center" Style="{StaticResource TitleStyle}"/>
