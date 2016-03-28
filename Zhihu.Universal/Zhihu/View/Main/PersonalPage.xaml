@@ -12,9 +12,13 @@
     NavigationCacheMode="Enabled"
     Background="{StaticResource PageBackBrush}"
     DataContext="{Binding Path=Main, Mode=OneWay, Source={StaticResource Locator}}">
-
-    <Grid>
-        <ScrollViewer>
+    
+    <Grid >
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <ScrollViewer Grid.Row="0" Grid.Column="0">
             <StackPanel Margin="0 20 0 45" Orientation="Vertical">
                 <!--Login User Profile-->
                 <Grid Background="Transparent" Tapped="NavigateToMyProfile_Tapped">
@@ -167,9 +171,25 @@
 
                     <!--<Border Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" BorderThickness="0 1 0 0" Style="{StaticResource LineStyle}"/>-->
                 </Grid>
-
+                
                 <Border Style="{StaticResource LineStyle}"/>
+                
             </StackPanel>
+            
         </ScrollViewer>
+        <CommandBar Grid.Row="1" Grid.Column="0" ClosedDisplayMode="Compact"
+                        HorizontalAlignment="Stretch" HorizontalContentAlignment="Center"
+                        IsOpen="False" IsSticky="False"
+                        Background="{StaticResource AppBarBackBrush}"
+                        Foreground="{StaticResource AppBarForeBrush}">
+            <AppBarButton Icon="BlockContact"  Label="注销登录">
+                <interactivity:Interaction.Behaviors>
+                    <core:EventTriggerBehavior EventName="Tapped">
+                        <core:InvokeCommandAction Command="{Binding Logout, Mode=OneWay, Source={Binding Source={StaticResource Locator}, Path=Main}}"/>
+                    </core:EventTriggerBehavior>
+                </interactivity:Interaction.Behaviors>
+            </AppBarButton>
+        </CommandBar>
     </Grid>
+    
 </Page>
