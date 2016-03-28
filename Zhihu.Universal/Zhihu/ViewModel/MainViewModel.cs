@@ -328,7 +328,7 @@ namespace Zhihu.ViewModel
 
         private async void CheckNotifyMethod()
         {
-#region Checking Network
+            #region Checking Network
 
             if (false == Utility.Instance.IsNetworkAvailable)
             {
@@ -336,8 +336,8 @@ namespace Zhihu.ViewModel
 
                 return;
             }
-
-#endregion
+            
+            #endregion
 
             if (null == _people) return;
 
