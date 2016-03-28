@@ -74,11 +74,6 @@
                               HorizontalAlignment="Stretch"
                               IsOn="{Binding Path=Theme.BlackTheme,Mode=TwoWay,Source={StaticResource ThemeHelper}}"
                               Visibility="Visible">
-                <interactivity:Interaction.Behaviors>
-                    <core:EventTriggerBehavior EventName="Toggled">
-                        <core:InvokeCommandAction Command="{Binding SwitchTopStory, Mode=OneWay}"/>
-                    </core:EventTriggerBehavior>
-                </interactivity:Interaction.Behaviors>
                 </ToggleSwitch>
 
 
