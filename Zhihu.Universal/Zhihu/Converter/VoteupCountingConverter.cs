@@ -15,7 +15,7 @@ namespace Zhihu.Converter
                 ? (count/1000.0).ToString("F1") + "k"
                 : count.ToString();
 
-            return String.Format("赞({0})", countStr);
+            return String.Format("赞同 {0}", countStr);
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, string language)

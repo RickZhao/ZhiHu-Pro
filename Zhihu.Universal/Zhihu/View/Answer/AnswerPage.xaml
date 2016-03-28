@@ -270,7 +270,7 @@
                     Foreground="{StaticResource AppBarForeBrush}"
                     HorizontalAlignment="Stretch" 
                     HorizontalContentAlignment="Stretch">
-            <AppBarButton Icon="Like" Label="{Binding Detail.VoteupCount, Converter={StaticResource CountConverter}}" >
+            <AppBarButton Icon="Like" Label="{Binding Detail.VoteupCount, Converter={StaticResource VoteupCountingConverter}}" >
                 <AppBarButton.Foreground>
                     <SolidColorBrush Color="{Binding Path=Relationship.Voting, ConverterParameter=1, Converter={StaticResource VotingToHighlightConverter}}"/>
                 </AppBarButton.Foreground>
