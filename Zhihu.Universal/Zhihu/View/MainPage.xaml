@@ -19,36 +19,6 @@
     DataContext="{Binding Path=Main, Mode=OneWay, Source={StaticResource Locator}}">
 
     <Page.Resources>
-        <CollectionViewSource x:Name="FeedsSource" Source="{Binding Feeds.Feeds, Mode=OneWay}"/>
-
-        <CollectionViewSource x:Name="EditorRecommends" Source="{Binding Find.Recommends, Mode=OneWay}"/>
-        <CollectionViewSource x:Name="HotAnswers" Source="{Binding Find.HotAnswers, Mode=OneWay}"/>
-        <CollectionViewSource x:Name="HotCollections" Source="{Binding Find.Collections, Mode=OneWay}"/>
-
-        <CollectionViewSource x:Name="Notifies" Source="{Binding Notify.Notifies}"/>
-        <CollectionViewSource x:Name="LikesSource" Source="{Binding Notify.Likes}"/>
-        <CollectionViewSource x:Name="ChatsSource" Source="{Binding Notify.Chats}"/>
-
-        <DataTemplate x:Key="FeedItemTemplate">
-            <itemView:FeedView />
-        </DataTemplate>
-
-        <DataTemplate x:Key="BannerHeader">
-            <Grid>
-                <FlipView x:Name="BannerFlipView" ItemsSource="{Binding Find.Banner.Normal}" HorizontalAlignment="Stretch"
-                          Height="{Binding ElementName=FeedsGrid, Path=ActualWidth, Converter={StaticResource BannerHeightConverter}}">
-                    <FlipView.ItemTemplate>
-                        <DataTemplate>
-                            <Border Tapped="BannerItem_Tapped">
-                                <Image Source="{Binding ImageUrl}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Stretch="Uniform"/>
-                            </Border>
-                        </DataTemplate>
-                    </FlipView.ItemTemplate>
-                </FlipView>
-                <controls:FlipViewIndicator FlipView="{Binding ElementName=BannerFlipView}" Margin="0 0 10 10" HorizontalAlignment="Right" VerticalAlignment="Bottom"/>
-            </Grid>
-        </DataTemplate>
-       
         <Storyboard x:Name="LeaveTipEaseOut">
             <DoubleAnimationUsingKeyFrames Duration="0:0:2" Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="LeaveTip">
                 <EasingDoubleKeyFrame KeyTime="0:0:0" Value="1"/>
@@ -78,7 +48,7 @@
 
             <!--<core:InvokeCommandAction Command="{Binding PromptContribute, Mode=OneWay}"/>-->
             <core:InvokeCommandAction Command="{Binding PromptPay, Mode=OneWay}"/>
-            
+
             <core:InvokeCommandAction Command="{Binding CheckNotify, Mode=OneWay}"/>
 
             <core:InvokeCommandAction Command="{Binding Feeds.Load, Mode=OneWay}"/>
@@ -89,9 +59,18 @@
         </core:EventTriggerBehavior>
     </interactivity:Interaction.Behaviors>
 
-    <Grid Background="{StaticResource PageBackBrush}">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition x:Name="MasterColumn" Width="*"/>
+            <ColumnDefinition x:Name="DetailColumn" Width="0"/>
+        </Grid.ColumnDefinitions>
+
         <VisualStateManager.VisualStateGroups>
-            <VisualStateGroup x:Name="AdaptiveStates">
+            <VisualStateGroup x:Name="AdaptiveStates" CurrentStateChanged="AdaptiveStates_CurrentStateChanged">
                 <VisualState x:Name="DefaultState">
                     <VisualState.StateTriggers>
                         <AdaptiveTrigger MinWindowWidth="900"/>
@@ -101,7 +80,10 @@
                         <Setter Target="MasterColumn.MinWidth" Value="450"/>
                         <Setter Target="MasterColumn.MaxWidth" Value="650"/>
                         <Setter Target="DetailColumn.Width" Value="1.6*"/>
+                        <Setter Target="SplitView.DisplayMode" Value="CompactOverlay" />
+                        <Setter Target="SplitView.Visibility" Value="Visible"/>
                         <!--<Setter Target="FrameContainer.Margin" Value="30 30 30 30"/>-->
+                        <Setter Target="NavCommandBar.Visibility" Value="Collapsed"/>
                         <Setter Target="FrameContainer.Visibility" Value="Visible"/>
                     </VisualState.Setters>
                 </VisualState>
@@ -112,483 +94,71 @@
                     <VisualState.Setters>
                         <Setter Target="MasterColumn.Width" Value="*"/>
                         <Setter Target="DetailColumn.Width" Value="0"/>
+                        <Setter Target="SplitView.DisplayMode" Value="Overlay"/>
+                        <Setter Target="SplitView.Visibility" Value="Collapsed"/>
+                        <Setter Target="NavCommandBar.Visibility" Value="Visible"/>
                         <Setter Target="FrameContainer.Visibility" Value="Collapsed"/>
                     </VisualState.Setters>
                 </VisualState>
             </VisualStateGroup>
         </VisualStateManager.VisualStateGroups>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="Auto"/>
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition x:Name="MasterColumn" Width="*"/>
-            <ColumnDefinition x:Name="DetailColumn" Width="0"/>
-        </Grid.ColumnDefinitions>
 
-        <Grid x:Name="FeedsGrid" Grid.Row="0" Grid.Column="0">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="0"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="*"/>
-            </Grid.RowDefinitions>
+        <controls:SwipeableSplitView x:Name="SplitView" Grid.Row="0" Grid.Column="0"
+                                 IsSwipeablePaneOpen="{Binding IsSplitViewPaneOpen, Mode=TwoWay}">
+            <SplitView.Pane>
+                <ListBox ItemsSource="{Binding MenuItems}" 
+                         SelectedItem="{Binding SelectedMenuItem, Mode=TwoWay, Converter={StaticResource ObjectToMenuItemConverter}}"
+                         ItemContainerStyle="{StaticResource MenuListBoxItemStyle}"
+                         SelectionChanged="ListBox_SelectionChanged">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate x:DataType="controls:MenuItem">
+                            <StackPanel Orientation="Horizontal" Height="48">
+                                <TextBlock Grid.RowSpan="2" Text="{Binding Icon, Mode=OneWay}" Style="{StaticResource IconTextBlockStyle}" />
+                                <TextBlock Grid.Column="1" Text="{Binding Title, Mode=OneWay}" Style="{StaticResource MenuTitleTextBlockStyle}" />
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </SplitView.Pane>
+            <SplitView.Content>
+                <Frame x:Name="MasterFrame" Grid.Row="0" Grid.Column="0" SourcePageType="{Binding SelectedPageType, Mode=TwoWay}" />
+            </SplitView.Content>
+        </controls:SwipeableSplitView>
 
-            <ProgressBar Grid.Row="1" Background="{StaticResource ProgressBackBrush}" Foreground="{StaticResource ProgressForeBrush}" IsIndeterminate="{Binding Feeds.FeedsLoading}"/>
-
-            <refresh:PullToRefreshBox Grid.Row="2">
-                <interactivity:Interaction.Behaviors>
-                    <core:EventTriggerBehavior EventName="RefreshInvoked">
-                        <core:InvokeCommandAction Command="{Binding Feeds.Refresh, Mode=OneWay}"/>
-                    </core:EventTriggerBehavior>
-                </interactivity:Interaction.Behaviors>
-                <ListView x:Name="FeedsView"
-                                  IsItemClickEnabled="True"
-                                  IncrementalLoadingThreshold="2"
-                                  IncrementalLoadingTrigger="Edge" 
-                                  ItemTemplate="{StaticResource FeedItemTemplate}"
-                                  ItemContainerStyle="{StaticResource ListViewItemStyle}"
-                                  ItemsSource="{Binding Source={StaticResource FeedsSource}}"
-                                  SelectionMode="Single"
-                                  ContainerContentChanging="FeedsView_OnContainerContentChanging"/>
-            </refresh:PullToRefreshBox>
-        </Grid>
-
-        <Grid x:Name="FindGrid" Grid.Row="0" Grid.Column="0" Visibility="Collapsed">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="0"/>
-                <RowDefinition Height="*"/>
-            </Grid.RowDefinitions>
-            <Pivot Grid.Row="1" FontSize="14"
-                   HeaderTemplate="{StaticResource PivotHeaderTemplate}"
-                   Style="{StaticResource PivotNormalStyle}">
-                <Pivot.Items>
-                    <PivotItem Header="推荐" Margin="0">
-                        <Grid>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto"/>
-                                <RowDefinition Height="*"/>
-                            </Grid.RowDefinitions>
-                            <ProgressBar Grid.Row="0" IsIndeterminate="{Binding Find.RecommendsLoading}"
-                                                     Background="{StaticResource ProgressBackBrush}" 
-                                                     Foreground="{StaticResource ProgressForeBrush}"/>
-
-                            <refresh:PullToRefreshBox Grid.Row="1">
-                                <interactivity:Interaction.Behaviors>
-                                    <core:EventTriggerBehavior EventName="RefreshInvoked">
-                                        <core:InvokeCommandAction Command="{Binding Find.RefreshRecommends, Mode=OneWay}"/>
-                                    </core:EventTriggerBehavior>
-                                </interactivity:Interaction.Behaviors>
-                                <ListView SelectionMode="Single"
-                                          ContainerContentChanging="Recommend_OnContainerContentChanging"
-                                          HeaderTemplate="{StaticResource BannerHeader}"
-                                          IsItemClickEnabled="True"
-                                          IncrementalLoadingThreshold="2" IncrementalLoadingTrigger="Edge"
-                                          ItemsSource="{Binding Source={StaticResource EditorRecommends}}"
-                                          ItemContainerStyle="{StaticResource ListViewItemStyle}">
-                                    <ListView.ItemTemplate>
-                                        <DataTemplate>
-                                            <itemView:EditorRecommendView />
-                                        </DataTemplate>
-                                    </ListView.ItemTemplate>
-                                </ListView>
-                            </refresh:PullToRefreshBox>
-                        </Grid>
-                    </PivotItem>
-                    <PivotItem Header="热门" Margin="0">
-                        <Grid>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto"/>
-                                <RowDefinition Height="*"/>
-                            </Grid.RowDefinitions>
-                            <ProgressBar Grid.Row="0" Background="{StaticResource ProgressBackBrush}" Foreground="{StaticResource ProgressForeBrush}" 
-                                                     IsIndeterminate="{Binding Find.AnswersLoading}"/>
-
-                            <refresh:PullToRefreshBox Grid.Row="1">
-                                <interactivity:Interaction.Behaviors>
-                                    <core:EventTriggerBehavior EventName="RefreshInvoked">
-                                        <core:InvokeCommandAction Command="{Binding Find.RefreshHotAnswers, Mode=OneWay}"/>
-                                    </core:EventTriggerBehavior>
-                                </interactivity:Interaction.Behaviors>
-                                <ListView ItemsSource="{Binding Source={StaticResource HotAnswers}}"
-                                          SelectionMode="Single" IsItemClickEnabled="True"
-                                          IncrementalLoadingThreshold="2" IncrementalLoadingTrigger="Edge"
-                                          ContainerContentChanging="HotAnswer_OnContainerContentChanging"
-                                          ItemContainerStyle="{StaticResource ListViewItemStyle}">
-                                    <ListView.ItemTemplate>
-                                        <DataTemplate>
-                                            <itemView:AnswerActivityView />
-                                        </DataTemplate>
-                                    </ListView.ItemTemplate>
-                                </ListView>
-                            </refresh:PullToRefreshBox>
-                        </Grid>
-                    </PivotItem>
-                    <PivotItem Header="收藏" Margin="0">
-                        <Grid>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto"/>
-                                <RowDefinition Height="*"/>
-                            </Grid.RowDefinitions>
-                            <ProgressBar Grid.Row="0" IsIndeterminate="{Binding Find.CollectionLoading}"
-                                                     Background="{StaticResource ProgressBackBrush}" 
-                                                     Foreground="{StaticResource ProgressForeBrush}"/>
-
-                            <refresh:PullToRefreshBox Grid.Row="1">
-                                <interactivity:Interaction.Behaviors>
-                                    <core:EventTriggerBehavior EventName="RefreshInvoked">
-                                        <core:InvokeCommandAction Command="{Binding Find.RefreshCollections, Mode=OneWay}"/>
-                                    </core:EventTriggerBehavior>
-                                </interactivity:Interaction.Behaviors>
-                                <ListView ItemsSource="{Binding Source={StaticResource HotCollections}}"
-                                          SelectionMode="Single" IsItemClickEnabled="True"
-                                          IncrementalLoadingThreshold="2" IncrementalLoadingTrigger="Edge"
-                                          ContainerContentChanging="HotCollection_OnContainerContentChanging"
-                                          ItemContainerStyle="{StaticResource ListViewItemStyle}">
-                                    <ListView.ItemTemplate>
-                                        <DataTemplate>
-                                            <itemView:HotCollectionView />
-                                        </DataTemplate>
-                                    </ListView.ItemTemplate>
-                                </ListView>
-                            </refresh:PullToRefreshBox>
-                        </Grid>
-                    </PivotItem>
-                </Pivot.Items>
-            </Pivot>
-        </Grid>
-
-        <Grid x:Name="NoteGrid" Grid.Row="0" Grid.Column="0" Visibility="Collapsed">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="0"/>
-                <RowDefinition Height="*"/>
-            </Grid.RowDefinitions>
-            <Pivot Grid.Row="1" FontSize="14"
-                   HeaderTemplate="{StaticResource PivotHeaderTemplate}"
-                   Style="{StaticResource PivotNormalStyle}">
-                <Pivot.Items>
-                    <PivotItem Header="通知" Margin="0">
-                        <Grid>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto"/>
-                                <RowDefinition Height="Auto"/>
-                                <RowDefinition Height="*"/>
-                            </Grid.RowDefinitions>
-                            <interactivity:Interaction.Behaviors>
-                                <core:EventTriggerBehavior EventName="Loaded">
-                                    <core:InvokeCommandAction Command="{Binding Notify.HasReadFollows, Mode=OneWay}"/>
-                                    <core:InvokeCommandAction Command="{Binding Notify.HasReadContents, Mode=OneWay}"/>
-                                </core:EventTriggerBehavior>
-                            </interactivity:Interaction.Behaviors>
-
-                            <ProgressBar Grid.Row="0" IsIndeterminate="{Binding Notify.ContentsLoading}" 
-                                         Background="{StaticResource ProgressBackBrush}" 
-                                         Foreground="{StaticResource ProgressForeBrush}"/>
-
-                            <Grid Grid.Row="1" Margin="5 5 5 10" Visibility="{Binding Notify.FollowsVisible}" Background="{StaticResource LightBackBrush}">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="Auto"/>
-                                </Grid.RowDefinitions>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="*"/>
-                                    <ColumnDefinition Width="30"/>
-                                </Grid.ColumnDefinitions>
-                                <TextBlock Grid.Row="0" Grid.Column="0" Text="有人关注了你" 
-                                               FontSize="{Binding Source={StaticResource ThemeHelper}, Path=Theme.FeedVerb}" 
-                                               Style="{StaticResource VerbStyle}"/>
-                                <ScrollViewer Grid.Row="1" Grid.Column="0" 
-                                              ZoomMode="Disabled" VerticalScrollBarVisibility="Disabled" HorizontalScrollBarVisibility="Auto">
-                                    <ItemsControl ItemsSource="{Binding Notify.Follows}">
-                                        <ItemsControl.ItemTemplate>
-                                            <DataTemplate>
-                                                <Ellipse x:Name="Avatar" Margin="5 5 5 5" Style="{StaticResource AvatarStyle}" Tapped="NotifyFollowerAvatar_Tapped">
-                                                    <Ellipse.Fill>
-                                                        <ImageBrush Stretch="Fill">
-                                                            <ImageBrush.ImageSource>
-                                                                <BitmapImage UriSource="{Binding Operators[0].AvatarUrl, ConverterParameter=xl, Converter={StaticResource AvatarConverter}}"/>
-                                                            </ImageBrush.ImageSource>
-                                                        </ImageBrush>
-                                                    </Ellipse.Fill>
-                                                </Ellipse>
-                                            </DataTemplate>
-                                        </ItemsControl.ItemTemplate>
-                                    </ItemsControl>
-                                </ScrollViewer>
-                            </Grid>
-
-                            <refresh:PullToRefreshBox Grid.Row="2">
-                                <interactivity:Interaction.Behaviors>
-                                    <core:EventTriggerBehavior EventName="RefreshInvoked">
-                                        <core:InvokeCommandAction Command="{Binding Notify.RefreshNotifies, Mode=OneWay}"/>
-                                    </core:EventTriggerBehavior>
-                                </interactivity:Interaction.Behaviors>
-                            <ListView SelectionMode="Single" IsItemClickEnabled="True"
-                                      ContainerContentChanging="NotifyView_OnContainerContentChanging"
-                                      HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch"
-                                      IncrementalLoadingThreshold="2" IncrementalLoadingTrigger="Edge"
-                                      ItemsSource="{Binding Source={StaticResource Notifies}}"
-                                      ItemContainerStyle="{StaticResource ListViewItemStyle}">
-                                    <ListView.ItemTemplate>
-                                        <DataTemplate>
-                                            <itemView:NotifyView>
-                                                <interactivity:Interaction.Behaviors>
-                                                    <core:EventTriggerBehavior EventName="Tapped">
-                                                        <core:InvokeCommandAction Command="{Binding Notify.HasReadContent, Source={Binding Path=Main, Mode=OneWay, Source={StaticResource Locator}}}"
-                                                                                  CommandParameter="{Binding}"/>
-                                                    </core:EventTriggerBehavior>
-                                                </interactivity:Interaction.Behaviors>
-                                            </itemView:NotifyView>
-                                        </DataTemplate>
-                                    </ListView.ItemTemplate>
-                                </ListView>
-                            </refresh:PullToRefreshBox>
-                        </Grid>
-                    </PivotItem>
-                    <PivotItem Header="赞与感谢" Margin="0">
-                        <Grid>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto"/>
-                                <RowDefinition Height="*"/>
-                            </Grid.RowDefinitions>
-
-                            <ProgressBar Grid.Row="0" IsIndeterminate="{Binding Notify.LikesLoading}" 
-                                                     Background="{StaticResource ProgressBackBrush}"
-                                                     Foreground="{StaticResource ProgressForeBrush}"/>
-
-                            <refresh:PullToRefreshBox Grid.Row="1">
-                                <interactivity:Interaction.Behaviors>
-                                    <core:EventTriggerBehavior EventName="RefreshInvoked">
-                                        <core:InvokeCommandAction Command="{Binding Notify.RefreshLikes, Mode=OneWay}"/>
-                                    </core:EventTriggerBehavior>
-                                </interactivity:Interaction.Behaviors>
-                                <ListView SelectionMode="Single" IsItemClickEnabled="True" 
-                                          ContainerContentChanging="Likes_OnContainerContentChanging"
-                                          IncrementalLoadingThreshold="2" IncrementalLoadingTrigger="Edge"
-                                          HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch"                                         
-                                          ItemsSource="{Binding Source={StaticResource LikesSource}}"
-                                          ItemContainerStyle="{StaticResource ListViewItemStyle}">
-                                    <ListView.ItemTemplate>
-                                        <DataTemplate>
-                                            <itemView:NotifyView>
-                                                <interactivity:Interaction.Behaviors>
-                                                    <core:EventTriggerBehavior EventName="Tapped">
-                                                        <core:InvokeCommandAction Command="{Binding Notify.HasReadContent, Source={Binding Path=Main, Mode=OneWay, Source={StaticResource Locator}}}"
-                                                                                  CommandParameter="{Binding}"/>
-                                                    </core:EventTriggerBehavior>
-                                                </interactivity:Interaction.Behaviors>
-                                            </itemView:NotifyView>
-                                        </DataTemplate>
-                                    </ListView.ItemTemplate>
-                                </ListView>
-                            </refresh:PullToRefreshBox>
-                        </Grid>
-                    </PivotItem>
-                    <PivotItem Header="私信" Margin="0">
-                        <Grid>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto"/>
-                                <RowDefinition Height="*"/>
-                            </Grid.RowDefinitions>
-
-                            <ProgressBar Grid.Row="0" Background="{StaticResource ProgressBackBrush}" Foreground="{StaticResource ProgressForeBrush}" 
-                                                     IsIndeterminate="{Binding Notify.ChatsLoading}"/>
-
-                            <refresh:PullToRefreshBox Grid.Row="1">
-                                <interactivity:Interaction.Behaviors>
-                                    <core:EventTriggerBehavior EventName="RefreshInvoked">
-                                        <core:InvokeCommandAction Command="{Binding Notify.RefreshChats, Mode=OneWay}"/>
-                                    </core:EventTriggerBehavior>
-                                </interactivity:Interaction.Behaviors>
-                                <ListView SelectionMode="Single" 
-                                          ContainerContentChanging="ChatView_OnContainerContentChanging"
-                                          IncrementalLoadingThreshold="2" IncrementalLoadingTrigger="Edge"
-                                          HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch"
-                                          IsItemClickEnabled="True"
-                                          ItemsSource="{Binding Source={StaticResource ChatsSource}}"
-                                          ItemContainerStyle="{StaticResource ListViewItemStyle}">
-                                    <ListView.ItemTemplate>
-                                        <DataTemplate>
-                                            <itemView:ChatView/>
-                                        </DataTemplate>
-                                    </ListView.ItemTemplate>
-                                </ListView>
-                            </refresh:PullToRefreshBox>
-                        </Grid>
-                    </PivotItem>
-                </Pivot.Items>
-            </Pivot>
-        </Grid>
-
-        <Grid x:Name="AboutGrid" Grid.Row="0" Grid.Column="0" Visibility="Collapsed">
-            <ScrollViewer>
-                <StackPanel Margin="0 20 0 45" Orientation="Vertical">
-                    <!--Login User Profile-->
-                    <Grid Background="Transparent" Tapped="NavigateToMyProfile_Tapped">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto"/>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="Auto"/>
-                        </Grid.ColumnDefinitions>
-                        <Ellipse Grid.Row="0" Grid.Column="0" Margin="25 15 0 15" Width="90" Height="90" HorizontalAlignment="Center" VerticalAlignment="Center">
-                            <Ellipse.Fill>
-                                <ImageBrush Stretch="Fill">
-                                    <ImageBrush.ImageSource>
-                                        <BitmapImage UriSource="{Binding Profile.AvatarUrl, ConverterParameter=xl, Converter={StaticResource AvatarConverter}}"/>
-                                    </ImageBrush.ImageSource>
-                                </ImageBrush>
-                            </Ellipse.Fill>
-                        </Ellipse>
-                        <TextBlock Grid.Row="0" Grid.Column="1" Margin="20 10 10 10" Text="{Binding Profile.Name}" 
-                                               Foreground="{StaticResource FeedTitleBrush}" VerticalAlignment="Center"
-                                               FontSize="{Binding Source={StaticResource ThemeHelper}, Path=Theme.FeedTitle}"/>
-                        <Image Grid.Row="0" Grid.Column="2" Margin="5 5 20 5" Width="20" VerticalAlignment="Center" Source="/Resource/Images/Public/ic_topic_more_normal.png"/>
-                    </Grid>
-                    <Border Style="{StaticResource LineStyle}"/>
-
-                    <!--Login User Following-->
-                    <Grid Background="Transparent" Tapped="NavToMyFollowing_Tapped">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                        </Grid.RowDefinitions>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto"/>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="Auto"/>
-                        </Grid.ColumnDefinitions>
-                        <Image Grid.Row="0" Grid.Column="0" Width="25" Height="25" Margin="25 15 5 15" VerticalAlignment="Center" Source="/Resource/Images/Public/Follow@3x.png"/>
-                        <TextBlock Grid.Row="0" Grid.Column="1" Margin="5 10 10 10" Text="我的关注" 
-                                               Foreground="{StaticResource FeedTitleBrush}" VerticalAlignment="Center"
-                                               FontSize="{Binding Source={StaticResource ThemeHelper}, Path=Theme.FeedTitle}"/>
-                        <Image Grid.Row="0" Grid.Column="2" Margin="5 5 20 5" Width="20" VerticalAlignment="Center" Source="/Resource/Images/Public/ic_topic_more_normal.png"/>
-
-                        <Border Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Margin="0 0 10 0" BorderThickness="0 1 0 0" Style="{StaticResource LineStyle}"/>
-                    </Grid>
-
-                    <!--Login User Collection-->
-                    <Grid Background="Transparent" Tapped="NavToMyCollections_Tapped">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                        </Grid.RowDefinitions>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto"/>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="Auto"/>
-                        </Grid.ColumnDefinitions>
-                        <Image Grid.Row="0" Grid.Column="0" Width="25" Height="25" Margin="25 15 5 15" VerticalAlignment="Center" Source="/Resource/Images/Public/Collect@3x.png"/>
-                        <TextBlock Grid.Row="0" Grid.Column="1" Margin="5 10 10 10" Text="我的收藏" 
-                                   Foreground="{StaticResource FeedTitleBrush}" VerticalAlignment="Center"
-                                   FontSize="{Binding Source={StaticResource ThemeHelper}, Path=Theme.FeedTitle}"/>
-                        <Image Grid.Row="0" Grid.Column="2" Margin="5 5 20 5" Width="20" VerticalAlignment="Center" Source="/Resource/Images/Public/ic_topic_more_normal.png"/>
-
-                        <!--<Border Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" BorderThickness="0 1 0 0" Style="{StaticResource LineStyle}"/>-->
-                    </Grid>
-                    <Border Style="{StaticResource LineStyle}"/>
-
-                    <!--Search-->
-                    <Grid Background="Transparent" Tapped="Search_Tapped">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                        </Grid.RowDefinitions>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto"/>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="Auto"/>
-                        </Grid.ColumnDefinitions>
-                        <Image Grid.Row="0" Grid.Column="0" Width="25" Height="25" Margin="25 15 5 15" VerticalAlignment="Center" Source="/Resource/Images/Public/Setting@3x.png"/>
-                        <TextBlock Grid.Row="0" Grid.Column="1" Margin="5 10 10 10" Text="搜索" 
-                                               Foreground="{StaticResource FeedTitleBrush}" VerticalAlignment="Center"
-                                               FontSize="{Binding Source={StaticResource ThemeHelper}, Path=Theme.FeedTitle}"/>
-                        <Image Grid.Row="0" Grid.Column="2" Margin="5 5 20 5" Width="20" VerticalAlignment="Center" Source="/Resource/Images/Public/ic_topic_more_normal.png"/>
-
-                        <Border Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Margin="0 0 10 0" BorderThickness="0 1 0 0" Style="{StaticResource LineStyle}"/>
-                    </Grid>
-
-                    <!--Make questionf-->
-                    <Grid Background="Transparent" Tapped="MakeQuestion_Tapped">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                        </Grid.RowDefinitions>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto"/>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="Auto"/>
-                        </Grid.ColumnDefinitions>
-                        <Image Grid.Row="0" Grid.Column="0" Width="25" Height="25" Margin="25 15 5 15" VerticalAlignment="Center" Source="/Resource/Images/Public/Setting@3x.png"/>
-                        <TextBlock Grid.Row="0" Grid.Column="1" Margin="5 10 10 10" Text="提问" 
-                                               Foreground="{StaticResource FeedTitleBrush}" VerticalAlignment="Center"
-                                               FontSize="{Binding Source={StaticResource ThemeHelper}, Path=Theme.FeedTitle}"/>
-                        <Image Grid.Row="0" Grid.Column="2" Margin="5 5 20 5" Width="20" VerticalAlignment="Center" Source="/Resource/Images/Public/ic_topic_more_normal.png"/>
-
-                        <!--<Border Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" BorderThickness="0 1 0 0" Style="{StaticResource LineStyle}"/>-->
-                    </Grid>
-                    
-                    <Border Style="{StaticResource LineStyle}"/>
-                    
-                    <!--Setting-->
-                    <Grid Background="Transparent" Tapped="SettingNav_OnTapped">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                        </Grid.RowDefinitions>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto"/>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="Auto"/>
-                        </Grid.ColumnDefinitions>
-                        <Image Grid.Row="0" Grid.Column="0" Width="25" Height="25" Margin="25 15 5 15" VerticalAlignment="Center" Source="/Resource/Images/Public/Setting@3x.png"/>
-                        <TextBlock Grid.Row="0" Grid.Column="1" Margin="5 10 10 10" Text="设置" 
-                                               Foreground="{StaticResource FeedTitleBrush}" VerticalAlignment="Center"
-                                               FontSize="{Binding Source={StaticResource ThemeHelper}, Path=Theme.FeedTitle}"/>
-                        <Image Grid.Row="0" Grid.Column="2" Margin="5 5 20 5" Width="20" VerticalAlignment="Center" Source="/Resource/Images/Public/ic_topic_more_normal.png"/>
-
-                        <Border Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Margin="0 0 10 0" BorderThickness="0 1 0 0" Style="{StaticResource LineStyle}"/>
-                    </Grid>
-                    
-                    <!--Contribute-->
-                    <Grid Background="Transparent">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                        </Grid.RowDefinitions>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto"/>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="Auto"/>
-                        </Grid.ColumnDefinitions>
-                        <interactivity:Interaction.Behaviors>
-                            <core:EventTriggerBehavior EventName="Tapped">
-                                <core:InvokeCommandAction Command="{Binding ShowContribute, Mode=OneWay}"/>
-                            </core:EventTriggerBehavior>
-                        </interactivity:Interaction.Behaviors>
-
-                        <Image Grid.Row="0" Grid.Column="0" Width="25" Height="25" Margin="25 15 5 15" VerticalAlignment="Center" Source="/Resource/Images/Public/Setting@3x.png"/>
-                        <TextBlock Grid.Row="0" Grid.Column="1" Margin="5 10 10 10" Text="成为赞助人" 
-                                               Foreground="{StaticResource FeedTitleBrush}" VerticalAlignment="Center"
-                                               FontSize="{Binding Source={StaticResource ThemeHelper}, Path=Theme.FeedTitle}"/>
-                        <Image Grid.Row="0" Grid.Column="2" Margin="5 5 20 5" Width="20" VerticalAlignment="Center" Source="/Resource/Images/Public/ic_topic_more_normal.png"/>
-
-                        <!--<Border Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" BorderThickness="0 1 0 0" Style="{StaticResource LineStyle}"/>-->
-                    </Grid>
-                    
-                    <Border Style="{StaticResource LineStyle}"/>
-                </StackPanel>
-            </ScrollViewer>
-        </Grid>
-
-        <CommandBar Grid.Row="1" Grid.Column="0" ClosedDisplayMode="Compact"
+        <CommandBar x:Name="NavCommandBar" Visibility="Visible" Grid.Row="1" Grid.Column="0" ClosedDisplayMode="Compact"
                     HorizontalAlignment="Stretch" HorizontalContentAlignment="Center"
                     IsOpen="False" IsSticky="False"
                     Background="{StaticResource AppBarBackBrush}"
                     Foreground="{StaticResource AppBarForeBrush}">
-            <AppBarButton Icon="Home" Label="首页" Tapped="AppBarButton_Home_Tapped"/>
-            <AppBarButton Icon="Globe" Label="发现" Tapped="AppBarButton_Find_Tapped"/>
+            <AppBarButton Icon="Home" Label="首页" Tapped="AppBarButton_Home_Tapped">
+                <interactivity:Interaction.Behaviors>
+                    <core:EventTriggerBehavior EventName="Tapped">
+                        <core:InvokeCommandAction Command="{Binding FeedsTappd, Mode=OneWay}"/>
+                    </core:EventTriggerBehavior>
+                </interactivity:Interaction.Behaviors>
+            </AppBarButton>
+            <AppBarButton Icon="Globe" Label="发现" Tapped="AppBarButton_Find_Tapped">
+                <interactivity:Interaction.Behaviors>
+                    <core:EventTriggerBehavior EventName="Tapped">
+                        <core:InvokeCommandAction Command="{Binding FindTapped, Mode=OneWay}"/>
+                    </core:EventTriggerBehavior>
+                </interactivity:Interaction.Behaviors>
+            </AppBarButton>
             <controls:NotifyAppBarButton Icon="Message" Label="消息" NotifyMarkVisiable="{Binding NotifyVisible}"
-                                         Tapped="AppBarButton_Message_Tapped"/>
-            <AppBarButton Icon="Contact" Label="个人" Tapped="AppBarButton_Me_Tapped"/>
+                                         Tapped="AppBarButton_Message_Tapped">
+                <interactivity:Interaction.Behaviors>
+                    <core:EventTriggerBehavior EventName="Tapped">
+                        <core:InvokeCommandAction Command="{Binding NoteTapped, Mode=OneWay}"/>
+                    </core:EventTriggerBehavior>
+                </interactivity:Interaction.Behaviors>
+            </controls:NotifyAppBarButton>
+            <AppBarButton Icon="Contact" Label="个人" Tapped="AppBarButton_Me_Tapped">
+                <interactivity:Interaction.Behaviors>
+                    <core:EventTriggerBehavior EventName="Tapped">
+                        <core:InvokeCommandAction Command="{Binding PersonalTapped, Mode=OneWay}"/>
+                    </core:EventTriggerBehavior>
+                </interactivity:Interaction.Behaviors>
+            </AppBarButton>
             <CommandBar.SecondaryCommands>
                 <AppBarButton Icon="Refresh" Label="刷新">
                     <interactivity:Interaction.Behaviors>
@@ -613,7 +183,7 @@
         </CommandBar>
 
         <Grid x:Name="FrameContainer" Grid.Row="0" Grid.RowSpan="2" Grid.Column="1"
-              HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                      HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
             <Frame x:Name="PreviewFrame" CacheSize="50"/>
         </Grid>
 
@@ -667,7 +237,7 @@
                 </Button>
             </Grid>
         </Border>
-        
+
         <ScrollViewer Grid.Row="0" Grid.RowSpan="2" Grid.Column="0" Grid.ColumnSpan="2"
                       BorderBrush="{StaticResource LineBrush}"
                       HorizontalAlignment="Center"

@@ -1,6 +1,9 @@
 ﻿using System;
+using System.Collections.ObjectModel;
 using System.Diagnostics;
+using System.Linq;
 using System.Text.RegularExpressions;
+using System.Windows.Input;
 
 using Windows.ApplicationModel.Store;
 using Windows.System;
@@ -18,12 +21,15 @@ using Zhihu.Common.Helper;
 using Zhihu.Controls;
 using Zhihu.Helper;
 using Zhihu.View;
+using Zhihu.View.Main;
 
 
 namespace Zhihu.ViewModel
 {
     public sealed class MainViewModel : ViewModelBase
     {
+        private readonly IPerson _people;
+
         public FeedsViewModel Feeds
         {
             get { return ServiceLocator.Current.GetInstance<FeedsViewModel>(); }
@@ -39,9 +45,66 @@ namespace Zhihu.ViewModel
             get { return ServiceLocator.Current.GetInstance<NotifyViewModel>(); }
         }
 
-        private Boolean _hasPayed = true;
+        #region SplitView Menu
 
-        private readonly IPerson _people;
+        private ObservableCollection<MenuItem> _menuItems = new ObservableCollection<MenuItem>();
+
+        public ObservableCollection<MenuItem> MenuItems
+        {
+            get { return this._menuItems; }
+        }
+
+        public RelayCommand ToggleSplitViewPaneCommand { get; private set; }
+
+        private bool isSplitViewPaneOpen =false;
+        public bool IsSplitViewPaneOpen
+        {
+            get { return this.isSplitViewPaneOpen; }
+            set { Set(ref this.isSplitViewPaneOpen, value); }
+        }
+
+        private MenuItem selectedMenuItem;
+        public MenuItem SelectedMenuItem
+        {
+            get { return this.selectedMenuItem; }
+            set
+            {
+                if (Set(ref this.selectedMenuItem, value))
+                {
+                    RaisePropertyChanged("SelectedPageType");
+
+                    // auto-close split view pane
+                    this.IsSplitViewPaneOpen = false;
+                }
+            }
+        }
+
+        public Type SelectedPageType
+        {
+            get
+            {
+                if (this.selectedMenuItem != null)
+                {
+                    return this.selectedMenuItem.PageType;
+                }
+                return null;
+            }
+            set
+            {
+                // select associated menu item
+                this.SelectedMenuItem = this._menuItems.FirstOrDefault(m => m.PageType == value);
+                RaisePropertyChanged();
+            }
+        }
+
+        public RelayCommand FeedsTappd { get; private set; }
+        public RelayCommand FindTapped { get; private set; }
+        public RelayCommand NoteTapped { get; private set; }
+        public RelayCommand PersonalTapped { get; private set; }
+
+        #endregion
+
+        private Boolean _hasPayed = true;
 
         private Profile _profile;
 
@@ -150,6 +213,18 @@ namespace Zhihu.ViewModel
         public MainViewModel(IPerson people) : this()
         {
             _people = people;
+
+            MenuItems.Add(new MenuItem { Icon = "", Title = "动态", PageType = typeof(FeedsPage) });
+            MenuItems.Add(new MenuItem { Icon = "", Title = "发现", PageType = typeof(FindPage) });
+            MenuItems.Add(new MenuItem { Icon = "", Title = "消息", PageType = typeof(NotePage) });
+            MenuItems.Add(new MenuItem { Icon = "", Title = "个人", PageType = typeof(PersonalPage) });
+
+            this.ToggleSplitViewPaneCommand = new RelayCommand(() => this.IsSplitViewPaneOpen = !this.IsSplitViewPaneOpen);
+
+            FeedsTappd = new RelayCommand(() => { SelectedPageType = typeof(FeedsPage); });
+            FindTapped = new RelayCommand(() => { SelectedPageType = typeof(FindPage); });
+            NoteTapped = new RelayCommand(() => { SelectedPageType = typeof(NotePage); });
+            PersonalTapped = new RelayCommand(() => { SelectedPageType = typeof(PersonalPage); });
 
             Logout = new RelayCommand(LogoutMethod);
 

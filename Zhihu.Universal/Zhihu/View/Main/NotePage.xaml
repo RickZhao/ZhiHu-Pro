@@ -1,0 +1,179 @@
+﻿<Page
+    x:Class="Zhihu.View.Main.NotePage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Zhihu.View.Main"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
+    xmlns:core="using:Microsoft.Xaml.Interactions.Core"
+    xmlns:refresh="using:PullToRefresh.UWP"
+    mc:Ignorable="d"
+    xmlns:itemView="using:Zhihu.Controls.ItemView"
+    
+    NavigationCacheMode="Enabled"
+    Background="{StaticResource PageBackBrush}"
+    DataContext="{Binding Path=Main, Mode=OneWay, Source={StaticResource Locator}}">
+
+    <Page.Resources>
+        <CollectionViewSource x:Name="Notifies" Source="{Binding Notify.Notifies}"/>
+        <CollectionViewSource x:Name="LikesSource" Source="{Binding Notify.Likes}"/>
+        <CollectionViewSource x:Name="ChatsSource" Source="{Binding Notify.Chats}"/>
+    </Page.Resources>
+    
+    <Pivot Grid.Row="1" FontSize="14"
+           HeaderTemplate="{StaticResource PivotHeaderTemplate}"
+           Style="{StaticResource PivotNormalStyle}">
+        <Pivot.Items>
+            <PivotItem Header="通知" Margin="0">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <interactivity:Interaction.Behaviors>
+                        <core:EventTriggerBehavior EventName="Loaded">
+                            <core:InvokeCommandAction Command="{Binding Notify.HasReadFollows, Mode=OneWay}"/>
+                            <core:InvokeCommandAction Command="{Binding Notify.HasReadContents, Mode=OneWay}"/>
+                        </core:EventTriggerBehavior>
+                    </interactivity:Interaction.Behaviors>
+
+                    <ProgressBar Grid.Row="0" IsIndeterminate="{Binding Notify.ContentsLoading}" 
+                                         Background="{StaticResource ProgressBackBrush}" 
+                                         Foreground="{StaticResource ProgressForeBrush}"/>
+
+                    <Grid Grid.Row="1" Margin="5 5 5 10" Visibility="{Binding Notify.FollowsVisible}" Background="{StaticResource LightBackBrush}">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="30"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Grid.Row="0" Grid.Column="0" Text="有人关注了你" 
+                                               FontSize="{Binding Source={StaticResource ThemeHelper}, Path=Theme.FeedVerb}" 
+                                               Style="{StaticResource VerbStyle}"/>
+                        <ScrollViewer Grid.Row="1" Grid.Column="0" 
+                                              ZoomMode="Disabled" VerticalScrollBarVisibility="Disabled" HorizontalScrollBarVisibility="Auto">
+                            <ItemsControl ItemsSource="{Binding Notify.Follows}">
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <Ellipse x:Name="Avatar" Margin="5 5 5 5" Style="{StaticResource AvatarStyle}" Tapped="NotifyFollowerAvatar_Tapped">
+                                            <Ellipse.Fill>
+                                                <ImageBrush Stretch="Fill">
+                                                    <ImageBrush.ImageSource>
+                                                        <BitmapImage UriSource="{Binding Operators[0].AvatarUrl, ConverterParameter=xl, Converter={StaticResource AvatarConverter}}"/>
+                                                    </ImageBrush.ImageSource>
+                                                </ImageBrush>
+                                            </Ellipse.Fill>
+                                        </Ellipse>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+                        </ScrollViewer>
+                    </Grid>
+
+                    <refresh:PullToRefreshBox Grid.Row="2">
+                        <interactivity:Interaction.Behaviors>
+                            <core:EventTriggerBehavior EventName="RefreshInvoked">
+                                <core:InvokeCommandAction Command="{Binding Notify.RefreshNotifies, Mode=OneWay}"/>
+                            </core:EventTriggerBehavior>
+                        </interactivity:Interaction.Behaviors>
+                        <ListView SelectionMode="Single" IsItemClickEnabled="True"
+                                      ContainerContentChanging="NotifyView_OnContainerContentChanging"
+                                      HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch"
+                                      IncrementalLoadingThreshold="2" IncrementalLoadingTrigger="Edge"
+                                      ItemsSource="{Binding Source={StaticResource Notifies}}"
+                                      ItemContainerStyle="{StaticResource ListViewItemStyle}">
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <itemView:NotifyView>
+                                        <interactivity:Interaction.Behaviors>
+                                            <core:EventTriggerBehavior EventName="Tapped">
+                                                <core:InvokeCommandAction Command="{Binding Notify.HasReadContent, Source={Binding Path=Main, Mode=OneWay, Source={StaticResource Locator}}}"
+                                                                                  CommandParameter="{Binding}"/>
+                                            </core:EventTriggerBehavior>
+                                        </interactivity:Interaction.Behaviors>
+                                    </itemView:NotifyView>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
+                    </refresh:PullToRefreshBox>
+                </Grid>
+            </PivotItem>
+            <PivotItem Header="赞与感谢" Margin="0">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <ProgressBar Grid.Row="0" IsIndeterminate="{Binding Notify.LikesLoading}" 
+                                                     Background="{StaticResource ProgressBackBrush}"
+                                                     Foreground="{StaticResource ProgressForeBrush}"/>
+
+                    <refresh:PullToRefreshBox Grid.Row="1">
+                        <interactivity:Interaction.Behaviors>
+                            <core:EventTriggerBehavior EventName="RefreshInvoked">
+                                <core:InvokeCommandAction Command="{Binding Notify.RefreshLikes, Mode=OneWay}"/>
+                            </core:EventTriggerBehavior>
+                        </interactivity:Interaction.Behaviors>
+                        <ListView SelectionMode="Single" IsItemClickEnabled="True" 
+                                          ContainerContentChanging="Likes_OnContainerContentChanging"
+                                          IncrementalLoadingThreshold="2" IncrementalLoadingTrigger="Edge"
+                                          HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch"                                         
+                                          ItemsSource="{Binding Source={StaticResource LikesSource}}"
+                                          ItemContainerStyle="{StaticResource ListViewItemStyle}">
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <itemView:NotifyView>
+                                        <interactivity:Interaction.Behaviors>
+                                            <core:EventTriggerBehavior EventName="Tapped">
+                                                <core:InvokeCommandAction Command="{Binding Notify.HasReadContent, Source={Binding Path=Main, Mode=OneWay, Source={StaticResource Locator}}}"
+                                                                                  CommandParameter="{Binding}"/>
+                                            </core:EventTriggerBehavior>
+                                        </interactivity:Interaction.Behaviors>
+                                    </itemView:NotifyView>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
+                    </refresh:PullToRefreshBox>
+                </Grid>
+            </PivotItem>
+            <PivotItem Header="私信" Margin="0">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <ProgressBar Grid.Row="0" Background="{StaticResource ProgressBackBrush}" Foreground="{StaticResource ProgressForeBrush}" 
+                                                     IsIndeterminate="{Binding Notify.ChatsLoading}"/>
+
+                    <refresh:PullToRefreshBox Grid.Row="1">
+                        <interactivity:Interaction.Behaviors>
+                            <core:EventTriggerBehavior EventName="RefreshInvoked">
+                                <core:InvokeCommandAction Command="{Binding Notify.RefreshChats, Mode=OneWay}"/>
+                            </core:EventTriggerBehavior>
+                        </interactivity:Interaction.Behaviors>
+                        <ListView SelectionMode="Single" 
+                                          ContainerContentChanging="ChatView_OnContainerContentChanging"
+                                          IncrementalLoadingThreshold="2" IncrementalLoadingTrigger="Edge"
+                                          HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch"
+                                          IsItemClickEnabled="True"
+                                          ItemsSource="{Binding Source={StaticResource ChatsSource}}"
+                                          ItemContainerStyle="{StaticResource ListViewItemStyle}">
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <itemView:ChatView/>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
+                    </refresh:PullToRefreshBox>
+                </Grid>
+            </PivotItem>
+        </Pivot.Items>
+    </Pivot>
+</Page>

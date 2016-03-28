@@ -350,11 +350,13 @@
     <Compile Include="Controls\ItemView\TopicView.xaml.cs">
       <DependentUpon>TopicView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\MenuItem.cs" />
     <Compile Include="Controls\NotifyAppBarButton.cs" />
     <Compile Include="Controls\PlaceholderImage.cs" />
     <Compile Include="Controls\RichBlock.xaml.cs">
       <DependentUpon>RichBlock.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\SwipeableSplitView.cs" />
     <Compile Include="Controls\ToasteBar.xaml.cs">
       <DependentUpon>ToasteBar.xaml</DependentUpon>
     </Compile>
@@ -381,6 +383,7 @@
     <Compile Include="Converter\NightModeConverter.cs" />
     <Compile Include="Converter\NoHelpeConverter.cs" />
     <Compile Include="Converter\NullableInt32Converter.cs" />
+    <Compile Include="Converter\ObjectToMenuItemConverter.cs" />
     <Compile Include="Converter\RandomColorConverter.cs" />
     <Compile Include="Converter\RelativeTimeConverter.cs" />
     <Compile Include="Converter\StringToVisibleConverter.cs" />
@@ -390,6 +393,7 @@
     <Compile Include="Converter\VoteupCountingConverter.cs" />
     <Compile Include="Converter\VotingToHighlightConverter.cs" />
     <Compile Include="Converter\VotingToImageConverter.cs" />
+    <Compile Include="Helper\Extensions.cs" />
     <Compile Include="Helper\RumtimeResourceDictionary.cs" />
     <Compile Include="Helper\HtmlHelper.cs" />
     <Compile Include="Helper\ListViewHelper.cs" />
@@ -429,6 +433,19 @@
     </Compile>
     <Compile Include="View\FeedbackPage.xaml.cs">
       <DependentUpon>FeedbackPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Main\PersonalPage.xaml.cs">
+      <DependentUpon>PersonalPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Main\FeedsPage.xaml.cs">
+      <DependentUpon>FeedsPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Main\FindPage.xaml.cs">
+      <DependentUpon>FindPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Main\MainStatus.cs" />
+    <Compile Include="View\Main\NotePage.xaml.cs">
+      <DependentUpon>NotePage.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\WaterMarkPage.xaml.cs">
       <DependentUpon>WaterMarkPage.xaml</DependentUpon>
@@ -681,6 +698,16 @@
       <SubType>Designer</SubType>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Page>
+    <Page Include="Resource\Templates.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Page>
+    <Page Include="Resource\Converters.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Page>
     <Page Include="Resource\Theme\DesignTime_Brush.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -706,6 +733,22 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\FeedbackPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Main\PersonalPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Main\FeedsPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Main\FindPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Main\NotePage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

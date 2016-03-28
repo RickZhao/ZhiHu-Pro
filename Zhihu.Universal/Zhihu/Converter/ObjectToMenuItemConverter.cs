@@ -2,23 +2,22 @@
 
 using Windows.UI.Xaml.Data;
 
+using Zhihu.Controls;
+
 
 namespace Zhihu.Converter
 {
-    internal sealed class LineHeightConverter:IValueConverter
+    internal sealed class ObjectToMenuItemConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, string language)
         {
-            var fontSize = (Double) value;
-
-            if (fontSize <= 10.0) return 20;
-
-            return 1.7*fontSize;
+            return value;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, string language)
         {
-            throw new NotImplementedException();
+            if (value != null) return (MenuItem)value;
+            return value;
         }
     }
 }

@@ -1,0 +1,49 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Zhihu.Resource"
+    xmlns:controls="using:Zhihu.Controls"
+    xmlns:itemView="using:Zhihu.Controls.ItemView"
+    xmlns:converter="using:Zhihu.Converter">
+
+    <converter:BannerHeightConverter x:Name="BannerHeightConverter"/>
+    
+    <DataTemplate x:Key="TextBoxHeader">
+        <Border>
+            <TextBlock Text="{Binding}" FontSize="{Binding Source={StaticResource ThemeHelper}, Path=Theme.FeedTitle}" Style="{StaticResource UpLightStyle}"/>
+        </Border>
+    </DataTemplate>
+
+    <DataTemplate x:Key="FeedItemTemplate">
+        <itemView:FeedView />
+    </DataTemplate>
+
+    <DataTemplate x:Key="BannerHeader">
+        <Grid>
+            <FlipView x:Name="BannerFlipView" ItemsSource="{Binding Find.Banner.Normal}" HorizontalAlignment="Stretch"
+                          Height="{Binding ElementName=FeedsGrid, Path=ActualWidth, Converter={StaticResource BannerHeightConverter}}">
+                <FlipView.ItemTemplate>
+                    <DataTemplate>
+                        <Border Tapped="BannerItem_Tapped">
+                            <Image Source="{Binding ImageUrl}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Stretch="Uniform"/>
+                        </Border>
+                    </DataTemplate>
+                </FlipView.ItemTemplate>
+            </FlipView>
+            <controls:FlipViewIndicator FlipView="{Binding ElementName=BannerFlipView}" Margin="0 0 10 10" HorizontalAlignment="Right" VerticalAlignment="Bottom"/>
+        </Grid>
+    </DataTemplate>
+
+    <DataTemplate x:Key="PivotHeaderTemplate">
+        <Border>
+            <TextBlock Text="{Binding}" FontSize="18"/>
+        </Border>
+    </DataTemplate>
+
+    <DataTemplate x:Key="PivotBottomHeaderTemplate">
+        <Border>
+            <TextBlock Text="{Binding}" FontSize="24"/>
+        </Border>
+    </DataTemplate>
+
+</ResourceDictionary>
