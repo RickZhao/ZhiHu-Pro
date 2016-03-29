@@ -64,12 +64,12 @@
                             </core:EventTriggerBehavior>
                         </interactivity:Interaction.Behaviors>
                         <ListView SelectionMode="Single"
-                                          ContainerContentChanging="Recommend_OnContainerContentChanging"
-                                          HeaderTemplate="{StaticResource BannerHeader}"
-                                          IsItemClickEnabled="True"
-                                          IncrementalLoadingThreshold="2" IncrementalLoadingTrigger="Edge"
-                                          ItemsSource="{Binding Source={StaticResource EditorRecommends}}"
-                                          ItemContainerStyle="{StaticResource ListViewItemStyle}">
+                                  IsItemClickEnabled="True"
+                                  ContainerContentChanging="Recommend_OnContainerContentChanging"
+                                  IncrementalLoadingThreshold="2" IncrementalLoadingTrigger="Edge"
+                                  HeaderTemplate="{StaticResource BannerHeader}"
+                                  ItemsSource="{Binding Source={StaticResource EditorRecommends}}"
+                                  ItemContainerStyle="{StaticResource ListViewItemStyle}">
                             <ListView.ItemTemplate>
                                 <DataTemplate>
                                     <itemView:EditorRecommendView />
@@ -94,11 +94,11 @@
                                 <core:InvokeCommandAction Command="{Binding Find.RefreshHotAnswers, Mode=OneWay}"/>
                             </core:EventTriggerBehavior>
                         </interactivity:Interaction.Behaviors>
-                        <ListView ItemsSource="{Binding Source={StaticResource HotAnswers}}"
-                                          SelectionMode="Single" IsItemClickEnabled="True"
-                                          IncrementalLoadingThreshold="2" IncrementalLoadingTrigger="Edge"
-                                          ContainerContentChanging="HotAnswer_OnContainerContentChanging"
-                                          ItemContainerStyle="{StaticResource ListViewItemStyle}">
+                        <ListView SelectionMode="Single" IsItemClickEnabled="True"
+                                  IncrementalLoadingThreshold="2" IncrementalLoadingTrigger="Edge"
+                                  ContainerContentChanging="HotAnswer_OnContainerContentChanging"
+                                  ItemsSource="{Binding Source={StaticResource HotAnswers}}"
+                                  ItemContainerStyle="{StaticResource ListViewItemStyle}">
                             <ListView.ItemTemplate>
                                 <DataTemplate>
                                     <itemView:AnswerActivityView />
@@ -124,11 +124,11 @@
                                 <core:InvokeCommandAction Command="{Binding Find.RefreshCollections, Mode=OneWay}"/>
                             </core:EventTriggerBehavior>
                         </interactivity:Interaction.Behaviors>
-                        <ListView ItemsSource="{Binding Source={StaticResource HotCollections}}"
-                                          SelectionMode="Single" IsItemClickEnabled="True"
-                                          IncrementalLoadingThreshold="2" IncrementalLoadingTrigger="Edge"
-                                          ContainerContentChanging="HotCollection_OnContainerContentChanging"
-                                          ItemContainerStyle="{StaticResource ListViewItemStyle}">
+                        <ListView SelectionMode="Single" IsItemClickEnabled="True"
+                                  IncrementalLoadingThreshold="2" IncrementalLoadingTrigger="Edge"
+                                  ContainerContentChanging="HotCollection_OnContainerContentChanging"
+                                  ItemsSource="{Binding Source={StaticResource HotCollections}}"
+                                  ItemContainerStyle="{StaticResource ListViewItemStyle}" >
                             <ListView.ItemTemplate>
                                 <DataTemplate>
                                     <itemView:HotCollectionView />
