@@ -430,6 +430,9 @@
     <Compile Include="View\FeedbackPage.xaml.cs">
       <DependentUpon>FeedbackPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\SettingPage.xaml.cs">
+      <DependentUpon>SettingPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\WaterMarkPage.xaml.cs">
       <DependentUpon>WaterMarkPage.xaml</DependentUpon>
     </Compile>
@@ -453,9 +456,6 @@
     </Compile>
     <Compile Include="View\ColumnPage.xaml.cs">
       <DependentUpon>ColumnPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\FontSizePage.xaml.cs">
-      <DependentUpon>FontSizePage.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\LoginPage.xaml.cs">
       <DependentUpon>LoginPage.xaml</DependentUpon>
@@ -510,9 +510,6 @@
     </Compile>
     <Compile Include="View\SearchPage.xaml.cs">
       <DependentUpon>SearchPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\SettingPage.xaml.cs">
-      <DependentUpon>SettingPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Table\TablePage.xaml.cs">
       <DependentUpon>TablePage.xaml</DependentUpon>
@@ -709,6 +706,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\SettingPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="View\WaterMarkPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -738,10 +739,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\ColumnPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\FontSizePage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -814,10 +811,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\SearchPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\SettingPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
