@@ -43,8 +43,7 @@
 
     </Page.Resources>
     
-    <Pivot Grid.Row="1" FontSize="14"
-           HeaderTemplate="{StaticResource PivotHeaderTemplate}"
+    <Pivot Grid.Row="1" FontSize="14" HeaderTemplate="{StaticResource PivotHeaderTemplate}"
            Style="{StaticResource PivotNormalStyle}">
         <Pivot.Items>
             <PivotItem Header="推荐" Margin="0">
@@ -53,9 +52,10 @@
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
-                    <ProgressBar Grid.Row="0" IsIndeterminate="{Binding Find.RecommendsLoading}"
-                                                     Background="{StaticResource ProgressBackBrush}" 
-                                                     Foreground="{StaticResource ProgressForeBrush}"/>
+                    <ProgressBar Grid.Row="0"
+                                 IsIndeterminate="{Binding Find.RecommendsLoading}"
+                                 Background="{StaticResource ProgressBackBrush}" 
+                                 Foreground="{StaticResource ProgressForeBrush}"/>
 
                     <refresh:PullToRefreshBox Grid.Row="1">
                         <interactivity:Interaction.Behaviors>
@@ -85,8 +85,10 @@
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
-                    <ProgressBar Grid.Row="0" Background="{StaticResource ProgressBackBrush}" Foreground="{StaticResource ProgressForeBrush}" 
-                                                     IsIndeterminate="{Binding Find.AnswersLoading}"/>
+                    <ProgressBar Grid.Row="0"
+                                 Background="{StaticResource ProgressBackBrush}"
+                                 Foreground="{StaticResource ProgressForeBrush}" 
+                                 IsIndeterminate="{Binding Find.AnswersLoading}"/>
 
                     <refresh:PullToRefreshBox Grid.Row="1">
                         <interactivity:Interaction.Behaviors>
@@ -115,8 +117,8 @@
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
                     <ProgressBar Grid.Row="0" IsIndeterminate="{Binding Find.CollectionLoading}"
-                                                     Background="{StaticResource ProgressBackBrush}" 
-                                                     Foreground="{StaticResource ProgressForeBrush}"/>
+                                 Background="{StaticResource ProgressBackBrush}" 
+                                 Foreground="{StaticResource ProgressForeBrush}"/>
 
                     <refresh:PullToRefreshBox Grid.Row="1">
                         <interactivity:Interaction.Behaviors>
