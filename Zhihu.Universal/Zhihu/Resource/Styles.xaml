@@ -349,14 +349,11 @@
             </Setter.Value>
         </Setter>
     </Style>
-    
-    <Style x:Key="IconTextBlockStyle" TargetType="TextBlock">
-        <Setter Property="FontFamily" Value="Segoe MDL2 Assets" />
-        <Setter Property="FontSize" Value="24" />
+
+    <Style x:Key="SymbolIconStyle" TargetType="SymbolIcon">
         <Setter Property="Width" Value="48" />
         <Setter Property="HorizontalAlignment" Value="Center" />
         <Setter Property="VerticalAlignment" Value="Center" />
-        <Setter Property="TextAlignment" Value="Center" />
     </Style>
 
     <Style x:Key="MenuTitleTextBlockStyle" TargetType="TextBlock" BasedOn="{StaticResource BodyTextBlockStyle}">

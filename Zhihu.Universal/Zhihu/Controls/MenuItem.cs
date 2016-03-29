@@ -1,5 +1,5 @@
 ﻿using System;
-
+using Windows.UI.Xaml.Controls;
 using GalaSoft.MvvmLight;
 
 
@@ -7,12 +7,12 @@ namespace Zhihu.Controls
 {
     public sealed class MenuItem : ObservableObject
     {
-        private string icon;
+        private Symbol icon;
         private string title;
         private Type pageType;
 
 
-        public string Icon
+        public Symbol Icon
         {
             get { return this.icon; }
             set { Set(ref this.icon, value); }

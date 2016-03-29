@@ -9,7 +9,7 @@ using Windows.ApplicationModel.Store;
 using Windows.System;
 using Windows.UI.Popups;
 using Windows.UI.Xaml;
-
+using Windows.UI.Xaml.Controls;
 using Microsoft.Practices.ServiceLocation;
 
 using GalaSoft.MvvmLight;
@@ -214,10 +214,10 @@ namespace Zhihu.ViewModel
         {
             _people = people;
 
-            MenuItems.Add(new MenuItem { Icon = "", Title = "动态", PageType = typeof(FeedsPage) });
-            MenuItems.Add(new MenuItem { Icon = "", Title = "发现", PageType = typeof(FindPage) });
-            MenuItems.Add(new MenuItem { Icon = "", Title = "消息", PageType = typeof(NotePage) });
-            MenuItems.Add(new MenuItem { Icon = "", Title = "个人", PageType = typeof(PersonalPage) });
+            MenuItems.Add(new MenuItem { Icon = Symbol.Home, Title = "动态", PageType = typeof(FeedsPage) });
+            MenuItems.Add(new MenuItem { Icon = Symbol.Globe, Title = "发现", PageType = typeof(FindPage) });
+            MenuItems.Add(new MenuItem { Icon = Symbol.Message, Title = "消息", PageType = typeof(NotePage) });
+            MenuItems.Add(new MenuItem { Icon = Symbol.Contact, Title = "个人", PageType = typeof(PersonalPage) });
 
             this.ToggleSplitViewPaneCommand = new RelayCommand(() => this.IsSplitViewPaneOpen = !this.IsSplitViewPaneOpen);
 

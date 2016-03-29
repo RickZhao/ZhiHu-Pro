@@ -109,7 +109,7 @@
             <ListBox.ItemTemplate>
                 <DataTemplate x:DataType="controls:MenuItem">
                     <StackPanel Orientation="Horizontal" Height="48">
-                        <TextBlock Grid.RowSpan="2" Text="{Binding Icon, Mode=OneWay}" Style="{StaticResource IconTextBlockStyle}" />
+                        <SymbolIcon Symbol="{Binding Icon, Mode=OneWay}" Style="{StaticResource SymbolIconStyle}"/>
                         <!--<TextBlock Grid.Column="1" Text="{Binding Title, Mode=OneWay}" Style="{StaticResource MenuTitleTextBlockStyle}" />-->
                     </StackPanel>
                 </DataTemplate>
