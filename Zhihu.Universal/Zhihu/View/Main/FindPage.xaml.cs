@@ -1,10 +1,12 @@
 ﻿
+using System;
 using System.Linq;
 
 using Windows.Foundation;
 using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Navigation;
 
 using GalaSoft.MvvmLight.Command;
@@ -84,6 +86,81 @@ namespace Zhihu.View.Main
         {
             UpdateBackButton();
             Theme.Instance.UpdateRequestedTheme(this);
+        }
+
+        private void BannerItem_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            var border = sender as Border;
+
+            var bannerItem = border?.DataContext as BannerItem;
+
+            BannerTappedMethod(bannerItem);
+        }
+
+        private void BannerTappedMethod(BannerItem bannerItem)
+        {
+            if (bannerItem == null) return;
+
+            var collectionTag = "collections";
+            var roundTableTag = "roundtable";
+            var articleTag = "articles";
+
+            if (bannerItem.Url.Contains(collectionTag))
+            {
+                var collectionIdString =
+                    bannerItem.Url.Substring(bannerItem.Url.IndexOf(collectionTag, StringComparison.Ordinal) +
+                                             collectionTag.Length + 1);
+                var collectionId = 0;
+
+                Int32.TryParse(collectionIdString, out collectionId);
+
+                NavHelper.NavToCollectionPage(collectionId, this.Frame);
+
+                SystemNavigationManager.GetForCurrentView().BackRequested -= FindPage_BackRequested;
+            }
+            else if (bannerItem.Url.Contains(roundTableTag))
+            {
+                var tableIdString =
+                   bannerItem.Url.Substring(bannerItem.Url.IndexOf(roundTableTag, StringComparison.Ordinal) +
+                                            roundTableTag.Length + 1);
+
+                NavHelper.NavToTablePage(tableIdString, this.Frame);
+
+                SystemNavigationManager.GetForCurrentView().BackRequested -= FindPage_BackRequested;
+            }
+            else if (bannerItem.Url.Contains(articleTag))
+            {
+                var articleIdString =
+                    bannerItem.Url.Substring(bannerItem.Url.IndexOf(articleTag, StringComparison.Ordinal) +
+                                             articleTag.Length + 1);
+                var articleId = 0;
+
+                Int32.TryParse(articleIdString, out articleId);
+
+                if (MainStatus.IsWide)
+                {
+                    SystemNavigationManager.GetForCurrentView().BackRequested -= FindPage_BackRequested;
+                }
+                else
+                {
+                    if (this.MainStatus.NavFrame.CanGoBack) this.MainStatus.NavFrame.GoBack();
+                }
+
+                NavHelper.NavToArticlePage(articleId, MainStatus.NavFrame);
+            }
+            else
+            {
+                if (MainStatus.IsWide)
+                {
+                    SystemNavigationManager.GetForCurrentView().BackRequested -= FindPage_BackRequested;
+                }
+                else
+                {
+                    if (this.MainStatus.NavFrame.CanGoBack) this.MainStatus.NavFrame.GoBack();
+                }
+                //NavHelper.NavToTablePage("rationalize", this.Frame);
+                NavHelper.HyperLinkClicked(bannerItem.Url, MainStatus.NavFrame);
+            }
         }
 
         #region Recommend Changing

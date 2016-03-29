@@ -10,7 +10,8 @@
     xmlns:refresh="using:PullToRefresh.UWP"
     mc:Ignorable="d"
     xmlns:itemView="using:Zhihu.Controls.ItemView"
-    
+    xmlns:controls="using:Zhihu.Controls"
+
     NavigationCacheMode="Enabled"
     Background="{StaticResource PageBackBrush}"
     DataContext="{Binding Path=Main, Mode=OneWay, Source={StaticResource Locator}}">
@@ -19,9 +20,30 @@
         <CollectionViewSource x:Name="EditorRecommends" Source="{Binding Find.Recommends, Mode=OneWay}"/>
         <CollectionViewSource x:Name="HotAnswers" Source="{Binding Find.HotAnswers, Mode=OneWay}"/>
         <CollectionViewSource x:Name="HotCollections" Source="{Binding Find.Collections, Mode=OneWay}"/>
+
+        <DataTemplate x:Key="BannerHeader"><!--Height="{Binding ElementName=ContainerPivot, Path=ActualWidth, Mode=TwoWay, Converter={StaticResource BannerHeightConverter}}"-->
+            <Grid Width="580" Height="236">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <FlipView x:Name="BannerFlipView" Grid.Row="0" Grid.RowSpan="2" HorizontalAlignment="Stretch" VerticalAlignment="Top"
+                          ItemsSource="{Binding Find.Banner.Normal}">
+                    <FlipView.ItemTemplate>
+                        <DataTemplate>
+                            <Image Source="{Binding ImageUrl}" Stretch="Uniform" HorizontalAlignment="Left" VerticalAlignment="Top"
+                                   Tapped="BannerItem_Tapped"/>
+                        </DataTemplate>
+                    </FlipView.ItemTemplate>
+                </FlipView>
+                <controls:FlipViewIndicator Grid.Row="1" Margin="0 0 10 10" HorizontalAlignment="Right" VerticalAlignment="Bottom"
+                                            FlipView="{Binding ElementName=BannerFlipView}"/>
+            </Grid>
+        </DataTemplate>
+
     </Page.Resources>
     
-    <Pivot Grid.Row="1" FontSize="14"
+    <Pivot x:Name="ContainerPivot" Grid.Row="1" FontSize="14"
            HeaderTemplate="{StaticResource PivotHeaderTemplate}"
            Style="{StaticResource PivotNormalStyle}">
         <Pivot.Items>
@@ -119,3 +141,5 @@
         </Pivot.Items>
     </Pivot>
 </Page>
+
+    

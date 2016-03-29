@@ -1,37 +1,50 @@
 ﻿<ResourceDictionary
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:Zhihu.Resource.Theme"
     xmlns:converter="using:Zhihu.Converter">
 
     <converter:AnswerItemClickEventArgsConverter x:Name="AnswerItemConverter"/>
     <converter:AvatarModeConverter x:Name="AvatarConverter"/>
+    
+    <converter:BannerHeightConverter x:Name="BannerHeightConverter"/>
     <converter:BooleanToVoted x:Name="BooleanToVoted"/>
-    <converter:CountToStringConverter x:Name="CountConverter"/>
-    <converter:CommentItemClickEventArgsConverter x:Name="CommentItemConverter"/>
-    <converter:FavoritedConverter x:Name="FavoritedConverter"/>
-    <converter:FollowingConverter x:Name="FollowingConverter"/>
-    <converter:GenderToImageConverter x:Name="GenderToImageConverter"/>
-    <converter:GetCollectionIdFromBannerConverter x:Name="GetColleIdConverter"/>
-    <converter:HtmlConverter x:Name="HtmlConverter"/>
-    <converter:HtmlImageExtractConverter x:Name="ImageExtractConverter"/>
-    <converter:NullableInt32Converter x:Name="NullableInt32Converter"/>
-    <converter:RelativeTimeConverter x:Name="RelativeTimeConverter"/>
-    <converter:SubStringConverter x:Name="SubStringConverter"/>
-    <converter:StringToVisibleConverter x:Name="StringToVisibleConverter"/>
-    <converter:NoHelpeConverter x:Name="NoHelpConverter"/>
-    <converter:ThankedConverter x:Name="ThankedConverter"/>
-    <converter:CommentsCountConverter x:Name="CommentsCountConverter"/>
-    <converter:VotingToImageConverter x:Name="VotingToImageConverter"/>
-    <converter:RandomColorConverter x:Name="RandomColorConverter"/>
-    <converter:LineHeightConverter x:Name="LineHeightConverter"/>
-    <converter:VoteupCountingConverter x:Name="VoteupCountingConverter"/>
-    <converter:NightModeConverter x:Name="NightModeConverter"/>
     <converter:BoolToVisiableConverter x:Name="BoolToVisiableConverter"/>
     <converter:BoolToHighlightConverter x:Name="BoolToHighlightConverter"/>
-    <converter:VotingToHighlightConverter x:Name="VotingToHighlightConverter"/>
+  
+    <converter:CountToStringConverter x:Name="CountConverter"/>
+    <converter:CommentsCountConverter x:Name="CommentsCountConverter"/>
+    <converter:CommentItemClickEventArgsConverter x:Name="CommentItemConverter"/>
+  
+    <converter:FavoritedConverter x:Name="FavoritedConverter"/>
+    <converter:FollowingConverter x:Name="FollowingConverter"/>
+  
+    <converter:GenderToImageConverter x:Name="GenderToImageConverter"/>
+    <converter:GetCollectionIdFromBannerConverter x:Name="GetColleIdConverter"/>
+  
+    <converter:HtmlConverter x:Name="HtmlConverter"/>
+    <converter:HtmlImageExtractConverter x:Name="ImageExtractConverter"/>
+
+    <converter:LineHeightConverter x:Name="LineHeightConverter"/>
+
+    <converter:NightModeConverter x:Name="NightModeConverter"/>
+    <converter:NullableInt32Converter x:Name="NullableInt32Converter"/>
+    <converter:NoHelpeConverter x:Name="NoHelpConverter"/>
+ 
+    <converter:ObjectToMenuItemConverter x:Key="ObjectToMenuItemConverter"/>
+    
+    <converter:RandomColorConverter x:Name="RandomColorConverter"/>
+    <converter:RelativeTimeConverter x:Name="RelativeTimeConverter"/>
+ 
+    <converter:SubStringConverter x:Name="SubStringConverter"/>
+    <converter:StringToVisibleConverter x:Name="StringToVisibleConverter"/>
+   
+    <converter:ThankedConverter x:Name="ThankedConverter"/>
+    
     <converter:UnixTimeStampConverter x:Key="UnixTimeStampConverter"/>
     <converter:UnixTimeStampFormatConverter x:Key="UnixTimeStampFormatConverter"/>
-    <converter:ObjectToMenuItemConverter x:Key="ObjectToMenuItemConverter"/>
-
+ 
+    <converter:VotingToImageConverter x:Name="VotingToImageConverter"/>
+    <converter:VoteupCountingConverter x:Name="VoteupCountingConverter"/>
+    <converter:VotingToHighlightConverter x:Name="VotingToHighlightConverter"/>
+  
 </ResourceDictionary>
