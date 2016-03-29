@@ -39,9 +39,10 @@
                         </core:EventTriggerBehavior>
                     </interactivity:Interaction.Behaviors>
 
-                    <ProgressBar Grid.Row="0" IsIndeterminate="{Binding Notify.ContentsLoading}" 
-                                         Background="{StaticResource ProgressBackBrush}" 
-                                         Foreground="{StaticResource ProgressForeBrush}"/>
+                    <ProgressBar Grid.Row="0" 
+                                 Background="{StaticResource ProgressBackBrush}" 
+                                 Foreground="{StaticResource ProgressForeBrush}"
+                                 IsIndeterminate="{Binding Notify.ContentsLoading}"/>
 
                     <Grid Grid.Row="1" Margin="5 5 5 10" Visibility="{Binding Notify.FollowsVisible}" Background="{StaticResource LightBackBrush}">
                         <Grid.RowDefinitions>
@@ -92,8 +93,8 @@
                                     <itemView:NotifyView>
                                         <interactivity:Interaction.Behaviors>
                                             <core:EventTriggerBehavior EventName="Tapped">
-                                                <core:InvokeCommandAction Command="{Binding Notify.HasReadContent, Source={Binding Path=Main, Mode=OneWay, Source={StaticResource Locator}}}"
-                                                                                  CommandParameter="{Binding}"/>
+                                                <core:InvokeCommandAction Command="{Binding Notify.HasReadContent}"
+                                                                          CommandParameter="{Binding}"/>
                                             </core:EventTriggerBehavior>
                                         </interactivity:Interaction.Behaviors>
                                     </itemView:NotifyView>
@@ -110,9 +111,10 @@
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
 
-                    <ProgressBar Grid.Row="0" IsIndeterminate="{Binding Notify.LikesLoading}" 
-                                                     Background="{StaticResource ProgressBackBrush}"
-                                                     Foreground="{StaticResource ProgressForeBrush}"/>
+                    <ProgressBar Grid.Row="0" 
+                                 Background="{StaticResource ProgressBackBrush}"
+                                 Foreground="{StaticResource ProgressForeBrush}"
+                                 IsIndeterminate="{Binding Notify.LikesLoading}"/>
 
                     <refresh:PullToRefreshBox Grid.Row="1">
                         <interactivity:Interaction.Behaviors>
@@ -131,7 +133,7 @@
                                     <itemView:NotifyView>
                                         <interactivity:Interaction.Behaviors>
                                             <core:EventTriggerBehavior EventName="Tapped">
-                                                <core:InvokeCommandAction Command="{Binding Notify.HasReadContent, Source={Binding Path=Main, Mode=OneWay, Source={StaticResource Locator}}}"
+                                                <core:InvokeCommandAction Command="{Binding Notify.HasReadContent}"
                                                                                   CommandParameter="{Binding}"/>
                                             </core:EventTriggerBehavior>
                                         </interactivity:Interaction.Behaviors>
@@ -149,8 +151,10 @@
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
 
-                    <ProgressBar Grid.Row="0" Background="{StaticResource ProgressBackBrush}" Foreground="{StaticResource ProgressForeBrush}" 
-                                                     IsIndeterminate="{Binding Notify.ChatsLoading}"/>
+                    <ProgressBar Grid.Row="0"
+                                 Background="{StaticResource ProgressBackBrush}" 
+                                 Foreground="{StaticResource ProgressForeBrush}" 
+                                 IsIndeterminate="{Binding Notify.ChatsLoading}"/>
 
                     <refresh:PullToRefreshBox Grid.Row="1">
                         <interactivity:Interaction.Behaviors>

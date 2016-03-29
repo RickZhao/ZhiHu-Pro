@@ -258,7 +258,7 @@
         <controls:ImageViewerHelper Grid.Row="0" ImageRuns="{Binding Detail.Content, Converter={StaticResource ImageExtractConverter}}"/>
 
         <!--Answer Content-->
-        <controls:RichBlock Grid.Row="0" HeaderTemplate="{StaticResource AnswerHeader}" 
+        <controls:RichBlock Grid.Row="0" Margin="0 20 0 0" HeaderTemplate="{StaticResource AnswerHeader}" 
                             FooterTemplate="{StaticResource FooterTemplate}"
                             HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  
                             Paragraphs="{Binding Detail.Content, Converter={StaticResource HtmlConverter}, ConverterParameter='True'}" />

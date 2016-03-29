@@ -82,17 +82,17 @@ namespace Zhihu.View.Main
 
             if (feed.Target.Type == "answer")
             {
-                NavHelper.NavToQuestionPage(feed.Target.Question.Id, this.Frame);
+                NavHelper.NavToQuestionPage(feed.Target.Question.Id, AppShellPage.AppFrame);
                 SystemNavigationManager.GetForCurrentView().BackRequested -= FeedsPage_BackRequested;
             }
             else if (feed.Target.Type == "question")
             {
-                NavHelper.NavToQuestionPage(feed.Target.GetId(), this.Frame);
+                NavHelper.NavToQuestionPage(feed.Target.GetId(), AppShellPage.AppFrame);
                 SystemNavigationManager.GetForCurrentView().BackRequested -= FeedsPage_BackRequested;
             }
             else if (feed.Target.Type == "column")
             {
-                NavHelper.NavToColumnPage(feed.Target.Id, this.Frame);
+                NavHelper.NavToColumnPage(feed.Target.Id, AppShellPage.AppFrame);
                 SystemNavigationManager.GetForCurrentView().BackRequested -= FeedsPage_BackRequested;
             }
             else if (feed.Target.Type == "article")

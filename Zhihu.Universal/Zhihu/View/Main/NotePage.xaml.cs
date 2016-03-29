@@ -116,7 +116,7 @@ namespace Zhihu.View.Main
 
             if ("question" == item.Target.Type)
             {
-                NavHelper.NavToQuestionPage(item.Target.GetId(), this.Frame);
+                NavHelper.NavToQuestionPage(item.Target.GetId(), AppShellPage.AppFrame);
                 SystemNavigationManager.GetForCurrentView().BackRequested -= NotePage_BackRequested;
             }
             else if ("answer" == item.Target.Type)
@@ -145,7 +145,7 @@ namespace Zhihu.View.Main
             }
             else if ("column" == item.Target.Type)
             {
-                NavHelper.NavToColumnPage(item.Target.Id, this.Frame);
+                NavHelper.NavToColumnPage(item.Target.Id, AppShellPage.AppFrame);
                 SystemNavigationManager.GetForCurrentView().BackRequested -= NotePage_BackRequested;
             }
         }

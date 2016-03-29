@@ -36,7 +36,7 @@ namespace Zhihu.View.Profile
 
         private void CollectionTappedMethod(Collection collection)
         {
-            NavHelper.NavToCollectionPage(collection.Id, this.Frame);
+            NavHelper.NavToCollectionPage(collection.Id, AppShellPage.AppFrame);
 
             SystemNavigationManager.GetForCurrentView().BackRequested -= FollowingPage_BackRequested;
         }
@@ -92,14 +92,14 @@ namespace Zhihu.View.Profile
 
         private void TopicTappedMethod(Common.Model.Topic topic)
         {
-            NavHelper.NavToTopicPage(topic.Id, this.Frame);
+            NavHelper.NavToTopicPage(topic.Id, AppShellPage.AppFrame);
 
             SystemNavigationManager.GetForCurrentView().BackRequested -= FollowingPage_BackRequested;
         }
 
         private void QuestionActivityTappedMethod(Common.Model.Question question)
         {
-            NavHelper.NavToQuestionPage(question.Id, this.Frame);
+            NavHelper.NavToQuestionPage(question.Id, AppShellPage.AppFrame);
 
             SystemNavigationManager.GetForCurrentView().BackRequested -= FollowingPage_BackRequested;
         }

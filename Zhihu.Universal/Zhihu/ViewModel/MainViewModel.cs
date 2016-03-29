@@ -219,6 +219,8 @@ namespace Zhihu.ViewModel
             MenuItems.Add(new MenuItem { Icon = Symbol.Message, Title = "消息", PageType = typeof(NotePage) });
             MenuItems.Add(new MenuItem { Icon = Symbol.Contact, Title = "个人", PageType = typeof(PersonalPage) });
 
+            SelectedMenuItem = MenuItems.FirstOrDefault();
+
             this.ToggleSplitViewPaneCommand = new RelayCommand(() => this.IsSplitViewPaneOpen = !this.IsSplitViewPaneOpen);
 
             FeedsTappd = new RelayCommand(() => { SelectedPageType = typeof(FeedsPage); });

@@ -114,7 +114,7 @@ namespace Zhihu.View.Main
 
                 Int32.TryParse(collectionIdString, out collectionId);
 
-                NavHelper.NavToCollectionPage(collectionId, this.Frame);
+                NavHelper.NavToCollectionPage(collectionId, AppShellPage.AppFrame);
 
                 SystemNavigationManager.GetForCurrentView().BackRequested -= FindPage_BackRequested;
             }
@@ -124,7 +124,7 @@ namespace Zhihu.View.Main
                    bannerItem.Url.Substring(bannerItem.Url.IndexOf(roundTableTag, StringComparison.Ordinal) +
                                             roundTableTag.Length + 1);
 
-                NavHelper.NavToTablePage(tableIdString, this.Frame);
+                NavHelper.NavToTablePage(tableIdString, AppShellPage.AppFrame);
 
                 SystemNavigationManager.GetForCurrentView().BackRequested -= FindPage_BackRequested;
             }
@@ -158,7 +158,7 @@ namespace Zhihu.View.Main
                 {
                     if (this.MainStatus.NavFrame.CanGoBack) this.MainStatus.NavFrame.GoBack();
                 }
-                //NavHelper.NavToTablePage("rationalize", this.Frame);
+                //NavHelper.NavToTablePage("rationalize", AppShellPage.AppFrame);
                 NavHelper.HyperLinkClicked(bannerItem.Url, MainStatus.NavFrame);
             }
         }
@@ -175,12 +175,12 @@ namespace Zhihu.View.Main
 
             if (recommend.Type == "question")
             {
-                NavHelper.NavToQuestionPage(recommend.Question.Id, this.Frame);
+                NavHelper.NavToQuestionPage(recommend.Question.Id, AppShellPage.AppFrame);
                 SystemNavigationManager.GetForCurrentView().BackRequested -= FindPage_BackRequested;
             }
             if (recommend.Type == "answer")
             {
-                NavHelper.NavToQuestionPage(recommend.Question.Id, this.Frame);
+                NavHelper.NavToQuestionPage(recommend.Question.Id, AppShellPage.AppFrame);
                 SystemNavigationManager.GetForCurrentView().BackRequested -= FindPage_BackRequested;
             }
             if (recommend.Type == "article")
@@ -204,7 +204,7 @@ namespace Zhihu.View.Main
 
             if (recommend.Type == "question")
             {
-                NavHelper.NavToAnswerPage(recommend.Question.Id, this.Frame);
+                NavHelper.NavToAnswerPage(recommend.Question.Id, AppShellPage.AppFrame);
                 SystemNavigationManager.GetForCurrentView().BackRequested -= FindPage_BackRequested;
             }
             if (recommend.Type == "answer")
@@ -296,7 +296,7 @@ namespace Zhihu.View.Main
 
         private void HotCollectionTappedMethod(HotCollection collection)
         {
-            NavHelper.NavToCollectionPage(collection.Id, this.Frame);
+            NavHelper.NavToCollectionPage(collection.Id, AppShellPage.AppFrame);
 
             SystemNavigationManager.GetForCurrentView().BackRequested -= FindPage_BackRequested;
         }
@@ -364,13 +364,13 @@ namespace Zhihu.View.Main
 
         private void AnswerAuthorTappedMethod(Common.Model.Answer answer)
         {
-            NavHelper.NavToProfilePage(answer.Author.Id, this.Frame);
+            NavHelper.NavToProfilePage(answer.Author.Id, AppShellPage.AppFrame);
             SystemNavigationManager.GetForCurrentView().BackRequested -= FindPage_BackRequested;
         }
 
         private void AnswerQuestionTappedMethod(Common.Model.Answer answer)
         {
-            NavHelper.NavToQuestionPage(answer.Question.Id, this.Frame);
+            NavHelper.NavToQuestionPage(answer.Question.Id, AppShellPage.AppFrame);
             SystemNavigationManager.GetForCurrentView().BackRequested -= FindPage_BackRequested;
         }
 
