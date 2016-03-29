@@ -77,12 +77,9 @@
                         <AdaptiveTrigger MinWindowWidth="900"/>
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
-                        <!--<Setter Target="MasterColumn.Width" Value="*"/>-->
-                        <!--<Setter Target="MasterColumn.MinWidth" Value="450"/>-->
                         <Setter Target="MasterColumn.Width" Value="600"/>
                         <Setter Target="DetailColumn.Width" Value="*"/>
                         <Setter Target="NavMenuList.Visibility" Value="Visible"/>
-                        <!--<Setter Target="FrameContainer.Margin" Value="30 30 30 30"/>-->
                         <Setter Target="NavCommandBar.Visibility" Value="Collapsed"/>
                         <Setter Target="FrameContainer.Visibility" Value="Visible"/>
                     </VisualState.Setters>
@@ -102,7 +99,7 @@
             </VisualStateGroup>
         </VisualStateManager.VisualStateGroups>
 
-        <ListBox x:Name="NavMenuList" ItemsSource="{Binding MenuItems}" Grid.Row="0" Grid.Column="0"
+        <ListBox x:Name="NavMenuList" ItemsSource="{Binding MenuItems}" Grid.Row="0" Grid.Column="0" Visibility="Collapsed"
                          SelectedItem="{Binding SelectedMenuItem, Mode=TwoWay, Converter={StaticResource ObjectToMenuItemConverter}}"
                          ItemContainerStyle="{StaticResource MenuListBoxItemStyle}"
                          SelectionChanged="ListBox_SelectionChanged">

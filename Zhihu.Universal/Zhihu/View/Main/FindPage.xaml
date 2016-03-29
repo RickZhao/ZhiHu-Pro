@@ -21,8 +21,8 @@
         <CollectionViewSource x:Name="HotAnswers" Source="{Binding Find.HotAnswers, Mode=OneWay}"/>
         <CollectionViewSource x:Name="HotCollections" Source="{Binding Find.Collections, Mode=OneWay}"/>
 
-        <DataTemplate x:Key="BannerHeader"><!--Height="{Binding ElementName=ContainerPivot, Path=ActualWidth, Mode=TwoWay, Converter={StaticResource BannerHeightConverter}}"-->
-            <Grid Width="580" Height="236">
+        <DataTemplate x:Key="BannerHeader">
+            <Grid HorizontalAlignment="Stretch" Height="{Binding ElementName=ContainerPivot, Path=ActualWidth, Mode=TwoWay, Converter={StaticResource BannerHeightConverter}}">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="Auto"/>
@@ -43,12 +43,12 @@
 
     </Page.Resources>
     
-    <Pivot x:Name="ContainerPivot" Grid.Row="1" FontSize="14"
+    <Pivot Grid.Row="1" FontSize="14"
            HeaderTemplate="{StaticResource PivotHeaderTemplate}"
            Style="{StaticResource PivotNormalStyle}">
         <Pivot.Items>
             <PivotItem Header="推荐" Margin="0">
-                <Grid>
+                <Grid x:Name="ContainerPivot" HorizontalAlignment="Stretch">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="*"/>

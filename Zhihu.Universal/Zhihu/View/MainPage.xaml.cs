@@ -124,6 +124,7 @@ namespace Zhihu.View
 
         private void AppBarButton_Home_Tapped(object sender, TappedRoutedEventArgs e)
         {
+            BroadcastPageStatus();
             //FeedsGrid.Visibility = FindGrid.Visibility = NoteGrid.Visibility = AboutGrid.Visibility = Visibility.Collapsed;
 
             //FeedsGrid.Visibility = Visibility.Visible;
@@ -131,6 +132,7 @@ namespace Zhihu.View
 
         private void AppBarButton_Find_Tapped(object sender, TappedRoutedEventArgs e)
         {
+            BroadcastPageStatus();
             //FeedsGrid.Visibility = FindGrid.Visibility = NoteGrid.Visibility = AboutGrid.Visibility = Visibility.Collapsed;
 
             //FindGrid.Visibility = Visibility.Visible;
@@ -138,6 +140,7 @@ namespace Zhihu.View
 
         private void AppBarButton_Message_Tapped(object sender, TappedRoutedEventArgs e)
         {
+            BroadcastPageStatus();
             //FeedsGrid.Visibility = FindGrid.Visibility = NoteGrid.Visibility = AboutGrid.Visibility = Visibility.Collapsed;
 
             //NoteGrid.Visibility = Visibility.Visible;
@@ -145,6 +148,7 @@ namespace Zhihu.View
 
         private void AppBarButton_Me_Tapped(object sender, TappedRoutedEventArgs e)
         {
+            BroadcastPageStatus();
             //FeedsGrid.Visibility = FindGrid.Visibility = NoteGrid.Visibility = AboutGrid.Visibility = Visibility.Collapsed;
 
             //AboutGrid.Visibility = Visibility.Visible;
@@ -180,9 +184,11 @@ namespace Zhihu.View
             BroadcastPageStatus();
         }
 
-        private void BroadcastPageStatus()
+        private async void BroadcastPageStatus()
         {
             var mainStatus = new MainStatus(AdaptiveStates.CurrentState != DefaultState, GetNavFrame());
+
+            await Task.Delay(1000);
 
             Messenger.Default.Send(mainStatus);
         }
