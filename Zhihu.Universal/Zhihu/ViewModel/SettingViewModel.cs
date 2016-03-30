@@ -178,7 +178,7 @@ namespace Zhihu.ViewModel
 
         private void NavToCustomFontSizeMethod()
         {
-            AppShellPage.AppFrame.Navigate(typeof (FontSizePage));
+            //AppShellPage.AppFrame.Navigate(typeof(FontSizePage));
         }
     }
 }
