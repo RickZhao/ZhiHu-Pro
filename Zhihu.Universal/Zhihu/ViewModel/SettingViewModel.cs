@@ -33,7 +33,17 @@ namespace Zhihu.ViewModel
                 RaisePropertyChanged(() => TopStoryEnable);
             }
         }
-        
+
+        public Boolean OpenLinkWithEdge
+        {
+            get { return NavHelper.OpenLinkWithEdge; }
+            private set
+            {
+                NavHelper.OpenLinkWithEdge = value;
+                RaisePropertyChanged(() => OpenLinkWithEdge);
+            }
+        }
+
         public ObservableCollection<Feed> DemoFeeds { get; private set; }
         
         public RelayCommand ClearCache { get; private set; }
@@ -172,6 +182,11 @@ namespace Zhihu.ViewModel
                 else
                     await statusBar.HideAsync();
             }
+        }
+
+        private void SwitchOpenLinkWithEdge()
+        {
+            OpenLinkWithEdge = !OpenLinkWithEdge;
         }
 
         private void NavToCustomFontSizeMethod()

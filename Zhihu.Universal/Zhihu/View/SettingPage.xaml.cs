@@ -155,5 +155,10 @@ namespace Zhihu.View
                 SentAppBarButton.Visibility = Visibility.Visible;
             }
         }
+
+        private void ToggleSwitch_OnToggled(object sender, RoutedEventArgs e)
+        {
+            NavHelper.OpenLinkWithEdge = !NavHelper.OpenLinkWithEdge;
+        }
     }
 }
