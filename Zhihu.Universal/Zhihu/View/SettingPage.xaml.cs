@@ -132,5 +132,10 @@ namespace Zhihu.View
         {
             Theme.Instance.ResetFontSize();
         }
+
+        private void BlackThemeToggleSwitch_Toggled(object sender, RoutedEventArgs e)
+        {
+            Theme.Instance.UpdateRequestedTheme(this);
+        }
     }
 }

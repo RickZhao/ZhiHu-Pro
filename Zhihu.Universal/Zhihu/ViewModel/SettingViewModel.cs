@@ -15,8 +15,6 @@ using Zhihu.Common.Helper;
 using Zhihu.Common.Service;
 using Zhihu.Controls;
 using Zhihu.Helper;
-using Zhihu.View;
-
 
 
 namespace Zhihu.ViewModel
@@ -35,9 +33,9 @@ namespace Zhihu.ViewModel
                 RaisePropertyChanged(() => TopStoryEnable);
             }
         }
-
+        
         public ObservableCollection<Feed> DemoFeeds { get; private set; }
-
+        
         public RelayCommand ClearCache { get; private set; }
         public RelayCommand CheckTopStory { get; private set; }
         public RelayCommand SwitchTopStory { get; private set; }
@@ -52,7 +50,7 @@ namespace Zhihu.ViewModel
             ClearCache = new RelayCommand(ClearCacheMethod);
 
             CheckTopStory = new RelayCommand(CheckTopStoryMethod);
-
+            
             SwitchTopStory = new RelayCommand(SwitchTopStoryMethod);
 
             SwitchStatusBar = new RelayCommand(SwitchStatusBarOpen);

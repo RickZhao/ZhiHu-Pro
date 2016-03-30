@@ -146,7 +146,7 @@
                         <AdaptiveTrigger MinWindowWidth="900"/>
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
-                        <Setter Target="MasterColumn.Width" Value="500"/>
+                        <Setter Target="MasterColumn.Width" Value="550"/>
                         <Setter Target="DetailColumn.Width" Value="*"/>
                         <!--<Setter Target="FrameContainer.Margin" Value="30 30 30 30"/>-->
                         <Setter Target="FrameContainer.Visibility" Value="Visible"/>

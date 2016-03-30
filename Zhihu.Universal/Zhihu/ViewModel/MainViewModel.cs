@@ -119,8 +119,6 @@ namespace Zhihu.ViewModel
             }
         }
 
-        public RelayCommand GetProfile { get; private set; }
-
         private Visibility _exploreVisible = Visibility.Collapsed;
 
         public Visibility ExploreVisible
@@ -192,6 +190,8 @@ namespace Zhihu.ViewModel
             }
         }
 
+        public RelayCommand GetProfile { get; private set; }
+
         public RelayCommand CheckNotify { get; private set; }
         public RelayCommand CheckTheme { get; private set; }
         public RelayCommand SwitchTheme { get; private set; }
@@ -221,7 +221,7 @@ namespace Zhihu.ViewModel
 
             SelectedMenuItem = MenuItems.FirstOrDefault();
 
-            this.ToggleSplitViewPaneCommand = new RelayCommand(() => this.IsSplitViewPaneOpen = !this.IsSplitViewPaneOpen);
+            ToggleSplitViewPaneCommand = new RelayCommand(() => this.IsSplitViewPaneOpen = !this.IsSplitViewPaneOpen);
 
             FeedsTappd = new RelayCommand(() => { SelectedPageType = typeof(FeedsPage); });
             FindTapped = new RelayCommand(() => { SelectedPageType = typeof(FindPage); });
@@ -318,18 +318,7 @@ namespace Zhihu.ViewModel
 
         private void CheckThemeMethod()
         {
-            var currentTheme = LocalSettingUtility.Instance.Read<String>(Utility.Instance.CurrentThemeKey);
-
-            if (String.IsNullOrEmpty(currentTheme) || currentTheme == "Light")
-            {
-                NightModeOn = false;
-                Theme.Instance.TurnLight();
-            }
-            else
-            {
-                NightModeOn = true;
-                Theme.Instance.TurnDark();
-            }
+            NightModeOn = Theme.Instance.IsBlackOn;
         }
 
         private void PromptPayMethod()
@@ -387,7 +376,7 @@ namespace Zhihu.ViewModel
                         // The in-app puchase was not completed because an error occurred.
                     }
                 }
-
+                RaisePropertyChanged(() => NightModeOn);
                 return;
             }
 

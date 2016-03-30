@@ -105,6 +105,18 @@ namespace Zhihu.Helper
                 RaisePropertyChanged();
             }
         }
+        
+        public Boolean IsBlackOn
+        {
+            get
+            {
+                var themeKey = Utility.Instance.CurrentThemeKey;
+                var currentTheme = LocalSettingUtility.Instance.Read<String>(themeKey);
+
+                if (String.IsNullOrEmpty(currentTheme) || currentTheme == "Light") return false;
+                else return true;
+            }
+        }
 
         #region Colors
 
@@ -740,22 +752,9 @@ namespace Zhihu.Helper
 
         #endregion
 
-        internal void ResetFontSize()
-        {
-            PageTitle = Constant.DefaultFontSize.PageTitle;
-            FeedTitle = Constant.DefaultFontSize.FeedTitle;
-            FeedSummary = Constant.DefaultFontSize.FeedSummary;
-            FeedVerb = Constant.DefaultFontSize.FeedVerb;
-            VoteCount = Constant.DefaultFontSize.VoteCount;
-        }
-
         private void LoadTheme()
         {
-            var themeKey = Utility.Instance.CurrentThemeKey;
-            var currentTheme = LocalSettingUtility.Instance.Read<String>(themeKey);
-
-            if (String.IsNullOrEmpty(
-                currentTheme) || currentTheme == "Light")
+            if (IsBlackOn==false)
             {
                 LoadLight();
             }
@@ -769,9 +768,7 @@ namespace Zhihu.Helper
         {
             if (page == null) return;
 
-            var currentTheme = LocalSettingUtility.Instance.Read<String>(Utility.Instance.CurrentThemeKey);
-
-            if (String.IsNullOrEmpty(currentTheme) || currentTheme == "Light")
+            if (IsBlackOn == false)
             {
                 page.RequestedTheme = ElementTheme.Light;
             }
@@ -781,16 +778,23 @@ namespace Zhihu.Helper
             }
         }
 
+        public void UpdateIsBlack()
+        {
+            RaisePropertyChanged(() => IsBlackOn);
+        }
+
         public void TurnLight()
         {
             LocalSettingUtility.Instance.Add(Utility.Instance.CurrentThemeKey, "Light");
             LoadLight();
+            RaisePropertyChanged(() => IsBlackOn);
         }
 
         public void TurnDark()
         {
             LocalSettingUtility.Instance.Add(Utility.Instance.CurrentThemeKey, "Dark");
             LoadDark();
+            RaisePropertyChanged(() => IsBlackOn);
         }
 
         private void LoadLight()
@@ -924,5 +928,15 @@ namespace Zhihu.Helper
 
             BoldForeColor = Color.FromArgb(0xFF, 0xEE, 0xEE, 0xEE);
         }
+
+        internal void ResetFontSize()
+        {
+            PageTitle = Constant.DefaultFontSize.PageTitle;
+            FeedTitle = Constant.DefaultFontSize.FeedTitle;
+            FeedSummary = Constant.DefaultFontSize.FeedSummary;
+            FeedVerb = Constant.DefaultFontSize.FeedVerb;
+            VoteCount = Constant.DefaultFontSize.VoteCount;
+        }
+
     }
 }
