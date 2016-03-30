@@ -77,7 +77,7 @@
                         <AdaptiveTrigger MinWindowWidth="900"/>
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
-                        <Setter Target="MasterColumn.Width" Value="500"/>
+                        <Setter Target="MasterColumn.Width" Value="452"/>
                         <Setter Target="DetailColumn.Width" Value="*"/>
                         <Setter Target="NavMenuList.Visibility" Value="Visible"/>
                         <Setter Target="NavCommandBar.Visibility" Value="Collapsed"/>
