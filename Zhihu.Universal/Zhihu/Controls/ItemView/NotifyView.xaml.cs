@@ -112,6 +112,10 @@ namespace Zhihu.Controls.ItemView
 
         internal void ShowSummary()
         {
+            if (this.Notify.Target.Type == "article")
+            {
+                this.SummaryContainer.Visibility = Visibility.Collapsed;
+            }
             if (this.Notify.Target.Type == "answer")
             {
                 this.VoteCount.Text = Notify.Target.VoteupCount.HasValue

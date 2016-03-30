@@ -15,6 +15,11 @@ namespace Zhihu.Common.Helper
             },
             new VerbModel()
             {
+                Verbs = new List<String>() { "ARTICLE_PUBLISH", },
+                Display = "发表了文章",
+            },
+            new VerbModel()
+            {
                 Verbs = new List<String>() {"COMMENT_CREATE_IN_ANSWER",},
                 Display = "评论了该答案",
             },

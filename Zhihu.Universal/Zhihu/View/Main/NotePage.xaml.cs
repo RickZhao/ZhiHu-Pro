@@ -77,7 +77,7 @@ namespace Zhihu.View.Main
 
             var notifyItem = ellipse.DataContext as NotifyItem;
 
-            if (notifyItem == null) return;
+            if (notifyItem == null || MainStatus == null) return;
 
             if (MainStatus.IsWide)
             {
@@ -93,24 +93,23 @@ namespace Zhihu.View.Main
 
         private void NotifyAuthorTappedMethod(NotifyItem item)
         {
-            if (item != null)
-            {
-                if (MainStatus.IsWide)
-                {
-                    SystemNavigationManager.GetForCurrentView().BackRequested -= NotePage_BackRequested;
-                }
-                else
-                {
-                    if (this.MainStatus.NavFrame.CanGoBack) this.MainStatus.NavFrame.GoBack();
-                }
+            if (item == null || MainStatus == null) return;
 
-                NavHelper.NavToProfilePage(item.Operators[0].Id, MainStatus.NavFrame);
+            if (MainStatus.IsWide)
+            {
+                SystemNavigationManager.GetForCurrentView().BackRequested -= NotePage_BackRequested;
             }
+            else
+            {
+                if (this.MainStatus.NavFrame.CanGoBack) this.MainStatus.NavFrame.GoBack();
+            }
+
+            NavHelper.NavToProfilePage(item.Operators[0].Id, MainStatus.NavFrame);
         }
 
         private void NotifyTitleTappedMethod(NotifyItem item)
         {
-            if (item == null) return;
+            if (item == null || MainStatus == null) return;
 
             HasReadNotifyItem(item);
 
@@ -152,7 +151,7 @@ namespace Zhihu.View.Main
 
         private void NotifySummaryTappedMethod(NotifyItem item)
         {
-            if (item == null) return;
+            if (item == null || MainStatus == null) return;
 
             HasReadNotifyItem(item);
 
@@ -191,8 +190,8 @@ namespace Zhihu.View.Main
 
         private void ChatTappedMethod(Chat chat)
         {
-            if (chat?.Participant != null)
-            {
+            if (chat?.Participant == null || MainStatus == null)
+
                 if (MainStatus.IsWide)
                 {
                     SystemNavigationManager.GetForCurrentView().BackRequested -= NotePage_BackRequested;
@@ -202,8 +201,7 @@ namespace Zhihu.View.Main
                     if (this.MainStatus.NavFrame.CanGoBack) this.MainStatus.NavFrame.GoBack();
                 }
 
-                NavHelper.NavToMessagePage(chat.Participant.Id, MainStatus.NavFrame);
-            }
+            NavHelper.NavToMessagePage(chat.Participant.Id, MainStatus.NavFrame);
         }
 
         #region Notifies

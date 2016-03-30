@@ -75,6 +75,7 @@ namespace Zhihu.View.Main
 
         private void NavigateToMyProfile_Tapped(object sender, TappedRoutedEventArgs e)
         {
+            if (MainStatus == null) return;
             if (MainStatus.IsWide)
             {
                 SystemNavigationManager.GetForCurrentView().BackRequested -= PersonalPage_BackRequested;
@@ -89,6 +90,7 @@ namespace Zhihu.View.Main
 
         private void NavToMyFollowing_Tapped(object sender, TappedRoutedEventArgs e)
         {
+            if (MainStatus == null) return;
             if (MainStatus.IsWide)
             {
                 SystemNavigationManager.GetForCurrentView().BackRequested -= PersonalPage_BackRequested;
@@ -103,6 +105,7 @@ namespace Zhihu.View.Main
 
         private void NavToMyCollections_Tapped(object sender, TappedRoutedEventArgs e)
         {
+            if (MainStatus == null) return;
             if (MainStatus.IsWide)
             {
                 SystemNavigationManager.GetForCurrentView().BackRequested -= PersonalPage_BackRequested;
@@ -117,6 +120,7 @@ namespace Zhihu.View.Main
 
         private void Search_Tapped(object sender, TappedRoutedEventArgs e)
         {
+            if (MainStatus == null) return;
             if (MainStatus.IsWide)
             {
                 SystemNavigationManager.GetForCurrentView().BackRequested -= PersonalPage_BackRequested;
@@ -131,6 +135,7 @@ namespace Zhihu.View.Main
 
         private void SettingNav_OnTapped(object sender, TappedRoutedEventArgs args)
         {
+            if (MainStatus == null) return;
             if (MainStatus.IsWide)
             {
                 SystemNavigationManager.GetForCurrentView().BackRequested -= PersonalPage_BackRequested;

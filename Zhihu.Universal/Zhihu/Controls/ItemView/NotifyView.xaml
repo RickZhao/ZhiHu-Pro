@@ -9,11 +9,11 @@
     d:DesignHeight="300"
     d:DesignWidth="400">
 
-    <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch" MinHeight="90">
+    <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch" MinHeight="65">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         
@@ -51,6 +51,6 @@
                        Style="{StaticResource SummaryStyle}"/>
         </Grid>
 
-        <Border Grid.Row="3" Style="{StaticResource LineStyle}"/>
+        <Border Grid.Row="3" VerticalAlignment="Bottom" Style="{StaticResource LineStyle}"/>
     </Grid>
 </UserControl>

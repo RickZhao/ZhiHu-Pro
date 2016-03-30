@@ -99,7 +99,7 @@ namespace Zhihu.View.Main
 
         private void BannerTappedMethod(BannerItem bannerItem)
         {
-            if (bannerItem == null) return;
+            if (bannerItem == null || MainStatus == null) return;
 
             var collectionTag = "collections";
             var roundTableTag = "roundtable";
@@ -171,7 +171,7 @@ namespace Zhihu.View.Main
 
         private void RecommendTitleTappedMethod(EditorRecommend recommend)
         {
-            if (recommend == null) return;
+            if (recommend == null || MainStatus == null) return;
 
             if (recommend.Type == "question")
             {
@@ -200,7 +200,7 @@ namespace Zhihu.View.Main
 
         private void RecommendSummaryTappedMethod(EditorRecommend recommend)
         {
-            if (recommend == null) return;
+            if (recommend == null || MainStatus == null) return;
 
             if (recommend.Type == "question")
             {
@@ -376,7 +376,7 @@ namespace Zhihu.View.Main
 
         private void AnswerSummaryTappedMethod(Common.Model.Answer answer)
         {
-            if (answer == null) return;
+            if (answer == null || MainStatus == null) return;
 
             if (MainStatus.IsWide)
             {

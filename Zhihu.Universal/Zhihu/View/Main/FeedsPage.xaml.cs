@@ -76,7 +76,7 @@ namespace Zhihu.View.Main
 
         private void FeedTitleTappedMethod(Feed feed)
         {
-            if (feed == null) return;
+            if (feed == null || MainStatus == null) return;
 
             _current = feed;
 
@@ -125,6 +125,8 @@ namespace Zhihu.View.Main
 
         private void FeedSummaryTappedMethod(Feed feed)
         {
+            if (MainStatus == null) return;
+
             _current = feed;
 
             var id = feed.Target.GetId();
@@ -150,6 +152,7 @@ namespace Zhihu.View.Main
 
         private void FeedAuthorTappedMethod(Feed feed)
         {
+            if (MainStatus == null) return;
             if (MainStatus.IsWide)
             {
                 SystemNavigationManager.GetForCurrentView().BackRequested -= FeedsPage_BackRequested;

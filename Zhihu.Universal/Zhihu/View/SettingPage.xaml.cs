@@ -137,5 +137,23 @@ namespace Zhihu.View
         {
             Theme.Instance.UpdateRequestedTheme(this);
         }
+
+        private void Pivot_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            LogOutAppBarButton.Visibility = FontsizeResetBarButton.Visibility = SentAppBarButton.Visibility = Visibility.Collapsed;
+
+            if (Pivot.SelectedIndex == 0)
+            {
+                LogOutAppBarButton.Visibility = Visibility.Visible;
+            }
+            else if(Pivot.SelectedIndex == 1)
+            {
+                FontsizeResetBarButton.Visibility = Visibility.Visible;
+            }
+            else if (Pivot.SelectedIndex == 2)
+            {
+                SentAppBarButton.Visibility = Visibility.Visible;
+            }
+        }
     }
 }

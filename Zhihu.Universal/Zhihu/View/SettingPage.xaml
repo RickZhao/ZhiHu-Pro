@@ -29,14 +29,16 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        <Pivot x:Name="Pivot" HeaderTemplate="{StaticResource PivotHeaderTemplate}"
-               Style="{StaticResource PivotNormalStyle}">
+        <Pivot x:Name="Pivot"
+               HeaderTemplate="{StaticResource PivotHeaderTemplate}"
+               Style="{StaticResource PivotNormalStyle}" 
+               SelectionChanged="Pivot_SelectionChanged">
             <Pivot.Items>
                 <PivotItem Header="通用">
                     <ScrollViewer VerticalScrollMode="Auto" HorizontalScrollMode="Disabled" ZoomMode="Disabled"
                                   VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
                         <StackPanel Orientation="Vertical">
-                            <ToggleSwitch Margin="10 20 10 10" Foreground="{StaticResource FeedTitleBrush}"
+                            <ToggleSwitch Margin="0 0 0 10" Foreground="{StaticResource FeedTitleBrush}"
                                               Header="状态栏" OnContent="显示" OffContent="关闭"
                                               FontSize="{Binding Source={StaticResource ThemeHelper}, Path=Theme.FeedSummary}"
                                               HorizontalAlignment="Stretch"
@@ -49,7 +51,7 @@
                                 </interactivity:Interaction.Behaviors>
                             </ToggleSwitch>
 
-                            <ToggleSwitch Margin="10 10 10 10" Foreground="{StaticResource FeedTitleBrush}"
+                            <ToggleSwitch Margin="0 0 0 10" Foreground="{StaticResource FeedTitleBrush}"
                                               Header="文本选项" OnContent="允许选择" OffContent="不允许选择"
                                               FontSize="{Binding Source={StaticResource ThemeHelper}, Path=Theme.FeedSummary}"
                                               HorizontalAlignment="Stretch"
@@ -57,7 +59,7 @@
                                               Visibility="Visible">
                             </ToggleSwitch>
 
-                            <ToggleSwitch Margin="10 10 10 10" Foreground="{StaticResource FeedTitleBrush}"
+                            <ToggleSwitch Margin="0 0 0 10" Foreground="{StaticResource FeedTitleBrush}"
                                               Header="缓存" OnContent="清理离线缓存" OffContent="清理离线缓存"
                                               FontSize="{Binding Source={StaticResource ThemeHelper}, Path=Theme.FeedSummary}"
                                               HorizontalAlignment="Stretch"
@@ -70,7 +72,7 @@
                                 </interactivity:Interaction.Behaviors>
                             </ToggleSwitch>
 
-                            <ToggleSwitch Margin="10 10 10 10" Foreground="{StaticResource FeedTitleBrush}"
+                            <ToggleSwitch Margin="0 0 0 10" Foreground="{StaticResource FeedTitleBrush}"
                                               Header="无图模式" OnContent="2G/3G网络不下载图片" OffContent="始终下载图片"
                                               FontSize="{Binding Source={StaticResource ThemeHelper}, Path=Theme.FeedSummary}"
                                               HorizontalAlignment="Stretch"
@@ -78,7 +80,7 @@
                                               Visibility="Visible" />
 
 
-                            <ToggleSwitch Margin="10 10 10 10" Foreground="{StaticResource FeedTitleBrush}"
+                            <ToggleSwitch Margin="0 0 0 10" Foreground="{StaticResource FeedTitleBrush}"
                                               Header="知乎实验室" OnContent="新版首页动态体验" OffContent="旧版首页"
                                               FontSize="{Binding Source={StaticResource ThemeHelper}, Path=Theme.FeedSummary}"
                                               HorizontalAlignment="Stretch"
@@ -91,7 +93,7 @@
                                 </interactivity:Interaction.Behaviors>
                             </ToggleSwitch>
 
-                            <ToggleSwitch Margin="10 10 10 10" Foreground="{StaticResource FeedTitleBrush}"
+                            <ToggleSwitch Margin="0 0 0 10" Foreground="{StaticResource FeedTitleBrush}"
                                           Header="夜间模式" OnContent="已开启" OffContent="已关闭"
                                           FontSize="{Binding Source={StaticResource ThemeHelper}, Path=Theme.FeedSummary}"
                                           HorizontalAlignment="Stretch"
@@ -113,7 +115,7 @@
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="*"/>
                         </Grid.RowDefinitions>
-                        <StackPanel Grid.Row="0" Height="200">
+                        <StackPanel Grid.Row="0" Height="150">
                             <ListView ContainerContentChanging="FeedsView_OnContainerContentChanging" 
                                   SelectionMode="Single"
                                   IsItemClickEnabled="True"
@@ -128,7 +130,7 @@
                             </ListView>
                         </StackPanel>
                         <ScrollViewer Grid.Row="1">
-                            <Grid Margin="10 0 10 20">
+                            <Grid Margin="0 0 0 0">
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="Auto"/>
                                     <RowDefinition Height="Auto"/>
@@ -143,27 +145,24 @@
                                     <ColumnDefinition  Width="45"/>
                                 </Grid.ColumnDefinitions>
 
-                                <Button Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Content="全部重置" HorizontalAlignment="Right" FontSize="{Binding Source={StaticResource ThemeHelper}, Path=Theme.FeedSummary}"
-                                    Tapped="FontSizeReset_OnTapped"/>
-
                                 <Slider Grid.Row="1" Grid.Column="0" Minimum="25" Maximum="50" Header="页面标题" StepFrequency="1" Value="{Binding Source={StaticResource ThemeHelper}, Path=Theme.PageTitle, Mode=TwoWay}"/>
-                                <TextBlock Grid.Row="1" Grid.Column="1" Margin="0 3 0 3" HorizontalAlignment="Center" VerticalAlignment="Center" 
+                                <TextBlock Grid.Row="1" Grid.Column="1" Margin="0 10 0 5" HorizontalAlignment="Center" VerticalAlignment="Center" 
                                        Text="{Binding Source={StaticResource ThemeHelper}, Path=Theme.PageTitle, Mode=TwoWay}"/>
 
                                 <Slider Grid.Row="2" Grid.Column="0" Minimum="17" Maximum="34" Header="动态标题" StepFrequency="1" Value="{Binding Source={StaticResource ThemeHelper}, Path=Theme.FeedTitle, Mode=TwoWay}"/>
-                                <TextBlock Grid.Row="2" Grid.Column="1" Margin="0 3 0 3" HorizontalAlignment="Center" VerticalAlignment="Center" 
+                                <TextBlock Grid.Row="2" Grid.Column="1" Margin="0 0 0 5" HorizontalAlignment="Center" VerticalAlignment="Center" 
                                        Text="{Binding Source={StaticResource ThemeHelper}, Path=Theme.FeedTitle, Mode=TwoWay}"/>
 
                                 <Slider Grid.Row="3" Grid.Column="0" Minimum="14" Maximum="30" Header="动态摘要" StepFrequency="1" Value="{Binding Source={StaticResource ThemeHelper}, Path=Theme.FeedSummary, Mode=TwoWay}"/>
-                                <TextBlock Grid.Row="3" Grid.Column="1" Margin="0 3 0 3" HorizontalAlignment="Center" VerticalAlignment="Center" 
+                                <TextBlock Grid.Row="3" Grid.Column="1" Margin="0 0 0 5" HorizontalAlignment="Center" VerticalAlignment="Center" 
                                        Text="{Binding Source={StaticResource ThemeHelper}, Path=Theme.FeedSummary, Mode=TwoWay}"/>
 
                                 <Slider Grid.Row="5" Grid.Column="0" Minimum="8" Maximum="22" Header="动态谓词" StepFrequency="1" Value="{Binding Source={StaticResource ThemeHelper}, Path=Theme.FeedVerb, Mode=TwoWay}"/>
-                                <TextBlock Grid.Row="5" Grid.Column="1" Margin="0 3 0 3" HorizontalAlignment="Center" VerticalAlignment="Center"
+                                <TextBlock Grid.Row="5" Grid.Column="1" Margin="0 0 0 5" HorizontalAlignment="Center" VerticalAlignment="Center"
                                        Text="{Binding Source={StaticResource ThemeHelper}, Path=Theme.FeedVerb, Mode=TwoWay}"/>
 
                                 <Slider Grid.Row="6" Grid.Column="0" Minimum="6" Maximum="20" Header="投票" StepFrequency="1" Value="{Binding Source={StaticResource ThemeHelper}, Path=Theme.VoteCount, Mode=TwoWay}"/>
-                                <TextBlock Grid.Row="6" Grid.Column="1" Margin="0 3 0 3" HorizontalAlignment="Center" VerticalAlignment="Center"
+                                <TextBlock Grid.Row="6" Grid.Column="1" Margin="0 0 0 0" HorizontalAlignment="Center" VerticalAlignment="Center"
                                        Text="{Binding Source={StaticResource ThemeHelper}, Path=Theme.VoteCount, Mode=TwoWay}"/>
                             </Grid>
                         </ScrollViewer>
@@ -176,34 +175,24 @@
                                 <EntranceThemeTransition/>
                             </TransitionCollection>
                         </Grid.ChildrenTransitions>
-
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="*"/>
                         </Grid.RowDefinitions>
 
-                        <TextBox Grid.Row="0" Margin="10 10 10 10"
+                        <TextBox Grid.Row="0" Margin="0 0 0 0"
                              AcceptsReturn="False"
                              Text="{Binding FeedBackTitle, Mode=TwoWay}" 
                              Header="标题" HeaderTemplate="{StaticResource TextBoxHeader}"
                              PlaceholderText="请输入问题" 
                              VerticalAlignment="Stretch"/>
 
-                        <TextBox Grid.Row="1" Margin="10 0 10 0" Height="300"
+                        <TextBox Grid.Row="1" Margin="0 0 0 0" Height="400"
                              AcceptsReturn="True" TextWrapping="Wrap"
                              Text="{Binding FeedBackContent, Mode=TwoWay}" 
                              Header="描述" HeaderTemplate="{StaticResource TextBoxHeader}"              
                              PlaceholderText="填写问题描述" 
                              VerticalAlignment="Stretch"/>
-
-                        <Button Grid.Row="2" Content="发送" VerticalAlignment="Top" Margin="10 10 0 0">
-                            <interactivity:Interaction.Behaviors>
-                                <core:EventTriggerBehavior EventName="Tapped">
-                                    <core:InvokeCommandAction Command="{Binding Feedback, Mode=OneWay, Source={Binding Source={StaticResource Locator}, Path=About}}"/>
-                                </core:EventTriggerBehavior>
-                            </interactivity:Interaction.Behaviors>
-                        </Button>
                     </Grid>
                 </PivotItem>
             </Pivot.Items>
@@ -213,10 +202,18 @@
                     IsOpen="False" IsSticky="False"
                     Background="{StaticResource AppBarBackBrush}"
                     Foreground="{StaticResource AppBarForeBrush}">
-            <AppBarButton Icon="BlockContact" Label="注销登录">
+            <AppBarButton x:Name="LogOutAppBarButton" Icon="BlockContact" Label="注销登录">
                 <interactivity:Interaction.Behaviors>
                     <core:EventTriggerBehavior EventName="Tapped">
                         <core:InvokeCommandAction Command="{Binding Logout, Source={Binding Source={StaticResource Locator}, Path=Main}}" />
+                    </core:EventTriggerBehavior>
+                </interactivity:Interaction.Behaviors>
+            </AppBarButton>
+            <AppBarButton x:Name="FontsizeResetBarButton" Icon="Redo" Label="全部重置" Tapped="FontSizeReset_OnTapped"/>
+            <AppBarButton x:Name="SentAppBarButton" Icon="Send" Label="发送">
+                <interactivity:Interaction.Behaviors>
+                    <core:EventTriggerBehavior EventName="Tapped">
+                        <core:InvokeCommandAction Command="{Binding Feedback, Mode=OneWay, Source={Binding Source={StaticResource Locator}, Path=About}}"/>
                     </core:EventTriggerBehavior>
                 </interactivity:Interaction.Behaviors>
             </AppBarButton>
