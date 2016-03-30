@@ -16,7 +16,7 @@
               IsItemClickEnabled="False"
               IncrementalLoadingTrigger="Edge"
               IncrementalLoadingThreshold="5"
-              ItemContainerStyle="{StaticResource ListViewItemStyle}"
+              ItemContainerStyle="{StaticResource ArticleStyle}"
               
               SelectionMode="Single"
               

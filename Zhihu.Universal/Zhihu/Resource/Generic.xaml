@@ -191,17 +191,62 @@
                                            PlaceholderBackground="{ThemeResource ListViewItemPlaceholderBackgroundThemeBrush}"
                                            ReorderHintOffset="{ThemeResource ListViewItemReorderHintThemeOffset}" 
                                            SelectionCheckMarkVisualEnabled="False" 
-                                           VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"/>
-                </ControlTemplate>
-            </Setter.Value>
-            <!--PointerOverForeground="{ThemeResource SystemControlHighlightAltBaseHighBrush}"
-            PointerOverBackground="{ThemeResource SystemControlHighlightListLowBrush}"
-            PressedBackground="{ThemeResource SystemControlHighlightListMediumBrush}"
-            SelectedPressedBackground="{ThemeResource SystemControlHighlightListAccentHighBrush}"
+                                           VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
+                                           
+                                           PointerOverForeground="{ThemeResource SystemControlHighlightAltBaseHighBrush}"
+                                           PointerOverBackground="{ThemeResource SystemControlHighlightListLowBrush}"
+                                           PressedBackground="{ThemeResource SystemControlHighlightListMediumBrush}"
+                                           SelectedPressedBackground="{ThemeResource SystemControlHighlightListAccentHighBrush}"
                                            SelectedForeground="{ThemeResource SystemControlHighlightAltBaseHighBrush}"
                                            SelectedPointerOverBackground="{ThemeResource SystemControlHighlightListAccentMediumBrush}" 
-                                           SelectedBackground="{ThemeResource SystemControlHighlightListAccentLowBrush}" 
-                                           -->
+                                           SelectedBackground="{ThemeResource SystemControlHighlightListAccentLowBrush}" />
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="ArticleStyle" TargetType="ListViewItem">
+        <Setter Property="FontFamily" Value="{ThemeResource ContentControlThemeFontFamily}"/>
+        <Setter Property="FontSize" Value="{ThemeResource ControlContentThemeFontSize}"/>
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="Foreground" Value="{ThemeResource SystemControlForegroundBaseHighBrush}"/>
+        <Setter Property="TabNavigation" Value="Local"/>
+        <Setter Property="IsHoldingEnabled" Value="True"/>
+        <Setter Property="Padding" Value="0,0,0,0"/>
+        <Setter Property="HorizontalAlignment" Value="Stretch"/>
+        <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+        <Setter Property="VerticalAlignment" Value="Stretch"/>
+        <Setter Property="VerticalContentAlignment" Value="Top"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ListViewItem">
+                    <ListViewItemPresenter CheckBrush="{ThemeResource SystemControlForegroundBaseMediumHighBrush}" 
+                                           ContentMargin="{TemplateBinding Padding}" 
+                                           CheckMode="Inline" 
+                                           CheckBoxBrush="{ThemeResource SystemControlForegroundBaseMediumHighBrush}" 
+                                           DragForeground="{ThemeResource ListViewItemDragForegroundThemeBrush}"
+                                           DragOpacity="{ThemeResource ListViewItemDragThemeOpacity}"
+                                           DragBackground="{ThemeResource ListViewItemDragBackgroundThemeBrush}"
+                                           DisabledOpacity="{ThemeResource ListViewItemDisabledThemeOpacity}"
+                                           FocusBorderBrush="{ThemeResource SystemControlForegroundAltHighBrush}"
+                                           FocusSecondaryBorderBrush="{ThemeResource SystemControlForegroundBaseHighBrush}" 
+                                           HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                           
+                                           PlaceholderBackground="{ThemeResource ListViewItemPlaceholderBackgroundThemeBrush}"
+                                           ReorderHintOffset="{ThemeResource ListViewItemReorderHintThemeOffset}" 
+                                           SelectionCheckMarkVisualEnabled="False" 
+                                           VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                </ControlTemplate>       
+                                           <!--
+                                           ContentTransitions="{TemplateBinding ContentTransitions}"
+                                           PointerOverForeground="{ThemeResource SystemControlHighlightAltBaseHighBrush}"
+                                           PointerOverBackground="{ThemeResource SystemControlHighlightListLowBrush}"
+                                           PressedBackground="{ThemeResource SystemControlHighlightListMediumBrush}"
+                                           SelectedPressedBackground="{ThemeResource SystemControlHighlightListAccentHighBrush}"
+                                           SelectedForeground="{ThemeResource SystemControlHighlightAltBaseHighBrush}"
+                                           SelectedPointerOverBackground="{ThemeResource SystemControlHighlightListAccentMediumBrush}" 
+                                           SelectedBackground="{ThemeResource SystemControlHighlightListAccentLowBrush}"--> 
+            </Setter.Value>
         </Setter>
     </Style>
 

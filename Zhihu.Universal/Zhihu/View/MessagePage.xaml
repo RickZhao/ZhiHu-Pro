@@ -56,7 +56,7 @@
                   SelectionMode="Single"
                   IsItemClickEnabled="True"
                   ItemsSource="{Binding Source={StaticResource MessageSource}}"
-                  ItemContainerStyle="{StaticResource ListViewItemStyle}"
+                  ItemContainerStyle="{StaticResource ArticleStyle}"
                   IncrementalLoadingThreshold="2"
                   IncrementalLoadingTrigger="Edge">
             <ListView.ItemTemplateSelector>
