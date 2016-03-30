@@ -7,38 +7,10 @@
 
     <ResourceDictionary.MergedDictionaries>
         <helper:RumtimeResourceDictionary RuntimeSource="ms-appx:///Resource/Theme/Brush.xaml"/>
+        <ResourceDictionary Source="/Resource/Converters.xaml"/>
         <ResourceDictionary Source="/Resource/Styles.xaml"/>
+        <ResourceDictionary Source="/Resource/Templates.xaml"/>
     </ResourceDictionary.MergedDictionaries>
-
-    <converter:AnswerItemClickEventArgsConverter x:Name="AnswerItemConverter"/>
-    <converter:AvatarModeConverter x:Name="AvatarConverter"/>
-    <converter:BooleanToVoted x:Name="BooleanToVoted"/>
-    <converter:CountToStringConverter x:Name="CountConverter"/>
-    <converter:CommentItemClickEventArgsConverter x:Name="CommentItemConverter"/>
-    <converter:FavoritedConverter x:Name="FavoritedConverter"/>
-    <converter:FollowingConverter x:Name="FollowingConverter"/>
-    <converter:GenderToImageConverter x:Name="GenderToImageConverter"/>
-    <converter:GetCollectionIdFromBannerConverter x:Name="GetColleIdConverter"/>
-    <converter:HtmlConverter x:Name="HtmlConverter"/>
-    <converter:HtmlImageExtractConverter x:Name="ImageExtractConverter"/>
-    <converter:NullableInt32Converter x:Name="NullableInt32Converter"/>
-    <converter:RelativeTimeConverter x:Name="RelativeTimeConverter"/>
-    <converter:SubStringConverter x:Name="SubStringConverter"/>
-    <converter:StringToVisibleConverter x:Name="StringToVisibleConverter"/>
-    <converter:NoHelpeConverter x:Name="NoHelpConverter"/>
-    <converter:ThankedConverter x:Name="ThankedConverter"/>
-    <converter:CommentsCountConverter x:Name="CommentsCountConverter"/>
-    <converter:VotingToImageConverter x:Name="VotingToImageConverter"/>
-    <converter:RandomColorConverter x:Name="RandomColorConverter"/>
-    <converter:LineHeightConverter x:Name="LineHeightConverter"/>
-    <converter:BannerHeightConverter x:Name="BannerHeightConverter"/>
-    <converter:VoteupCountingConverter x:Name="VoteupCountingConverter"/>
-    <converter:NightModeConverter x:Name="NightModeConverter"/>
-    <converter:BoolToVisiableConverter x:Name="BoolToVisiableConverter"/>
-    <converter:BoolToHighlightConverter x:Name="BoolToHighlightConverter"/>
-    <converter:VotingToHighlightConverter x:Name="VotingToHighlightConverter"/>
-    <converter:UnixTimeStampConverter x:Key="UnixTimeStampConverter"/>
-    <converter:UnixTimeStampFormatConverter x:Key="UnixTimeStampFormatConverter"/>
 
     <Style x:Name="AuthorStyle" TargetType="TextBlock">
         <Setter Property="Foreground" Value="{StaticResource AuthorBrush}"/>
@@ -227,12 +199,6 @@
         <Setter Property="TextWrapping" Value="Wrap"/>
         <Setter Property="HorizontalAlignment" Value="Stretch"/>
     </Style>
-
-    <DataTemplate x:Key="TextBoxHeader">
-        <Border>
-            <TextBlock Text="{Binding}" FontSize="{Binding Source={StaticResource ThemeHelper}, Path=Theme.FeedTitle}" Style="{StaticResource UpLightStyle}"/>
-        </Border>
-    </DataTemplate>
 
     <Style x:Name="HeaderStyle" TargetType="TextBlock">
         <Setter Property="Foreground" Value="{StaticResource SecondForeBrush}"/>

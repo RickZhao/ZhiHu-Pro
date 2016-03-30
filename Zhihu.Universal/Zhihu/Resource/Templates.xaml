@@ -1,0 +1,28 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:itemView="using:Zhihu.Controls.ItemView">
+
+    <DataTemplate x:Key="TextBoxHeader">
+        <Border>
+            <TextBlock Text="{Binding}" FontSize="{Binding Source={StaticResource ThemeHelper}, Path=Theme.FeedTitle}" Style="{StaticResource UpLightStyle}"/>
+        </Border>
+    </DataTemplate>
+
+    <DataTemplate x:Key="FeedItemTemplate">
+        <itemView:FeedView />
+    </DataTemplate>
+
+    <DataTemplate x:Key="PivotHeaderTemplate">
+        <Border>
+            <TextBlock Text="{Binding}" FontSize="18"/>
+        </Border>
+    </DataTemplate>
+
+    <DataTemplate x:Key="PivotBottomHeaderTemplate">
+        <Border>
+            <TextBlock Text="{Binding}" FontSize="24"/>
+        </Border>
+    </DataTemplate>
+
+</ResourceDictionary>

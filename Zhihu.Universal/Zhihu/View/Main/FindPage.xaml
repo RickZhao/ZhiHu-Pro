@@ -1,0 +1,147 @@
+﻿<Page
+    x:Class="Zhihu.View.Main.FindPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Zhihu.View.Main"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
+    xmlns:core="using:Microsoft.Xaml.Interactions.Core"
+    xmlns:refresh="using:PullToRefresh.UWP"
+    mc:Ignorable="d"
+    xmlns:itemView="using:Zhihu.Controls.ItemView"
+    xmlns:controls="using:Zhihu.Controls"
+
+    NavigationCacheMode="Enabled"
+    Background="{StaticResource PageBackBrush}"
+    DataContext="{Binding Path=Main, Mode=OneWay, Source={StaticResource Locator}}">
+
+    <Page.Resources>
+        <CollectionViewSource x:Name="EditorRecommends" Source="{Binding Find.Recommends, Mode=OneWay}"/>
+        <CollectionViewSource x:Name="HotAnswers" Source="{Binding Find.HotAnswers, Mode=OneWay}"/>
+        <CollectionViewSource x:Name="HotCollections" Source="{Binding Find.Collections, Mode=OneWay}"/>
+
+        <DataTemplate x:Key="BannerHeader">
+            <Grid HorizontalAlignment="Stretch" Height="{Binding ElementName=ContainerPivot, Path=ActualWidth, Mode=TwoWay, Converter={StaticResource BannerHeightConverter}}">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <FlipView x:Name="BannerFlipView" Grid.Row="0" Grid.RowSpan="2" HorizontalAlignment="Stretch" VerticalAlignment="Top"
+                          ItemsSource="{Binding Find.Banner.Normal}">
+                    <FlipView.ItemTemplate>
+                        <DataTemplate>
+                            <Image Source="{Binding ImageUrl}" Stretch="Uniform" HorizontalAlignment="Left" VerticalAlignment="Top"
+                                   Tapped="BannerItem_Tapped"/>
+                        </DataTemplate>
+                    </FlipView.ItemTemplate>
+                </FlipView>
+                <controls:FlipViewIndicator Grid.Row="1" Margin="0 0 10 10" HorizontalAlignment="Right" VerticalAlignment="Bottom"
+                                            FlipView="{Binding ElementName=BannerFlipView}"/>
+            </Grid>
+        </DataTemplate>
+
+    </Page.Resources>
+    
+    <Pivot Grid.Row="1" FontSize="14" HeaderTemplate="{StaticResource PivotHeaderTemplate}"
+           Style="{StaticResource PivotNormalStyle}">
+        <Pivot.Items>
+            <PivotItem Header="推荐" Margin="0">
+                <Grid x:Name="ContainerPivot" HorizontalAlignment="Stretch">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <ProgressBar Grid.Row="0"
+                                 IsIndeterminate="{Binding Find.RecommendsLoading}"
+                                 Background="{StaticResource ProgressBackBrush}" 
+                                 Foreground="{StaticResource ProgressForeBrush}"/>
+
+                    <refresh:PullToRefreshBox Grid.Row="1">
+                        <interactivity:Interaction.Behaviors>
+                            <core:EventTriggerBehavior EventName="RefreshInvoked">
+                                <core:InvokeCommandAction Command="{Binding Find.RefreshRecommends, Mode=OneWay}"/>
+                            </core:EventTriggerBehavior>
+                        </interactivity:Interaction.Behaviors>
+                        <ListView SelectionMode="Single"
+                                  IsItemClickEnabled="True"
+                                  ContainerContentChanging="Recommend_OnContainerContentChanging"
+                                  IncrementalLoadingThreshold="2" IncrementalLoadingTrigger="Edge"
+                                  HeaderTemplate="{StaticResource BannerHeader}"
+                                  ItemsSource="{Binding Source={StaticResource EditorRecommends}}"
+                                  ItemContainerStyle="{StaticResource ListViewItemStyle}">
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <itemView:EditorRecommendView />
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
+                    </refresh:PullToRefreshBox>
+                </Grid>
+            </PivotItem>
+            <PivotItem Header="热门" Margin="0">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <ProgressBar Grid.Row="0"
+                                 Background="{StaticResource ProgressBackBrush}"
+                                 Foreground="{StaticResource ProgressForeBrush}" 
+                                 IsIndeterminate="{Binding Find.AnswersLoading}"/>
+
+                    <refresh:PullToRefreshBox Grid.Row="1">
+                        <interactivity:Interaction.Behaviors>
+                            <core:EventTriggerBehavior EventName="RefreshInvoked">
+                                <core:InvokeCommandAction Command="{Binding Find.RefreshHotAnswers, Mode=OneWay}"/>
+                            </core:EventTriggerBehavior>
+                        </interactivity:Interaction.Behaviors>
+                        <ListView SelectionMode="Single" IsItemClickEnabled="True"
+                                  IncrementalLoadingThreshold="2" IncrementalLoadingTrigger="Edge"
+                                  ContainerContentChanging="HotAnswer_OnContainerContentChanging"
+                                  ItemsSource="{Binding Source={StaticResource HotAnswers}}"
+                                  ItemContainerStyle="{StaticResource ListViewItemStyle}">
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <itemView:AnswerActivityView />
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
+                    </refresh:PullToRefreshBox>
+                </Grid>
+            </PivotItem>
+            <PivotItem Header="收藏" Margin="0">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <ProgressBar Grid.Row="0" IsIndeterminate="{Binding Find.CollectionLoading}"
+                                 Background="{StaticResource ProgressBackBrush}" 
+                                 Foreground="{StaticResource ProgressForeBrush}"/>
+
+                    <refresh:PullToRefreshBox Grid.Row="1">
+                        <interactivity:Interaction.Behaviors>
+                            <core:EventTriggerBehavior EventName="RefreshInvoked">
+                                <core:InvokeCommandAction Command="{Binding Find.RefreshCollections, Mode=OneWay}"/>
+                            </core:EventTriggerBehavior>
+                        </interactivity:Interaction.Behaviors>
+                        <ListView SelectionMode="Single" IsItemClickEnabled="True"
+                                  IncrementalLoadingThreshold="2" IncrementalLoadingTrigger="Edge"
+                                  ContainerContentChanging="HotCollection_OnContainerContentChanging"
+                                  ItemsSource="{Binding Source={StaticResource HotCollections}}"
+                                  ItemContainerStyle="{StaticResource ListViewItemStyle}" >
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <itemView:HotCollectionView />
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
+                    </refresh:PullToRefreshBox>
+                </Grid>
+            </PivotItem>
+        </Pivot.Items>
+    </Pivot>
+</Page>
+
+    

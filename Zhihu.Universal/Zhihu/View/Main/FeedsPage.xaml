@@ -1,0 +1,48 @@
+﻿<Page
+    x:Class="Zhihu.View.Main.FeedsPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Zhihu.View.Main"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
+    xmlns:core="using:Microsoft.Xaml.Interactions.Core"
+    xmlns:refresh="using:PullToRefresh.UWP"
+    mc:Ignorable="d"
+    xmlns:itemView="using:Zhihu.Controls.ItemView"
+    
+    NavigationCacheMode="Enabled"
+    Background="{StaticResource PageBackBrush}"
+    DataContext="{Binding Path=Main, Mode=OneWay, Source={StaticResource Locator}}">
+
+    <Page.Resources>
+        <CollectionViewSource x:Name="FeedsSource" Source="{Binding Feeds.Feeds, Mode=OneWay}"/>
+    </Page.Resources>
+    
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <ProgressBar Grid.Row="1" Background="{StaticResource ProgressBackBrush}" Foreground="{StaticResource ProgressForeBrush}" IsIndeterminate="{Binding Feeds.FeedsLoading}"/>
+
+        <refresh:PullToRefreshBox Grid.Row="2">
+            <interactivity:Interaction.Behaviors>
+                <core:EventTriggerBehavior EventName="RefreshInvoked">
+                    <core:InvokeCommandAction Command="{Binding Feeds.Refresh, Mode=OneWay}"/>
+                </core:EventTriggerBehavior>
+            </interactivity:Interaction.Behaviors>
+            <ListView x:Name="FeedsView"
+                                  IsItemClickEnabled="True"
+                                  IncrementalLoadingThreshold="2"
+                                  IncrementalLoadingTrigger="Edge" 
+                                  ItemTemplate="{StaticResource FeedItemTemplate}"
+                                  ItemContainerStyle="{StaticResource ListViewItemStyle}"
+                                  ItemsSource="{Binding Source={StaticResource FeedsSource}}"
+                                  SelectionMode="Single"
+                                  ContainerContentChanging="FeedsView_OnContainerContentChanging"/>
+        </refresh:PullToRefreshBox>
+    </Grid>
+</Page>
