@@ -184,11 +184,6 @@ namespace Zhihu.ViewModel
             }
         }
 
-        private void SwitchOpenLinkWithEdge()
-        {
-            OpenLinkWithEdge = !OpenLinkWithEdge;
-        }
-
         private void NavToCustomFontSizeMethod()
         {
             //AppShellPage.AppFrame.Navigate(typeof(FontSizePage));

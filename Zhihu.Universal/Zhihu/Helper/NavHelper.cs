@@ -7,7 +7,7 @@ using Windows.UI.Xaml.Controls;
 using Microsoft.Practices.ServiceLocation;
 
 using GalaSoft.MvvmLight.Messaging;
-
+using Zhihu.Common.Helper;
 using Zhihu.View;
 using Zhihu.View.Answer;
 using Zhihu.View.Article;
@@ -22,7 +22,23 @@ namespace Zhihu.Helper
 {
     public sealed class NavHelper
     {
-        public static Boolean OpenLinkWithEdge = false;
+        private static Boolean _openLinkWithEdge;
+        public static Boolean OpenLinkWithEdge
+        {
+            get
+            {
+                Boolean.TryParse(LocalSettingUtility.Instance.Read<String>("OpenLinkWithEdge"), out _openLinkWithEdge);
+
+                return _openLinkWithEdge;
+            }
+            set
+            {
+                _openLinkWithEdge = value;
+
+                LocalSettingUtility.Instance.Add("OpenLinkWithEdge", value.ToString());
+            }
+        }
+        
         private const String TableTag = "www.zhihu.com/roundtable/";
         private const String ColumnTag = "zhuanlan.zhihu.com/";
         private const String PeopleTag = "www.zhihu.com/people/";
