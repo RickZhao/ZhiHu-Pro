@@ -22,9 +22,10 @@
         <CollectionViewSource x:Name="HotCollections" Source="{Binding Find.Collections, Mode=OneWay}"/>
 
         <DataTemplate x:Key="BannerHeader">
-            <Grid HorizontalAlignment="Stretch" Height="{Binding ElementName=ContainerPivot, Path=ActualWidth, Mode=TwoWay, Converter={StaticResource BannerHeightConverter}}">
+            <!--{Binding ElementName=this, Path=ActualWidth, Mode=TwoWay, Converter={StaticResource BannerHeightConverter}}-->
+            <Grid HorizontalAlignment="Stretch" Height="184">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
                 <FlipView x:Name="BannerFlipView" Grid.Row="0" Grid.RowSpan="2" HorizontalAlignment="Stretch" VerticalAlignment="Top"
@@ -42,7 +43,13 @@
         </DataTemplate>
 
     </Page.Resources>
-    
+
+    <interactivity:Interaction.Behaviors>
+        <core:EventTriggerBehavior EventName="Loaded">
+            <core:InvokeCommandAction Command="{Binding Find.GetBanner, Mode=OneWay}"/>
+        </core:EventTriggerBehavior>
+    </interactivity:Interaction.Behaviors>
+
     <Pivot Grid.Row="1" FontSize="14" HeaderTemplate="{StaticResource PivotHeaderTemplate}"
            Style="{StaticResource PivotNormalStyle}">
         <Pivot.Items>

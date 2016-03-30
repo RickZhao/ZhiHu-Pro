@@ -20,7 +20,13 @@
         <CollectionViewSource x:Name="LikesSource" Source="{Binding Notify.Likes}"/>
         <CollectionViewSource x:Name="ChatsSource" Source="{Binding Notify.Chats}"/>
     </Page.Resources>
-    
+
+    <interactivity:Interaction.Behaviors>
+        <core:EventTriggerBehavior EventName="Loaded">
+            <core:InvokeCommandAction Command="{Binding Notify.CheckUnreadFollows, Mode=OneWay}"/>
+        </core:EventTriggerBehavior>
+    </interactivity:Interaction.Behaviors>
+
     <Pivot Grid.Row="1" FontSize="14"
            HeaderTemplate="{StaticResource PivotHeaderTemplate}"
            Style="{StaticResource PivotNormalStyle}">

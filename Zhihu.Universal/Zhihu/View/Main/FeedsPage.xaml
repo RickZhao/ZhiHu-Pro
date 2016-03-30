@@ -18,7 +18,13 @@
     <Page.Resources>
         <CollectionViewSource x:Name="FeedsSource" Source="{Binding Feeds.Feeds, Mode=OneWay}"/>
     </Page.Resources>
-    
+
+    <interactivity:Interaction.Behaviors>
+        <core:EventTriggerBehavior EventName="Loaded">
+            <core:InvokeCommandAction Command="{Binding Feeds.Load, Mode=OneWay}"/>
+        </core:EventTriggerBehavior>
+    </interactivity:Interaction.Behaviors>
+
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="0"/>

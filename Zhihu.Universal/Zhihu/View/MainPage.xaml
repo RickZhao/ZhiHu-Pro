@@ -55,7 +55,7 @@
 
             <core:InvokeCommandAction Command="{Binding Find.GetBanner, Mode=OneWay}"/>
 
-            <core:InvokeCommandAction Command="{Binding Notify.CheckFollows, Mode=OneWay}"/>
+            <core:InvokeCommandAction Command="{Binding Notify.CheckUnreadFollows, Mode=OneWay}"/>
         </core:EventTriggerBehavior>
     </interactivity:Interaction.Behaviors>
 
