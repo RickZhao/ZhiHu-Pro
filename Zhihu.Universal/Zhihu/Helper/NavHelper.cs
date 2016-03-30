@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
-
+using Windows.System;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
@@ -22,6 +22,7 @@ namespace Zhihu.Helper
 {
     public sealed class NavHelper
     {
+        public static Boolean OpenLinkWithEdge = false;
         private const String TableTag = "www.zhihu.com/roundtable/";
         private const String ColumnTag = "zhuanlan.zhihu.com/";
         private const String PeopleTag = "www.zhihu.com/people/";
@@ -157,14 +158,8 @@ namespace Zhihu.Helper
             navigate?.Navigate(typeof(MessagePage));
         }
 
-        private static void ProcessInnerHtml(String hyperLinkUrl, Frame detailFrame)
+        private static async void ProcessInnerHtml(String hyperLinkUrl, Frame detailFrame)
         {
-            if (hyperLinkUrl.Contains("zhihu.com") == false)
-            {
-                NavToWebViewPage(hyperLinkUrl, AppShellPage.AppFrame);
-
-                return;
-            }
 
             if (hyperLinkUrl.Contains(PeopleTag))
             {
@@ -273,7 +268,15 @@ namespace Zhihu.Helper
             }
             else
             {
-                NavToWebViewPage(hyperLinkUrl, AppShellPage.AppFrame);
+                if (OpenLinkWithEdge)
+                {
+                    var uri = new Uri(hyperLinkUrl);
+                    await Launcher.LaunchUriAsync(uri);
+                }
+                else
+                {
+                    NavToWebViewPage(hyperLinkUrl, AppShellPage.AppFrame);
+                }
             }
         }
     }
