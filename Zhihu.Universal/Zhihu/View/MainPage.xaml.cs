@@ -100,13 +100,6 @@ namespace Zhihu.View
             return navFrame;
         }
 
-        private async void ToggleSwitch_OnToggled(object sender, RoutedEventArgs arg)
-        {
-            await Task.Delay(50);
-
-            Theme.Instance.UpdateRequestedTheme(this);
-        }
-
         private void FeedsGoToTop_Tapped(object sender, TappedRoutedEventArgs e)
         {
             //var firstFeed = FeedsView.Items.FirstOrDefault();
