@@ -211,6 +211,7 @@
     <Style x:Key="FlyoutPresenterStyle" TargetType="FlyoutPresenter">
         <Setter Property="ScrollViewer.ZoomMode" Value="Enabled"/>
         <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="BorderThickness" Value="0 0 0 0"/>
         <Setter Property="MinHeight" Value="300"/>
         <Setter Property="MinWidth" Value="300"/>
     </Style>
