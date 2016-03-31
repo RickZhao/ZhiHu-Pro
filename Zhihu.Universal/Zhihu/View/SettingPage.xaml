@@ -38,12 +38,11 @@
                     <ScrollViewer VerticalScrollMode="Auto" HorizontalScrollMode="Disabled" ZoomMode="Disabled"
                                   VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
                         <StackPanel Orientation="Vertical">
-                            <ToggleSwitch Margin="0 0 0 10" Foreground="{StaticResource FeedTitleBrush}"
-                                              Header="状态栏" OnContent="显示" OffContent="关闭"
-                                              FontSize="{Binding Source={StaticResource ThemeHelper}, Path=Theme.FeedSummary}"
-                                              HorizontalAlignment="Stretch"
-                                              IsOn="{Binding Path=Theme.StatusBarIsOpen, Mode=TwoWay, Source={StaticResource ThemeHelper}}"
-                                              Visibility="Visible">
+                            <ToggleSwitch Margin="0 0 0 10" HorizontalAlignment="Stretch"
+                                          Header="状态栏" OnContent="显示" OffContent="关闭"
+                                          Foreground="{StaticResource FeedTitleBrush}" HeaderTemplate="{StaticResource ToggleSwitchHeader}"
+                                          FontSize="{Binding Source={StaticResource ThemeHelper}, Path=Theme.FeedSummary}"
+                                          IsOn="{Binding Path=Theme.StatusBarIsOpen, Mode=TwoWay, Source={StaticResource ThemeHelper}}">
                                 <interactivity:Interaction.Behaviors>
                                     <core:EventTriggerBehavior EventName="Toggled">
                                         <core:InvokeCommandAction Command="{Binding SwitchStatusBar, Mode=OneWay}" />
@@ -51,20 +50,19 @@
                                 </interactivity:Interaction.Behaviors>
                             </ToggleSwitch>
 
-                            <ToggleSwitch Margin="0 0 0 10" Foreground="{StaticResource FeedTitleBrush}"
-                                              Header="文本选项" OnContent="允许选择" OffContent="不允许选择"
-                                              FontSize="{Binding Source={StaticResource ThemeHelper}, Path=Theme.FeedSummary}"
-                                              HorizontalAlignment="Stretch"
-                                              IsOn="{Binding Path=Theme.TextSelectionEnable, Mode=TwoWay, Source={StaticResource ThemeHelper}}"
-                                              Visibility="Visible">
+                            <ToggleSwitch Margin="0 0 0 10" HorizontalAlignment="Stretch"
+                                          Header="文本选项" OnContent="允许选择" OffContent="不允许选择"
+                                          Foreground="{StaticResource FeedTitleBrush}"
+                                          HeaderTemplate="{StaticResource ToggleSwitchHeader}"
+                                          FontSize="{Binding Source={StaticResource ThemeHelper}, Path=Theme.FeedSummary}"
+                                          IsOn="{Binding Path=Theme.TextSelectionEnable, Mode=TwoWay, Source={StaticResource ThemeHelper}}">
                             </ToggleSwitch>
 
-                            <ToggleSwitch Margin="0 0 0 10" Foreground="{StaticResource FeedTitleBrush}"
-                                              Header="缓存" OnContent="清理离线缓存" OffContent="清理离线缓存"
-                                              FontSize="{Binding Source={StaticResource ThemeHelper}, Path=Theme.FeedSummary}"
-                                              HorizontalAlignment="Stretch"
-                                              IsOn="False"
-                                              Visibility="Visible">
+                            <ToggleSwitch Margin="0 0 0 10" HorizontalAlignment="Stretch" IsOn="False"
+                                          Header="缓存" OnContent="清理离线缓存" OffContent="清理离线缓存"
+                                          Foreground="{StaticResource FeedTitleBrush}"
+                                          HeaderTemplate="{StaticResource ToggleSwitchHeader}"
+                                          FontSize="{Binding Source={StaticResource ThemeHelper}, Path=Theme.FeedSummary}">
                                 <interactivity:Interaction.Behaviors>
                                     <core:EventTriggerBehavior EventName="Toggled">
                                         <core:InvokeCommandAction Command="{Binding ClearCache, Mode=OneWay}" />
@@ -72,30 +70,28 @@
                                 </interactivity:Interaction.Behaviors>
                             </ToggleSwitch>
 
-                            <ToggleSwitch Margin="0 0 0 10" Foreground="{StaticResource FeedTitleBrush}"
-                                              Header="无图模式" OnContent="2G/3G网络不下载图片" OffContent="始终下载图片"
-                                              FontSize="{Binding Source={StaticResource ThemeHelper}, Path=Theme.FeedSummary}"
-                                              HorizontalAlignment="Stretch"
-                                              IsOn="{Binding Path=Theme.NoImage, Mode=TwoWay, Source={StaticResource ThemeHelper}}"
-                                              Visibility="Visible" />
+                            <ToggleSwitch Margin="0 0 0 10" HorizontalAlignment="Stretch"
+                                          Header="无图模式" OnContent="2G/3G网络不下载图片" OffContent="始终下载图片" 
+                                          Foreground="{StaticResource FeedTitleBrush}"
+                                          HeaderTemplate="{StaticResource ToggleSwitchHeader}"
+                                          FontSize="{Binding Source={StaticResource ThemeHelper}, Path=Theme.FeedSummary}"
+                                          IsOn="{Binding Path=Theme.NoImage, Mode=TwoWay, Source={StaticResource ThemeHelper}}"/>
 
-                            <ToggleSwitch Margin="0 0 0 10" Foreground="{StaticResource FeedTitleBrush}"
-                                              Header="用 Edge 打开外链" 
-                                              OnContent="您现在所有非知乎链接会通过 edge 打开。" 
-                                              OffContent="您现在所有非知乎链接会通过内置浏览器打开，保证您的浏览一体性。"
-                                              FontSize="{Binding Source={StaticResource ThemeHelper}, Path=Theme.FeedSummary}"
-                                              HorizontalAlignment="Stretch"
-                                              IsOn="{Binding OpenLinkWithEdge}"
-                                              Visibility="Visible"
-                                              Toggled="ToggleSwitch_OnToggled">
+                            <ToggleSwitch Margin="0 0 0 10" HorizontalAlignment="Stretch"
+                                          Header="用 Edge 打开外链" OnContent="跳转到 Edge 打开" OffContent="使用内置浏览器打开"
+                                          Foreground="{StaticResource FeedTitleBrush}" 
+                                          HeaderTemplate="{StaticResource ToggleSwitchHeader}"
+                                          FontSize="{Binding Source={StaticResource ThemeHelper}, Path=Theme.FeedSummary}"
+                                          IsOn="{Binding OpenLinkWithEdge}"
+                                          Toggled="ToggleSwitch_OnToggled">
                             </ToggleSwitch>
 
-                            <ToggleSwitch Margin="0 0 0 10" Foreground="{StaticResource FeedTitleBrush}"
-                                              Header="知乎实验室" OnContent="新版首页动态体验" OffContent="旧版首页"
-                                              FontSize="{Binding Source={StaticResource ThemeHelper}, Path=Theme.FeedSummary}"
-                                              HorizontalAlignment="Stretch"
-                                              IsOn="{Binding TopStoryEnable}"
-                                              Visibility="Visible">
+                            <ToggleSwitch Margin="0 0 0 10" HorizontalAlignment="Stretch"
+                                          Header="知乎实验室" OnContent="新版首页动态体验" OffContent="旧版首页" 
+                                          Foreground="{StaticResource FeedTitleBrush}"
+                                          HeaderTemplate="{StaticResource ToggleSwitchHeader}"
+                                          FontSize="{Binding Source={StaticResource ThemeHelper}, Path=Theme.FeedSummary}"
+                                          IsOn="{Binding TopStoryEnable}">
                                 <interactivity:Interaction.Behaviors>
                                     <core:EventTriggerBehavior EventName="Toggled">
                                         <core:InvokeCommandAction Command="{Binding SwitchTopStory, Mode=OneWay}" />
@@ -103,12 +99,12 @@
                                 </interactivity:Interaction.Behaviors>
                             </ToggleSwitch>
 
-                            <ToggleSwitch Margin="0 0 0 10" Foreground="{StaticResource FeedTitleBrush}"
+                            <ToggleSwitch Margin="0 0 0 10" HorizontalAlignment="Stretch" 
                                           Header="夜间模式" OnContent="已开启" OffContent="已关闭"
+                                          Foreground="{StaticResource FeedTitleBrush}"
+                                          HeaderTemplate="{StaticResource ToggleSwitchHeader}"
                                           FontSize="{Binding Source={StaticResource ThemeHelper}, Path=Theme.FeedSummary}"
-                                          HorizontalAlignment="Stretch"
                                           IsOn="{Binding NightModeOn, Source={Binding Main, Source={StaticResource Locator}}}"
-                                          Visibility="Visible"
                                           Toggled="BlackThemeToggleSwitch_Toggled">
                                 <interactivity:Interaction.Behaviors>
                                     <core:EventTriggerBehavior EventName="Toggled">

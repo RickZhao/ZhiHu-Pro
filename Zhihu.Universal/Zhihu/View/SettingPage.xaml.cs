@@ -1,4 +1,5 @@
-﻿using Windows.Foundation;
+﻿using System.Threading.Tasks;
+using Windows.Foundation;
 using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -133,8 +134,9 @@ namespace Zhihu.View
             Theme.Instance.ResetFontSize();
         }
 
-        private void BlackThemeToggleSwitch_Toggled(object sender, RoutedEventArgs e)
+        private async void BlackThemeToggleSwitch_Toggled(object sender, RoutedEventArgs e)
         {
+            await Task.Delay(50);
             Theme.Instance.UpdateRequestedTheme(this);
         }
 

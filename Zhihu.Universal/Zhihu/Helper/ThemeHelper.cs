@@ -768,14 +768,7 @@ namespace Zhihu.Helper
         {
             if (page == null) return;
 
-            if (IsBlackOn == false)
-            {
-                page.RequestedTheme = ElementTheme.Light;
-            }
-            else
-            {
-                page.RequestedTheme = ElementTheme.Dark;
-            }
+            page.RequestedTheme = IsBlackOn == false ? ElementTheme.Light : ElementTheme.Dark;
         }
 
         public void UpdateIsBlack()

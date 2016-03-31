@@ -1,13 +1,13 @@
 ﻿{
   "dependencies": {
     "Google.ProtocolBuffersLite": "2.4.1.555",
-    "Microsoft.ApplicationInsights": "1.2.3",
+    "Microsoft.ApplicationInsights": "2.0.1",
     "Microsoft.ApplicationInsights.PersistenceChannel": "1.2.3",
     "Microsoft.ApplicationInsights.WindowsApps": "1.1.1",
     "Microsoft.NETCore.UniversalWindowsPlatform": "5.0.0",
     "MvvmLightLibs": "5.2.0",
-    "Newtonsoft.Json": "8.0.2",
-    "pulltorefresh.uwp": "0.3.3",
+    "Newtonsoft.Json": "8.0.3",
+    "pulltorefresh.uwp": "0.3.4",
     "SQLite.Net-PCL": "3.1.1",
     "UmengAnalytics": "3.1.0",
     "wechatsdk": "2.0.1"

@@ -5,7 +5,8 @@
 
     <DataTemplate x:Key="TextBoxHeader">
         <Border>
-            <TextBlock Text="{Binding}" FontSize="{Binding Source={StaticResource ThemeHelper}, Path=Theme.FeedTitle}" Style="{StaticResource UpLightStyle}"/>
+            <TextBlock Text="{Binding}" FontSize="{Binding Source={StaticResource ThemeHelper}, Path=Theme.FeedTitle}" 
+                       Style="{StaticResource UpLightStyle}"/>
         </Border>
     </DataTemplate>
 
@@ -15,14 +16,18 @@
 
     <DataTemplate x:Key="PivotHeaderTemplate">
         <Border>
-            <TextBlock Text="{Binding}" FontSize="18"/>
+            <TextBlock Text="{Binding}" FontSize="18" Foreground="{StaticResource FeedTitleBrush}"/>
         </Border>
     </DataTemplate>
 
     <DataTemplate x:Key="PivotBottomHeaderTemplate">
         <Border>
-            <TextBlock Text="{Binding}" FontSize="24"/>
+            <TextBlock Text="{Binding}" FontSize="24" Foreground="{StaticResource FeedTitleBrush}"/>
         </Border>
     </DataTemplate>
 
+    <DataTemplate x:Key="ToggleSwitchHeader">
+        <TextBlock Text="{Binding}" FontSize="{Binding Source={StaticResource ThemeHelper}, Path=Theme.FeedSummary}"
+                   Foreground="{StaticResource FeedTitleBrush}"/>
+    </DataTemplate>
 </ResourceDictionary>
