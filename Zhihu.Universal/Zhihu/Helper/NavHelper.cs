@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Diagnostics;
-
+using Windows.System;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
 using Microsoft.Practices.ServiceLocation;
 
 using GalaSoft.MvvmLight.Messaging;
-
+using Zhihu.Common.Helper;
 using Zhihu.View;
 using Zhihu.View.Answer;
 using Zhihu.View.Article;
@@ -22,6 +22,23 @@ namespace Zhihu.Helper
 {
     public sealed class NavHelper
     {
+        private static Boolean _openLinkWithEdge;
+        public static Boolean OpenLinkWithEdge
+        {
+            get
+            {
+                Boolean.TryParse(LocalSettingUtility.Instance.Read<String>("OpenLinkWithEdge"), out _openLinkWithEdge);
+
+                return _openLinkWithEdge;
+            }
+            set
+            {
+                _openLinkWithEdge = value;
+
+                LocalSettingUtility.Instance.Add("OpenLinkWithEdge", value.ToString());
+            }
+        }
+        
         private const String TableTag = "www.zhihu.com/roundtable/";
         private const String ColumnTag = "zhuanlan.zhihu.com/";
         private const String PeopleTag = "www.zhihu.com/people/";
@@ -157,14 +174,8 @@ namespace Zhihu.Helper
             navigate?.Navigate(typeof(MessagePage));
         }
 
-        private static void ProcessInnerHtml(String hyperLinkUrl, Frame detailFrame)
+        private static async void ProcessInnerHtml(String hyperLinkUrl, Frame detailFrame)
         {
-            if (hyperLinkUrl.Contains("zhihu.com") == false)
-            {
-                NavToWebViewPage(hyperLinkUrl, AppShellPage.AppFrame);
-
-                return;
-            }
 
             if (hyperLinkUrl.Contains(PeopleTag))
             {
@@ -273,7 +284,15 @@ namespace Zhihu.Helper
             }
             else
             {
-                NavToWebViewPage(hyperLinkUrl, AppShellPage.AppFrame);
+                if (OpenLinkWithEdge)
+                {
+                    var uri = new Uri(hyperLinkUrl);
+                    await Launcher.LaunchUriAsync(uri);
+                }
+                else
+                {
+                    NavToWebViewPage(hyperLinkUrl, AppShellPage.AppFrame);
+                }
             }
         }
     }

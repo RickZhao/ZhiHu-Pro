@@ -79,6 +79,16 @@
                                               IsOn="{Binding Path=Theme.NoImage, Mode=TwoWay, Source={StaticResource ThemeHelper}}"
                                               Visibility="Visible" />
 
+                            <ToggleSwitch Margin="0 0 0 10" Foreground="{StaticResource FeedTitleBrush}"
+                                              Header="用 Edge 打开外链" 
+                                              OnContent="您现在所有非知乎链接会通过 edge 打开。" 
+                                              OffContent="您现在所有非知乎链接会通过内置浏览器打开，保证您的浏览一体性。"
+                                              FontSize="{Binding Source={StaticResource ThemeHelper}, Path=Theme.FeedSummary}"
+                                              HorizontalAlignment="Stretch"
+                                              IsOn="{Binding OpenLinkWithEdge}"
+                                              Visibility="Visible"
+                                              Toggled="ToggleSwitch_OnToggled">
+                            </ToggleSwitch>
 
                             <ToggleSwitch Margin="0 0 0 10" Foreground="{StaticResource FeedTitleBrush}"
                                               Header="知乎实验室" OnContent="新版首页动态体验" OffContent="旧版首页"
