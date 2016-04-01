@@ -15,7 +15,7 @@ namespace Zhihu.Common.Helper
             },
             new VerbModel()
             {
-                Verbs = new List<String>() { "ARTICLE_PUBLISH", },
+                Verbs = new List<String>() { "ARTICLE_PUBLISH", "ARTICLE_CREATE" },
                 Display = "发表了文章",
             },
             new VerbModel()
