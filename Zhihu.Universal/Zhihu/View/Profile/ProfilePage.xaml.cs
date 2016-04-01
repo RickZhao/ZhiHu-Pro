@@ -142,5 +142,10 @@ namespace Zhihu.View.Profile
         {
             //NavHelper.ProcessInnerHtml(SimpleIoc.Default.GetInstance<ProfileViewModel>().Profile.SinaWeiboName);
         }
+
+        private void NavToMessage_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            NavHelper.NavToMessagePage(_profileId, this.Frame);
+        }
     }
 }

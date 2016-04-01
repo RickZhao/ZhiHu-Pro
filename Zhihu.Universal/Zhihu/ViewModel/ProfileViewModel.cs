@@ -528,7 +528,6 @@ namespace Zhihu.ViewModel
         public RelayCommand CheckFollowing { get; private set; }
         public RelayCommand FollowUnFollow { get; private set; }
         
-        public RelayCommand NavToMessagePage { get; private set; }
         public RelayCommand<Int32> NavToTopic { get; private set; }
         public RelayCommand<String> NavToQqWeibo { get; private set; }
         
@@ -547,7 +546,6 @@ namespace Zhihu.ViewModel
             FollowUnFollow = new RelayCommand(FollowUnFollowMethod);
 
             NavToTopic = new RelayCommand<Int32>(NavToTopicMethod);
-            NavToMessagePage = new RelayCommand(NavToMessagePageMethod);
 
             NavToQqWeibo = new RelayCommand<String>(NavToQqWeiboMethod);
         }
@@ -889,12 +887,7 @@ namespace Zhihu.ViewModel
         {
             //VmNavHelper.NavToTopicPage(topicId, _navigate);
         }
-        
-
-        private void NavToMessagePageMethod()
-        {
-            //if (_navigate != null) VmNavHelper.NavToMessagePage(_userId, _navigate);
-        }
+                
         
         private void NavToQqWeiboMethod(String qqWeibo)
         {
