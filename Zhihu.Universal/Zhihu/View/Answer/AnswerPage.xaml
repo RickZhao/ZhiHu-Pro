@@ -268,7 +268,7 @@
                     HorizontalAlignment="Stretch" 
                     HorizontalContentAlignment="Stretch">
             <!-- lower voting button -->
-            <AppBarButton HorizontalAlignment="Left" Flyout="{StaticResource VoteFlyout}">
+            <AppBarButton Flyout="{StaticResource VoteFlyout}" Visibility="{Binding Path=Theme.LowerVotingButtonVisiblity, Source={StaticResource ThemeHelper}}">
                 <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto"/>
@@ -316,7 +316,8 @@
                           Tapped="ShowComments_OnTapped"/>
 
             <CommandBar.SecondaryCommands>
-                <AppBarButton Icon="Globe" Label="分享至微信">
+                <AppBarButton Label="投票" Flyout="{StaticResource VoteFlyout}" Visibility="{Binding Path=Theme.LowerVotingButtonSecondaryVisiblity, Source={StaticResource ThemeHelper}}"/>
+                    <AppBarButton Icon="Globe" Label="分享至微信">
                     <interactivity:Interaction.Behaviors>
                         <core:EventTriggerBehavior EventName="Tapped">
                             <core:InvokeCommandAction Command="{Binding ShareViaWeChat, Mode=OneWay}"/>

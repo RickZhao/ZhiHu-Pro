@@ -960,19 +960,15 @@ namespace Zhihu.Helper
             { 
                 return LowerVotingButtonVisiable ? "Visible" : "Collapsed";
             }
-            set
+        }
+        public String LowerVotingButtonSecondaryVisiblity
+        {
+            get
             {
-                if (value == "Visible")
-                    LowerVotingButtonVisiable = true;
-                else if (value == "Collapsed")
-                    LowerVotingButtonVisiable = false;
-                else
-                    Debug.WriteLine(
-                        "invalid value for LowerVotingButtonVisiblity, it can only be 'Visible' or 'Collapsed'.");
-
+                return LowerVotingButtonVisiable ? "Collapsed" : "Visible";
             }
         }
-#endregion
+        #endregion
 
     }
 }
