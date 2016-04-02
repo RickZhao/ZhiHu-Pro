@@ -267,7 +267,29 @@
                     Foreground="{StaticResource AppBarForeBrush}"
                     HorizontalAlignment="Stretch" 
                     HorizontalContentAlignment="Stretch">
+            <!-- lower voting button -->
+            <AppBarButton HorizontalAlignment="Left" Flyout="{StaticResource VoteFlyout}">
+                <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Image Grid.Row="0" Grid.Column="0" Height="8" VerticalAlignment="Bottom" Source="{Binding Path=Relationship.Voting, Converter={StaticResource VotingToImageConverter}, ConverterParameter=up}"/>
+                    <Image Grid.Row="1" Grid.Column="0" Height="8" VerticalAlignment="Top" Source="{Binding Path=Relationship.Voting, Converter={StaticResource VotingToImageConverter}, ConverterParameter=down}"/>
 
+                    <TextBlock Grid.Row="0" Grid.RowSpan="2" Grid.Column="1"                                                       
+                                                       Margin="8 0 0 0"
+                                                       Text="{Binding Detail.VoteupCount, Converter={StaticResource CountConverter}}" 
+                                                       FontWeight="Bold" 
+                                                       FontSize="{Binding Source={StaticResource ThemeHelper}, Path=Theme.FeedSummary}" 
+                                                       Foreground="{StaticResource QuesNoteForeBrush}"
+                                                       Style="{StaticResource VoteStyle}"/>
+            </Grid>
+            </AppBarButton>
             <AppBarButton Icon="Like" Label="{Binding Detail.VoteupCount, Converter={StaticResource VoteupCountingConverter}}" >
                 <AppBarButton.Foreground>
                     <SolidColorBrush Color="{Binding Path=Relationship.Voting, ConverterParameter=1, Converter={StaticResource VotingToHighlightConverter}}"/>
