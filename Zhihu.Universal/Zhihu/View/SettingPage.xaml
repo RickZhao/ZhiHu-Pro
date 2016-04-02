@@ -8,6 +8,7 @@
     xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
     xmlns:core="using:Microsoft.Xaml.Interactions.Core"
     xmlns:itemView="using:Zhihu.Controls.ItemView"
+    xmlns:helper="using:Zhihu.Helper"
     mc:Ignorable="d"
     Background="{StaticResource PageBackBrush}"
     NavigationCacheMode="Enabled"
@@ -173,6 +174,18 @@
                             </Grid>
                         </ScrollViewer>
                     </Grid>
+                </PivotItem>
+                <PivotItem Header="布局">
+                    <StackPanel Orientation="Vertical">
+                        <ToggleSwitch Margin="0 0 0 10" HorizontalAlignment="Stretch"
+                                          Header="下方投票按钮" OnContent="在 command bar 上显示投票按钮" OffContent="在二级菜单中显示投票按钮"
+                                          Foreground="{StaticResource FeedTitleBrush}" 
+                                          HeaderTemplate="{StaticResource ToggleSwitchHeader}"
+                                          FontSize="{Binding Source={StaticResource ThemeHelper}, Path=Theme.FeedSummary}"
+                                          IsOn="{Binding Path=Theme.LowerVotingButtonVisiable, Mode=TwoWay, Source={StaticResource ThemeHelper}}"
+                                      Toggled="ToggleSwitch_OnToggled">
+                        </ToggleSwitch>
+                    </StackPanel>
                 </PivotItem>
                 <PivotItem Header="反馈">
                     <Grid>

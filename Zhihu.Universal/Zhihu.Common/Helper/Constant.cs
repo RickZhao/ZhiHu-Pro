@@ -1,4 +1,6 @@
-﻿namespace Zhihu.Common.Helper
+﻿using System;
+
+namespace Zhihu.Common.Helper
 {
     public class Constant
     {
@@ -9,6 +11,10 @@
             public const double FeedVerb = 14.0;
             public const double FeedSummary = 15.0;
             public const double VoteCount = 11.0;
+        }
+        public class DefaultLayout
+        {
+            public const Boolean LowerVotingButtonVisiblity = true;
         }
     }
 }

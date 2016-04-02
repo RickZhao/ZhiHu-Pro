@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
-
+using System.Diagnostics;
+using System.Globalization;
 using Windows.UI;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -930,6 +931,48 @@ namespace Zhihu.Helper
             FeedVerb = Constant.DefaultFontSize.FeedVerb;
             VoteCount = Constant.DefaultFontSize.VoteCount;
         }
+
+#region layout
+        private Boolean _lowerVotingButtonVisiable;
+
+        public Boolean LowerVotingButtonVisiable
+        {
+            get
+            {
+                var success = Boolean.TryParse(LocalSettingUtility.Instance.Read<String>("lowerVotingButtonVisiable"),
+                    out _lowerVotingButtonVisiable);
+
+                if (!success)
+                    _lowerVotingButtonVisiable = Constant.DefaultLayout.LowerVotingButtonVisiblity;
+
+                return _lowerVotingButtonVisiable;
+            }
+            set
+            {
+                _lowerVotingButtonVisiable = value;
+                LocalSettingUtility.Instance.Add("lowerVotingButtonVisiable", value.ToString());
+            }
+        }
+
+        public String LowerVotingButtonVisiblity
+        {
+            get
+            { 
+                return LowerVotingButtonVisiable ? "Visible" : "Collapsed";
+            }
+            set
+            {
+                if (value == "Visible")
+                    LowerVotingButtonVisiable = true;
+                else if (value == "Collapsed")
+                    LowerVotingButtonVisiable = false;
+                else
+                    Debug.WriteLine(
+                        "invalid value for LowerVotingButtonVisiblity, it can only be 'Visible' or 'Collapsed'.");
+
+            }
+        }
+#endregion
 
     }
 }
