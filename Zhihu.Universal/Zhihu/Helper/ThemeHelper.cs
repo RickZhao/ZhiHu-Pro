@@ -932,7 +932,33 @@ namespace Zhihu.Helper
             VoteCount = Constant.DefaultFontSize.VoteCount;
         }
 
-#region layout
+        #region layout
+
+        // upper voting button
+        private Boolean _upperVotingButtonVisiable;
+
+        public Boolean UpperVotingButtonVisiable
+        {
+            get
+            {
+                var success = Boolean.TryParse(LocalSettingUtility.Instance.Read<String>("upperVotingButtonVisiable"),
+                    out _lowerVotingButtonVisiable);
+
+                if (!success)
+                    _upperVotingButtonVisiable = Constant.DefaultLayout.UpperVotingButtonVisible;
+
+                return _upperVotingButtonVisiable;
+            }
+            set
+            {
+                _upperVotingButtonVisiable = value;
+                LocalSettingUtility.Instance.Add("upperVotingButtonVisiable", value.ToString());
+            }
+        }
+
+        public String UpperVotingButtonVisiblity => UpperVotingButtonVisiable ? "Visible" : "Collapsed";
+
+        // lower voting button
         private Boolean _lowerVotingButtonVisiable;
 
         public Boolean LowerVotingButtonVisiable
@@ -943,7 +969,7 @@ namespace Zhihu.Helper
                     out _lowerVotingButtonVisiable);
 
                 if (!success)
-                    _lowerVotingButtonVisiable = Constant.DefaultLayout.LowerVotingButtonVisiblity;
+                    _lowerVotingButtonVisiable = Constant.DefaultLayout.LowerVotingButtonVisible;
 
                 return _lowerVotingButtonVisiable;
             }
@@ -954,20 +980,175 @@ namespace Zhihu.Helper
             }
         }
 
-        public String LowerVotingButtonVisiblity
-        {
-            get
-            { 
-                return LowerVotingButtonVisiable ? "Visible" : "Collapsed";
-            }
-        }
-        public String LowerVotingButtonSecondaryVisiblity
+        public String LowerVotingButtonVisiblity => LowerVotingButtonVisiable ? "Visible" : "Collapsed";
+
+        // upvote and down button (lowerVoteButtonPair)
+        private Boolean _lowerVotingButtonPairVisiable;
+
+        public Boolean LowerVotingButtonPairVisiable
         {
             get
             {
-                return LowerVotingButtonVisiable ? "Collapsed" : "Visible";
+                var success = Boolean.TryParse(LocalSettingUtility.Instance.Read<String>("lowerVotingButtonPairVisiable"),
+                    out _lowerVotingButtonPairVisiable);
+
+                if (!success)
+                    _lowerVotingButtonPairVisiable = Constant.DefaultLayout.LowerVotingButtonPairVisible;
+
+                return _lowerVotingButtonPairVisiable;
+            }
+            set
+            {
+                _lowerVotingButtonPairVisiable = value;
+                LocalSettingUtility.Instance.Add("lowerVotingButtonVisiable", value.ToString());
             }
         }
+
+        public String LowerVotingButtonPairVisiblity => LowerVotingButtonPairVisiable ? "Visible" : "Collapsed";
+
+        // Thanks button
+        private Boolean _thanksButtonVisiable;
+
+        public Boolean ThanksButtonVisiable
+        {
+            get
+            {
+                var success = Boolean.TryParse(LocalSettingUtility.Instance.Read<String>("ThanksButtonVisiable"),
+                    out _thanksButtonVisiable);
+
+                if (!success)
+                    _thanksButtonVisiable = Constant.DefaultLayout.ThanksButtonVisible;
+
+                return _thanksButtonVisiable;
+            }
+            set
+            {
+                _thanksButtonVisiable = value;
+                LocalSettingUtility.Instance.Add("ThanksButtonVisiable", value.ToString());
+            }
+        }
+        public String ThanksButtonVisiblity => ThanksButtonVisiable ? "Visible" : "Collapsed";
+        public String SecondaryThanksButtonVisiblity => ThanksButtonVisiable ? "Visible" : "Collapsed";
+
+        // not-helpful button
+        private Boolean _notHelpfulButtonVisiable;
+
+        public Boolean NotHelpfullButtonVisiable
+        {
+            get
+            {
+                var success = Boolean.TryParse(LocalSettingUtility.Instance.Read<String>("NotHelpfulButtonVisiable"),
+                    out _notHelpfulButtonVisiable);
+
+                if (!success)
+                    _notHelpfulButtonVisiable = Constant.DefaultLayout.NotHelpfulButtonVisible;
+
+                return _notHelpfulButtonVisiable;
+            }
+            set
+            {
+                _notHelpfulButtonVisiable = value;
+                LocalSettingUtility.Instance.Add("NotHelpfulButtonVisiable", value.ToString());
+            }
+        }
+        public String NotHelpfulButtonVisiblity => NotHelpfullButtonVisiable ? "Visible" : "Collapsed";
+        public String SecondaryNotHelpfulButtonVisiblity => NotHelpfullButtonVisiable ? "Visible" : "Collapsed";
+
+        // add to collection button
+        private Boolean _addToCollectionButtonVisiable;
+
+        public Boolean AddToCollectionButtonVisiable
+        {
+            get
+            {
+                var success = Boolean.TryParse(LocalSettingUtility.Instance.Read<String>("AddToCollectionButtonVisiable"),
+                    out _addToCollectionButtonVisiable);
+
+                if (!success)
+                    _addToCollectionButtonVisiable = Constant.DefaultLayout.AddToCollectionButtonVisible;
+
+                return _addToCollectionButtonVisiable;
+            }
+            set
+            {
+                _addToCollectionButtonVisiable = value;
+                LocalSettingUtility.Instance.Add("AddToCollectionButtonVisiable", value.ToString());
+            }
+        }
+        public String AddToCollectionButtonVisiblity => AddToCollectionButtonVisiable ? "Visible" : "Collapsed";
+        public String SecondaryAddToCollectionButtonVisiblity => AddToCollectionButtonVisiable ? "Visible" : "Collapsed";
+
+        // comment button
+        private Boolean _commentButtonVisiable;
+
+        public Boolean CommentButtonVisiable
+        {
+            get
+            {
+                var success = Boolean.TryParse(LocalSettingUtility.Instance.Read<String>("CommentButtonVisiable"),
+                    out _commentButtonVisiable);
+
+                if (!success)
+                    _commentButtonVisiable = Constant.DefaultLayout.CommentButtonVisible;
+
+                return _commentButtonVisiable;
+            }
+            set
+            {
+                _commentButtonVisiable = value;
+                LocalSettingUtility.Instance.Add("CommentButtonVisiable", value.ToString());
+            }
+        }
+        public String CommentButtonVisiblity => CommentButtonVisiable? "Visible" : "Collapsed";
+        public String SecondaryCommentButtonVisiblity => CommentButtonVisiable ? "Visible" : "Collapsed";
+
+        // share to wechat button
+        private Boolean _shareToWechatButtonVisiable;
+
+        public Boolean ShareToWechatButtonVisiable
+        {
+            get
+            {
+                var success = Boolean.TryParse(LocalSettingUtility.Instance.Read<String>("ShareToWechatButtonVisiable"),
+                    out _shareToWechatButtonVisiable);
+
+                if (!success)
+                    _shareToWechatButtonVisiable = Constant.DefaultLayout.ShareToWechatButtonVisible;
+
+                return _shareToWechatButtonVisiable;
+            }
+            set
+            {
+                _shareToWechatButtonVisiable = value;
+                LocalSettingUtility.Instance.Add("ShareToWechatButtonVisiable", value.ToString());
+            }
+        }
+        public String ShareToWechatButtonVisiblity => ShareToWechatButtonVisiable ? "Visible" : "Collapsed";
+        public String SecondaryShareToWechatButtonVisiblity => ShareToWechatButtonVisiable ? "Visible" : "Collapsed";
+
+        // open with edge button
+        private Boolean _openWithEdgeButtonVisiable;
+
+        public Boolean OpenWithEdgeButtonVisiable
+        {
+            get
+            {
+                var success = Boolean.TryParse(LocalSettingUtility.Instance.Read<String>("OpenWithEdgeButtonVisiable"),
+                    out _openWithEdgeButtonVisiable);
+
+                if (!success)
+                    _openWithEdgeButtonVisiable = Constant.DefaultLayout.OpenWithEdgeButtonVisible;
+
+                return _openWithEdgeButtonVisiable;
+            }
+            set
+            {
+                _openWithEdgeButtonVisiable = value;
+                LocalSettingUtility.Instance.Add("OpenWithEdgeButtonVisiable", value.ToString());
+            }
+        }
+        public String OpenWithEdgeButtonVisiblity => OpenWithEdgeButtonVisiable ? "Visible" : "Collapsed";
+        public String SecondaryOpenWithEdgeButtonVisiblity => OpenWithEdgeButtonVisiable ? "Visible" : "Collapsed";
         #endregion
 
     }

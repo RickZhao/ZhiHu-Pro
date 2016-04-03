@@ -177,14 +177,56 @@
                 </PivotItem>
                 <PivotItem Header="布局">
                     <StackPanel Orientation="Vertical">
+                        
                         <ToggleSwitch Margin="0 0 0 10" HorizontalAlignment="Stretch"
-                                          Header="下方投票按钮" OnContent="在 command bar 上显示投票按钮" OffContent="在二级菜单中显示投票按钮"
+                                          Header="上方投票按钮" OnContent="显示" OffContent="隐藏"
                                           Foreground="{StaticResource FeedTitleBrush}" 
                                           HeaderTemplate="{StaticResource ToggleSwitchHeader}"
                                           FontSize="{Binding Source={StaticResource ThemeHelper}, Path=Theme.FeedSummary}"
-                                          IsOn="{Binding Path=Theme.LowerVotingButtonVisiable, Mode=TwoWay, Source={StaticResource ThemeHelper}}"
-                                      Toggled="ToggleSwitch_OnToggled">
-                        </ToggleSwitch>
+                                          IsOn="{Binding Path=Theme.LowerVotingButtonVisiable, Mode=TwoWay, Source={StaticResource ThemeHelper}}"/>
+
+                        <ToggleSwitch Margin="0 0 0 10" HorizontalAlignment="Stretch"
+                                          Header="下方投票按钮" OnContent="只显示一个投票按钮" OffContent="分开为赞同和反对两个按钮"
+                                          Foreground="{StaticResource FeedTitleBrush}" 
+                                          HeaderTemplate="{StaticResource ToggleSwitchHeader}"
+                                          FontSize="{Binding Source={StaticResource ThemeHelper}, Path=Theme.FeedSummary}"
+                                          IsOn="{Binding Path=Theme.LowerVotingButtonVisiable, Mode=TwoWay, Source={StaticResource ThemeHelper}}"/>
+
+                        <ToggleSwitch Margin="0 0 0 10" HorizontalAlignment="Stretch"
+                                          Header="感谢按钮" OnContent="在下方命令栏中显示" OffContent="在二级菜单中显示"
+                                          Foreground="{StaticResource FeedTitleBrush}" 
+                                          HeaderTemplate="{StaticResource ToggleSwitchHeader}"
+                                          FontSize="{Binding Source={StaticResource ThemeHelper}, Path=Theme.FeedSummary}"
+                                          IsOn="{Binding Path=Theme.LowerVotingButtonVisiable, Mode=TwoWay, Source={StaticResource ThemeHelper}}"/>
+
+                        <ToggleSwitch Margin="0 0 0 10" HorizontalAlignment="Stretch"
+                                          Header="没有帮助按钮" OnContent="在下方命令栏中显示" OffContent="在二级菜单中显示"
+                                          Foreground="{StaticResource FeedTitleBrush}" 
+                                          HeaderTemplate="{StaticResource ToggleSwitchHeader}"
+                                          FontSize="{Binding Source={StaticResource ThemeHelper}, Path=Theme.FeedSummary}"
+                                          IsOn="{Binding Path=Theme.LowerVotingButtonVisiable, Mode=TwoWay, Source={StaticResource ThemeHelper}}"/>
+
+                        <ToggleSwitch Margin="0 0 0 10" HorizontalAlignment="Stretch"
+                                          Header="加入收藏按钮" OnContent="在下方命令栏中显示" OffContent="在二级菜单中显示"
+                                          Foreground="{StaticResource FeedTitleBrush}" 
+                                          HeaderTemplate="{StaticResource ToggleSwitchHeader}"
+                                          FontSize="{Binding Source={StaticResource ThemeHelper}, Path=Theme.FeedSummary}"
+                                          IsOn="{Binding Path=Theme.LowerVotingButtonVisiable, Mode=TwoWay, Source={StaticResource ThemeHelper}}"/>
+                        
+                        <ToggleSwitch Margin="0 0 0 10" HorizontalAlignment="Stretch"
+                                          Header="Edge 打开按钮" OnContent="在下方命令栏中显示" OffContent="在二级菜单中显示"
+                                          Foreground="{StaticResource FeedTitleBrush}" 
+                                          HeaderTemplate="{StaticResource ToggleSwitchHeader}"
+                                          FontSize="{Binding Source={StaticResource ThemeHelper}, Path=Theme.FeedSummary}"
+                                          IsOn="{Binding Path=Theme.LowerVotingButtonVisiable, Mode=TwoWay, Source={StaticResource ThemeHelper}}"/>
+                        
+                        <ToggleSwitch Margin="0 0 0 10" HorizontalAlignment="Stretch"
+                                          Header="分享到微信按钮" OnContent="在下方命令栏中显示" OffContent="在二级菜单中显示"
+                                          Foreground="{StaticResource FeedTitleBrush}" 
+                                          HeaderTemplate="{StaticResource ToggleSwitchHeader}"
+                                          FontSize="{Binding Source={StaticResource ThemeHelper}, Path=Theme.FeedSummary}"
+                                          IsOn="{Binding Path=Theme.LowerVotingButtonVisiable, Mode=TwoWay, Source={StaticResource ThemeHelper}}"/>
+
                     </StackPanel>
                 </PivotItem>
                 <PivotItem Header="反馈">
