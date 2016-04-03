@@ -162,5 +162,11 @@ namespace Zhihu.View
         {
             NavHelper.OpenLinkWithEdge = !NavHelper.OpenLinkWithEdge;
         }
+
+        private void LowerVotingButtonDisplayModeToggle(object sender, RoutedEventArgs e)
+        {
+            Theme.Instance.LowerVotingButtonVisiable = !Theme.Instance.LowerVotingButtonVisiable;
+            Theme.Instance.LowerVotingButtonPairVisiable = !Theme.Instance.LowerVotingButtonPairVisiable;
+        }
     }
 }
