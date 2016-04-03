@@ -414,6 +414,11 @@
                 <!-- add to collection Button-->
                 <AppBarButton Icon="OutlineStar" Label="加入收藏" Flyout="{StaticResource CollectionFlyout}"
                               Visibility="{Binding Path=Theme.SecondaryAddToCollectionButtonVisiblity, Source={StaticResource ThemeHelper}}"/>
+                <!-- comment button -->
+                <AppBarButton Icon="Comment" Label="{Binding Path=Detail.CommentCount, Converter={StaticResource CommentsCountConverter}}"
+                          Foreground="{StaticResource AppBarForeBrush}"
+                          Tapped="ShowComments_OnTapped"
+                          Visibility="{Binding Path=Theme.SecondaryCommentButtonVisiblity, Source={StaticResource ThemeHelper}}"/>
             </CommandBar.SecondaryCommands>
         </CommandBar>   
     </Grid>
