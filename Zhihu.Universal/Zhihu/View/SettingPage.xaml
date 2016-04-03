@@ -191,7 +191,7 @@
                                           HeaderTemplate="{StaticResource ToggleSwitchHeader}"
                                           FontSize="{Binding Source={StaticResource ThemeHelper}, Path=Theme.FeedSummary}"
                                           IsOn="{Binding Path=Theme.LowerVotingButtonVisiable, Mode=TwoWay, Source={StaticResource ThemeHelper}}"
-                                          Toggled="LowerVotingButtonDisplayModeToggle"/>
+                                          />
 
                         <ToggleSwitch Margin="0 0 0 10" HorizontalAlignment="Stretch"
                                           Header="感谢按钮" OnContent="在下方命令栏中显示" OffContent="在二级菜单中显示"
@@ -226,7 +226,7 @@
                                           Foreground="{StaticResource FeedTitleBrush}" 
                                           HeaderTemplate="{StaticResource ToggleSwitchHeader}"
                                           FontSize="{Binding Source={StaticResource ThemeHelper}, Path=Theme.FeedSummary}"
-                                          IsOn="{Binding Path=Theme.LowerVotingButtonVisiable, Mode=TwoWay, Source={StaticResource ThemeHelper}}"/>
+                                          IsOn="{Binding Path=Theme.ShareToWechatButtonVisiable, Mode=TwoWay, Source={StaticResource ThemeHelper}}"/>
 
                         <ToggleSwitch Margin="0 0 0 10" HorizontalAlignment="Stretch"
                                           Header="Edge 打开按钮" OnContent="在下方命令栏中显示" OffContent="在二级菜单中显示"

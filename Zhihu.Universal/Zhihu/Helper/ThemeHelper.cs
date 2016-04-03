@@ -981,30 +981,30 @@ namespace Zhihu.Helper
         }
 
         public String LowerVotingButtonVisiblity => LowerVotingButtonVisiable ? "Visible" : "Collapsed";
+//
+//        // upvote and down button (lowerVoteButtonPair)
+//        private Boolean _lowerVotingButtonPairVisiable;
+//
+//        public Boolean LowerVotingButtonPairVisiable
+//        {
+//            get
+//            {
+//                var success = Boolean.TryParse(LocalSettingUtility.Instance.Read<String>("lowerVotingButtonPairVisiable"),
+//                    out _lowerVotingButtonPairVisiable);
+//
+//                if (!success)
+//                    _lowerVotingButtonPairVisiable = Constant.DefaultLayout.LowerVotingButtonPairVisible;
+//
+//                return _lowerVotingButtonPairVisiable;
+//            }
+//            set
+//            {
+//                _lowerVotingButtonPairVisiable = value;
+//                LocalSettingUtility.Instance.Add("lowerVotingButtonVisiable", value.ToString());
+//            }
+//        }
 
-        // upvote and down button (lowerVoteButtonPair)
-        private Boolean _lowerVotingButtonPairVisiable;
-
-        public Boolean LowerVotingButtonPairVisiable
-        {
-            get
-            {
-                var success = Boolean.TryParse(LocalSettingUtility.Instance.Read<String>("lowerVotingButtonPairVisiable"),
-                    out _lowerVotingButtonPairVisiable);
-
-                if (!success)
-                    _lowerVotingButtonPairVisiable = Constant.DefaultLayout.LowerVotingButtonPairVisible;
-
-                return _lowerVotingButtonPairVisiable;
-            }
-            set
-            {
-                _lowerVotingButtonPairVisiable = value;
-                LocalSettingUtility.Instance.Add("lowerVotingButtonVisiable", value.ToString());
-            }
-        }
-
-        public String LowerVotingButtonPairVisiblity => LowerVotingButtonPairVisiable ? "Visible" : "Collapsed";
+        public String LowerVotingButtonPairVisiblity => LowerVotingButtonVisiable ? "Collapsed" : "Visible";
 
         // Thanks button
         private Boolean _thanksButtonVisiable;
@@ -1028,7 +1028,7 @@ namespace Zhihu.Helper
             }
         }
         public String ThanksButtonVisiblity => ThanksButtonVisiable ? "Visible" : "Collapsed";
-        public String SecondaryThanksButtonVisiblity => ThanksButtonVisiable ? "Visible" : "Collapsed";
+        public String SecondaryThanksButtonVisiblity => ThanksButtonVisiable ? "Collapsed" : "Visible";
 
         // not-helpful button
         private Boolean _notHelpfulButtonVisiable;
@@ -1052,7 +1052,7 @@ namespace Zhihu.Helper
             }
         }
         public String NotHelpfulButtonVisiblity => NotHelpfullButtonVisiable ? "Visible" : "Collapsed";
-        public String SecondaryNotHelpfulButtonVisiblity => NotHelpfullButtonVisiable ? "Visible" : "Collapsed";
+        public String SecondaryNotHelpfulButtonVisiblity => NotHelpfullButtonVisiable ? "Collapsed" : "Visible";
 
         // add to collection button
         private Boolean _addToCollectionButtonVisiable;
@@ -1076,7 +1076,7 @@ namespace Zhihu.Helper
             }
         }
         public String AddToCollectionButtonVisiblity => AddToCollectionButtonVisiable ? "Visible" : "Collapsed";
-        public String SecondaryAddToCollectionButtonVisiblity => AddToCollectionButtonVisiable ? "Visible" : "Collapsed";
+        public String SecondaryAddToCollectionButtonVisiblity => AddToCollectionButtonVisiable ? "Collapsed" : "Visible";
 
         // comment button
         private Boolean _commentButtonVisiable;
@@ -1100,7 +1100,7 @@ namespace Zhihu.Helper
             }
         }
         public String CommentButtonVisiblity => CommentButtonVisiable? "Visible" : "Collapsed";
-        public String SecondaryCommentButtonVisiblity => CommentButtonVisiable ? "Visible" : "Collapsed";
+        public String SecondaryCommentButtonVisiblity => CommentButtonVisiable ? "Collapsed" : "Visible";
 
         // share to wechat button
         private Boolean _shareToWechatButtonVisiable;
@@ -1124,7 +1124,7 @@ namespace Zhihu.Helper
             }
         }
         public String ShareToWechatButtonVisiblity => ShareToWechatButtonVisiable ? "Visible" : "Collapsed";
-        public String SecondaryShareToWechatButtonVisiblity => ShareToWechatButtonVisiable ? "Visible" : "Collapsed";
+        public String SecondaryShareToWechatButtonVisiblity => ShareToWechatButtonVisiable ? "Collapsed" : "Visible";
 
         // open with edge button
         private Boolean _openWithEdgeButtonVisiable;
@@ -1148,7 +1148,7 @@ namespace Zhihu.Helper
             }
         }
         public String OpenWithEdgeButtonVisiblity => OpenWithEdgeButtonVisiable ? "Visible" : "Collapsed";
-        public String SecondaryOpenWithEdgeButtonVisiblity => OpenWithEdgeButtonVisiable ? "Visible" : "Collapsed";
+        public String SecondaryOpenWithEdgeButtonVisiblity => OpenWithEdgeButtonVisiable ? "Collapsed" : "Visible";
         #endregion
 
     }

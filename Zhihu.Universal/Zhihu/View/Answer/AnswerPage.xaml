@@ -318,7 +318,7 @@
                     </core:EventTriggerBehavior>
                 </interactivity:Interaction.Behaviors>
             </AppBarButton>
-            <!-- like button-->
+            <!-- Thanks button-->
             <AppBarButton Label="{Binding Path=Relationship.IsThanked, Converter={StaticResource ThankedConverter}}"
                           Visibility="{Binding Path=Theme.ThanksButtonVisiblity, Source={StaticResource ThemeHelper}}">
                 <TextBlock FontFamily="Segoe MDL2 Assets" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Center" Text=""/>
@@ -366,7 +366,7 @@
             </AppBarButton>            
             <!-- Open with Edge Button-->
             <AppBarButton Icon="NewWindow" Label="Edge 打开"
-                          Visibility="{Binding Path=Theme.OpenWithEdgeButtonVisiable, Source={StaticResource ThemeHelper}}">
+                          Visibility="{Binding Path=Theme.OpenWithEdgeButtonVisiblity, Source={StaticResource ThemeHelper}}">
                 <interactivity:Interaction.Behaviors>
                     <core:EventTriggerBehavior EventName="Tapped">
                         <core:InvokeCommandAction Command="{Binding OpenWithEdge, Mode=OneWay}"/>
