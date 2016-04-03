@@ -108,8 +108,11 @@
                 </Grid>
 
                 <!-- upper voting button -->
-                <Border Grid.Row="2" Grid.Column="1" Margin="5 5 5 5" Style="{StaticResource VerticalLineStyle}"/>
-                <Button Grid.Row="2" Grid.Column="2" Margin="5 0 10 0" Style="{StaticResource FlatButtonStyle}" Flyout="{StaticResource VoteFlyout}">
+                <Border Grid.Row="2" Grid.Column="1" Margin="5 5 5 5" Style="{StaticResource VerticalLineStyle}" 
+                        Visibility="{Binding Path=Theme.UpperVotingButtonVisiblity, Source={StaticResource ThemeHelper}}"/>
+                <Button Grid.Row="2" Grid.Column="2" Margin="5 0 10 0" Style="{StaticResource FlatButtonStyle}" 
+                        Flyout="{StaticResource VoteFlyout}" 
+                        Visibility="{Binding Path=Theme.UpperVotingButtonVisiblity, Source={StaticResource ThemeHelper}}">
                     <Grid Height="42" HorizontalAlignment="Center" VerticalAlignment="Center">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto"/>
@@ -268,7 +271,8 @@
                     HorizontalAlignment="Stretch" 
                     HorizontalContentAlignment="Stretch">
             <!-- lower voting button -->
-            <AppBarButton Label="投票" Flyout="{StaticResource VoteFlyout}" Visibility="{Binding Path=Theme.LowerVotingButtonVisiblity, Source={StaticResource ThemeHelper}}">
+            <AppBarButton Label="投票" Flyout="{StaticResource VoteFlyout}" 
+                          Visibility="{Binding Path=Theme.LowerVotingButtonVisiblity, Source={StaticResource ThemeHelper}}">
                 <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto"/>
@@ -291,7 +295,8 @@
             </Grid>
             </AppBarButton>
             <!-- up-vote button-->
-            <AppBarButton Icon="Like" Label="{Binding Detail.VoteupCount, Converter={StaticResource VoteupCountingConverter}}" >
+            <AppBarButton Icon="Like" Label="{Binding Detail.VoteupCount, Converter={StaticResource VoteupCountingConverter}}" 
+                          Visibility="{Binding Path=Theme.LowerVotingButtonPairVisiblity, Source={StaticResource ThemeHelper}}">
                 <AppBarButton.Foreground>
                     <SolidColorBrush Color="{Binding Path=Relationship.Voting, ConverterParameter=1, Converter={StaticResource VotingToHighlightConverter}}"/>
                 </AppBarButton.Foreground>
@@ -302,7 +307,8 @@
                 </interactivity:Interaction.Behaviors>
             </AppBarButton>
             <!-- down-vote button -->
-            <AppBarButton Icon="Dislike" Label="反对">
+            <AppBarButton Icon="Dislike" Label="反对"
+                          Visibility="{Binding Path=Theme.LowerVotingButtonPairVisiblity, Source={StaticResource ThemeHelper}}">
                 <AppBarButton.Foreground>
                     <SolidColorBrush Color="{Binding Path=Relationship.Voting, ConverterParameter=-1, Converter={StaticResource VotingToHighlightConverter}}"/>
                 </AppBarButton.Foreground>
@@ -313,7 +319,8 @@
                 </interactivity:Interaction.Behaviors>
             </AppBarButton>
             <!-- like button-->
-            <AppBarButton Label="{Binding Path=Relationship.IsThanked, Converter={StaticResource ThankedConverter}}">
+            <AppBarButton Label="{Binding Path=Relationship.IsThanked, Converter={StaticResource ThankedConverter}}"
+                          Visibility="{Binding Path=Theme.ThanksButtonVisiblity, Source={StaticResource ThemeHelper}}">
                 <TextBlock FontFamily="Segoe MDL2 Assets" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Center" Text=""/>
                 <AppBarButton.Foreground>
                     <SolidColorBrush Color="{Binding Path=Relationship.IsThanked, Converter={StaticResource BoolToHighlightConverter}}"/>
@@ -325,7 +332,8 @@
                 </interactivity:Interaction.Behaviors>
             </AppBarButton>
             <!-- Not Helpful button -->
-            <AppBarButton Icon="Flag" Label="{Binding Path=Relationship.IsNotHelp, Converter={StaticResource NoHelpConverter}}">
+            <AppBarButton Icon="Flag" Label="{Binding Path=Relationship.IsNotHelp, Converter={StaticResource NoHelpConverter}}"
+                          Visibility="{Binding Path=Theme.NotHelpfulButtonVisiblity, Source={StaticResource ThemeHelper}}">
                 <AppBarButton.Foreground>
                     <SolidColorBrush Color="{Binding Path=Relationship.IsNotHelp, Converter={StaticResource BoolToHighlightConverter}}"/>
                 </AppBarButton.Foreground>
@@ -336,7 +344,8 @@
                 </interactivity:Interaction.Behaviors>
             </AppBarButton>
             <!-- add to collection button -->
-            <AppBarButton Icon="OutlineStar" Label="加入收藏" Flyout="{StaticResource CollectionFlyout}">
+            <AppBarButton Icon="OutlineStar" Label="加入收藏" Flyout="{StaticResource CollectionFlyout}"
+                          Visibility="{Binding Path=Theme.AddToCollectionButtonVisiblity, Source={StaticResource ThemeHelper}}">
                 <AppBarButton.Foreground>
                     <SolidColorBrush Color="{Binding Path=Relationship.IsFavorited, Converter={StaticResource BoolToHighlightConverter}}"/>
                 </AppBarButton.Foreground>
@@ -344,9 +353,11 @@
             <!-- comment button -->
             <AppBarButton Icon="Comment" Label="{Binding Path=Detail.CommentCount, Converter={StaticResource CommentsCountConverter}}"
                           Foreground="{StaticResource AppBarForeBrush}"
-                          Tapped="ShowComments_OnTapped"/>
+                          Tapped="ShowComments_OnTapped"
+                          Visibility="{Binding Path=Theme.CommentButtonVisiblity, Source={StaticResource ThemeHelper}}"/>
             <!-- Share to Wechat Button-->
-            <AppBarButton Icon="Globe" Label="分享至微信">
+            <AppBarButton Icon="Globe" Label="分享至微信"
+                          Visibility="{Binding Path=Theme.ShareToWechatButtonVisiblity, Source={StaticResource ThemeHelper}}">
                 <interactivity:Interaction.Behaviors>
                     <core:EventTriggerBehavior EventName="Tapped">
                         <core:InvokeCommandAction Command="{Binding ShareViaWeChat, Mode=OneWay}"/>
@@ -354,7 +365,8 @@
                 </interactivity:Interaction.Behaviors>
             </AppBarButton>            
             <!-- Open with Edge Button-->
-            <AppBarButton Icon="NewWindow" Label="Edge 打开">
+            <AppBarButton Icon="NewWindow" Label="Edge 打开"
+                          Visibility="{Binding Path=Theme.OpenWithEdgeButtonVisiable, Source={StaticResource ThemeHelper}}">
                 <interactivity:Interaction.Behaviors>
                     <core:EventTriggerBehavior EventName="Tapped">
                         <core:InvokeCommandAction Command="{Binding OpenWithEdge, Mode=OneWay}"/>
@@ -364,7 +376,8 @@
 
             <CommandBar.SecondaryCommands>
                 <!-- share to wechat button -->    
-                <AppBarButton Icon="Globe" Label="分享至微信">
+                <AppBarButton Icon="Globe" Label="分享至微信"
+                              Visibility="{Binding Path=Theme.SecondaryShareToWechatButtonVisiblity, Source={StaticResource ThemeHelper}}">
                     <interactivity:Interaction.Behaviors>
                         <core:EventTriggerBehavior EventName="Tapped">
                             <core:InvokeCommandAction Command="{Binding ShareViaWeChat, Mode=OneWay}"/>
@@ -372,7 +385,8 @@
                     </interactivity:Interaction.Behaviors>
                 </AppBarButton>
                 <!-- Open With Edge Button -->
-                <AppBarButton Icon="NewWindow" Label="Edge 打开">
+                <AppBarButton Icon="NewWindow" Label="Edge 打开"
+                              Visibility="{Binding Path=Theme.SecondaryOpenWithEdgeButtonVisiblity, Source={StaticResource ThemeHelper}}">
                     <interactivity:Interaction.Behaviors>
                         <core:EventTriggerBehavior EventName="Tapped">
                             <core:InvokeCommandAction Command="{Binding OpenWithEdge, Mode=OneWay}"/>
@@ -380,7 +394,8 @@
                     </interactivity:Interaction.Behaviors>
                 </AppBarButton>
                 <!-- Like Button -->
-                <AppBarButton Label="{Binding Path=Relationship.IsThanked, Converter={StaticResource ThankedConverter}}">
+                <AppBarButton Label="{Binding Path=Relationship.IsThanked, Converter={StaticResource ThankedConverter}}"
+                              Visibility="{Binding Path=Theme.SecondaryThanksButtonVisiblity, Source={StaticResource ThemeHelper}}">
                     <interactivity:Interaction.Behaviors>
                        <core:EventTriggerBehavior EventName="Tapped">
                            <core:InvokeCommandAction Command="{Binding AnswerThankTapped, Mode=OneWay}"/>
@@ -388,7 +403,8 @@
                    </interactivity:Interaction.Behaviors>
                 </AppBarButton>
                 <!-- Not Helpful Button -->
-                <AppBarButton Icon="Flag" Label="{Binding Path=Relationship.IsNotHelp, Converter={StaticResource NoHelpConverter}}">
+                <AppBarButton Icon="Flag" Label="{Binding Path=Relationship.IsNotHelp, Converter={StaticResource NoHelpConverter}}"
+                              Visibility="{Binding Path=Theme.SecondaryNotHelpfulButtonVisiblity, Source={StaticResource ThemeHelper}}">
                     <interactivity:Interaction.Behaviors>
                         <core:EventTriggerBehavior EventName="Tapped">
                             <core:InvokeCommandAction Command="{Binding AnswerNoHelpTapped, Mode=OneWay}"/>
@@ -396,7 +412,8 @@
                     </interactivity:Interaction.Behaviors>
                 </AppBarButton>
                 <!-- add to collection Button-->
-                <AppBarButton Icon="OutlineStar" Label="加入收藏" Flyout="{StaticResource CollectionFlyout}"/>
+                <AppBarButton Icon="OutlineStar" Label="加入收藏" Flyout="{StaticResource CollectionFlyout}"
+                              Visibility="{Binding Path=Theme.SecondaryAddToCollectionButtonVisiblity, Source={StaticResource ThemeHelper}}"/>
             </CommandBar.SecondaryCommands>
         </CommandBar>   
     </Grid>
