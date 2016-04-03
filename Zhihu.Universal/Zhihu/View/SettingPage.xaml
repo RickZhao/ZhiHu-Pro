@@ -176,7 +176,9 @@
                     </Grid>
                 </PivotItem>
                 <PivotItem Header="布局">
-                    <StackPanel Orientation="Vertical">
+                    <ScrollViewer VerticalScrollMode="Auto" HorizontalScrollMode="Disabled" ZoomMode="Disabled"
+                                  VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                        <StackPanel Orientation="Vertical">
                         
                         <ToggleSwitch Margin="0 0 0 10" HorizontalAlignment="Stretch"
                                           Header="上方投票按钮" OnContent="显示" OffContent="隐藏"
@@ -236,6 +238,7 @@
                                           IsOn="{Binding Path=Theme.OpenWithEdgeButtonVisiable, Mode=TwoWay, Source={StaticResource ThemeHelper}}"/>
 
                     </StackPanel>
+                    </ScrollViewer>
                 </PivotItem>
                 <PivotItem Header="反馈">
                     <Grid>
