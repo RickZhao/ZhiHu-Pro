@@ -152,7 +152,7 @@ namespace Zhihu.View
             {
                 FontsizeResetBarButton.Visibility = Visibility.Visible;
             }
-            else if (Pivot.SelectedIndex == 2)
+            else if (Pivot.SelectedIndex == 3)
             {
                 SentAppBarButton.Visibility = Visibility.Visible;
             }
