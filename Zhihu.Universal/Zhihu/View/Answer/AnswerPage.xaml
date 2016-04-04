@@ -107,9 +107,13 @@
                                Style="{StaticResource AuthorHeadLineStyle}"/>
                 </Grid>
 
-                <Border Grid.Row="2" Grid.Column="1" Margin="10 5 10 5" Style="{StaticResource VerticalLineStyle}"/>
-                <Button Grid.Row="2" Grid.Column="2" Margin="10 0 15 0" Style="{StaticResource FlatButtonStyle}" Flyout="{StaticResource VoteFlyout}">
-                    <Grid>
+                <!-- upper voting button -->
+                <Border Grid.Row="2" Grid.Column="1" Margin="5 5 5 5" Style="{StaticResource VerticalLineStyle}" 
+                        Visibility="{Binding Path=Theme.UpperVotingButtonVisiblity, Source={StaticResource ThemeHelper}}"/>
+                <Button Grid.Row="2" Grid.Column="2" Margin="5 0 10 0" Style="{StaticResource FlatButtonStyle}" 
+                        Flyout="{StaticResource VoteFlyout}" 
+                        Visibility="{Binding Path=Theme.UpperVotingButtonVisiblity, Source={StaticResource ThemeHelper}}">
+                    <Grid Height="42" HorizontalAlignment="Center" VerticalAlignment="Center">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto"/>
                             <ColumnDefinition Width="Auto"/>
@@ -118,11 +122,11 @@
                             <RowDefinition Height="*"/>
                             <RowDefinition Height="*"/>
                         </Grid.RowDefinitions>
-                        <Image Grid.Row="0" Grid.Column="0" Height="18" Margin="0 0 0 0" VerticalAlignment="Bottom" Source="{Binding Path=Relationship.Voting, Converter={StaticResource VotingToImageConverter}, ConverterParameter=up}"/>
-                        <Image Grid.Row="1" Grid.Column="0" Height="18" Margin="0 0 0 0" VerticalAlignment="Top" Source="{Binding Path=Relationship.Voting, Converter={StaticResource VotingToImageConverter}, ConverterParameter=down}"/>
+                        <Image Grid.Row="0" Grid.Column="0" Height="12" VerticalAlignment="Bottom" Source="{Binding Path=Relationship.Voting, Converter={StaticResource VotingToImageConverter}, ConverterParameter=up}"/>
+                        <Image Grid.Row="1" Grid.Column="0" Height="12" VerticalAlignment="Top" Source="{Binding Path=Relationship.Voting, Converter={StaticResource VotingToImageConverter}, ConverterParameter=down}"/>
 
-                        <TextBlock Grid.Row="0" Grid.RowSpan="2" Grid.Column="1" MinWidth="30"
-                                                   Margin="10 0 0 0"
+                        <TextBlock Grid.Row="0" Grid.RowSpan="2" Grid.Column="1" MinWidth="28"
+                                                   Margin="8 0 0 0"
                                                    Text="{Binding Detail.VoteupCount, Converter={StaticResource CountConverter}}" 
                                                    FontWeight="Bold" 
                                                    FontSize="{Binding Source={StaticResource ThemeHelper}, Path=Theme.FeedSummary}" 
@@ -212,7 +216,7 @@
 
                 <Button Grid.Row="1" Grid.Column="1" Style="{StaticResource FlatButtonStyle}">
                     <StackPanel Orientation="Vertical">
-                        <Image Height="90" VerticalAlignment="Bottom" Source="{Binding Path=Relationship.Voting, Converter={StaticResource VotingToImageConverter}, ConverterParameter=up}"/>
+                        <Image Height="45" Margin="10, 17, 10, 23" VerticalAlignment="Bottom" Source="{Binding Path=Relationship.Voting, Converter={StaticResource VotingToImageConverter}, ConverterParameter=up}"/>
                         <TextBlock Text="赞同" HorizontalAlignment="Center" FontSize="{Binding Source={StaticResource ThemeHelper}, Path=Theme.FeedSummary}" Style="{StaticResource SummaryStyle}"/>
                     </StackPanel>
                     <interactivity:Interaction.Behaviors>
@@ -224,7 +228,7 @@
 
                 <Button Grid.Row="1" Grid.Column="3" Style="{StaticResource FlatButtonStyle}">
                     <StackPanel>
-                        <Image Height="90" VerticalAlignment="Top" Source="{Binding Path=Relationship.Voting, Converter={StaticResource VotingToImageConverter}, ConverterParameter=down}"/>
+                        <Image Height="45" Margin="10, 17, 10, 23" Source="{Binding Path=Relationship.Voting, Converter={StaticResource VotingToImageConverter}, ConverterParameter=down}"/>
                         <TextBlock Text="反对" HorizontalAlignment="Center" FontSize="{Binding Source={StaticResource ThemeHelper}, Path=Theme.FeedSummary}" Style="{StaticResource SummaryStyle}"/>
                     </StackPanel>
                     <interactivity:Interaction.Behaviors>
@@ -254,7 +258,7 @@
         <controls:ImageViewerHelper Grid.Row="0" ImageRuns="{Binding Detail.Content, Converter={StaticResource ImageExtractConverter}}"/>
 
         <!--Answer Content-->
-        <controls:RichBlock Grid.Row="0" Margin="0 0 0 0" HeaderTemplate="{StaticResource AnswerHeader}" 
+        <controls:RichBlock Grid.Row="0" HeaderTemplate="{StaticResource AnswerHeader}" 
                             FooterTemplate="{StaticResource FooterTemplate}"
                             HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  
                             Paragraphs="{Binding Detail.Content, Converter={StaticResource HtmlConverter}, ConverterParameter='True'}" />
@@ -266,7 +270,33 @@
                     Foreground="{StaticResource AppBarForeBrush}"
                     HorizontalAlignment="Stretch" 
                     HorizontalContentAlignment="Stretch">
-            <AppBarButton Icon="Like" Label="{Binding Detail.VoteupCount, Converter={StaticResource VoteupCountingConverter}}" >
+            <!-- lower voting button -->
+            <AppBarButton Label="投票" Flyout="{StaticResource VoteFlyout}" 
+                          Visibility="{Binding Path=Theme.LowerVotingButtonVisiblity, Source={StaticResource ThemeHelper}}">
+                <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Image Grid.Row="0" Grid.Column="0" Height="8" VerticalAlignment="Bottom" Source="{Binding Path=Relationship.Voting, Converter={StaticResource VotingToImageConverter}, ConverterParameter=up}"/>
+                    <Image Grid.Row="1" Grid.Column="0" Height="8" VerticalAlignment="Top" Source="{Binding Path=Relationship.Voting, Converter={StaticResource VotingToImageConverter}, ConverterParameter=down}"/>
+
+                    <TextBlock Grid.Row="0" Grid.RowSpan="2" Grid.Column="1"                                                       
+                                                       Margin="8 0 0 0"
+                                                       Text="{Binding Detail.VoteupCount, Converter={StaticResource CountConverter}}" 
+                                                       FontWeight="Bold" 
+                                                       FontSize="{Binding Source={StaticResource ThemeHelper}, Path=Theme.FeedSummary}" 
+                                                       Foreground="{StaticResource QuesNoteForeBrush}"
+                                                       Style="{StaticResource VoteStyle}"/>
+            </Grid>
+            </AppBarButton>
+            <!-- up-vote button-->
+            <AppBarButton Icon="Like" Label="{Binding Detail.VoteupCount, Converter={StaticResource VoteupCountingConverter}}" 
+                          Visibility="{Binding Path=Theme.LowerVotingButtonPairVisiblity, Source={StaticResource ThemeHelper}}">
                 <AppBarButton.Foreground>
                     <SolidColorBrush Color="{Binding Path=Relationship.Voting, ConverterParameter=1, Converter={StaticResource VotingToHighlightConverter}}"/>
                 </AppBarButton.Foreground>
@@ -276,7 +306,9 @@
                     </core:EventTriggerBehavior>
                 </interactivity:Interaction.Behaviors>
             </AppBarButton>
-            <AppBarButton Icon="Dislike" Label="反对">
+            <!-- down-vote button -->
+            <AppBarButton Icon="Dislike" Label="反对"
+                          Visibility="{Binding Path=Theme.LowerVotingButtonPairVisiblity, Source={StaticResource ThemeHelper}}">
                 <AppBarButton.Foreground>
                     <SolidColorBrush Color="{Binding Path=Relationship.Voting, ConverterParameter=-1, Converter={StaticResource VotingToHighlightConverter}}"/>
                 </AppBarButton.Foreground>
@@ -285,52 +317,108 @@
                         <core:InvokeCommandAction Command="{Binding VoteDownTapped, Mode=OneWay}"/>
                     </core:EventTriggerBehavior>
                 </interactivity:Interaction.Behaviors>
-            </AppBarButton>           
-                      
+            </AppBarButton>
+            <!-- Thanks button-->
+            <AppBarButton Label="{Binding Path=Relationship.IsThanked, Converter={StaticResource ThankedConverter}}"
+                          Visibility="{Binding Path=Theme.ThanksButtonVisiblity, Source={StaticResource ThemeHelper}}">
+                <TextBlock FontFamily="Segoe MDL2 Assets" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Center" Text=""/>
+                <AppBarButton.Foreground>
+                    <SolidColorBrush Color="{Binding Path=Relationship.IsThanked, Converter={StaticResource BoolToHighlightConverter}}"/>
+                </AppBarButton.Foreground>
+                <interactivity:Interaction.Behaviors>
+                    <core:EventTriggerBehavior EventName="Tapped">
+                        <core:InvokeCommandAction Command="{Binding AnswerThankTapped, Mode=OneWay}"/>
+                    </core:EventTriggerBehavior>
+                </interactivity:Interaction.Behaviors>
+            </AppBarButton>
+            <!-- Not Helpful button -->
+            <AppBarButton Icon="Flag" Label="{Binding Path=Relationship.IsNotHelp, Converter={StaticResource NoHelpConverter}}"
+                          Visibility="{Binding Path=Theme.NotHelpfulButtonVisiblity, Source={StaticResource ThemeHelper}}">
+                <AppBarButton.Foreground>
+                    <SolidColorBrush Color="{Binding Path=Relationship.IsNotHelp, Converter={StaticResource BoolToHighlightConverter}}"/>
+                </AppBarButton.Foreground>
+                <interactivity:Interaction.Behaviors>
+                    <core:EventTriggerBehavior EventName="Tapped">
+                        <core:InvokeCommandAction Command="{Binding AnswerNoHelpTapped, Mode=OneWay}"/>
+                    </core:EventTriggerBehavior>
+                </interactivity:Interaction.Behaviors>
+            </AppBarButton>
+            <!-- add to collection button -->
+            <AppBarButton Icon="OutlineStar" Label="加入收藏" Flyout="{StaticResource CollectionFlyout}"
+                          Visibility="{Binding Path=Theme.AddToCollectionButtonVisiblity, Source={StaticResource ThemeHelper}}">
+                <AppBarButton.Foreground>
+                    <SolidColorBrush Color="{Binding Path=Relationship.IsFavorited, Converter={StaticResource BoolToHighlightConverter}}"/>
+                </AppBarButton.Foreground>
+            </AppBarButton>
+            <!-- comment button -->
             <AppBarButton Icon="Comment" Label="{Binding Path=Detail.CommentCount, Converter={StaticResource CommentsCountConverter}}"
                           Foreground="{StaticResource AppBarForeBrush}"
-                          Tapped="ShowComments_OnTapped"/>
+                          Tapped="ShowComments_OnTapped"
+                          Visibility="{Binding Path=Theme.CommentButtonVisiblity, Source={StaticResource ThemeHelper}}"/>
+            <!-- Share to Wechat Button-->
+            <AppBarButton Icon="Globe" Label="分享至微信"
+                          Visibility="{Binding Path=Theme.ShareToWechatButtonVisiblity, Source={StaticResource ThemeHelper}}">
+                <interactivity:Interaction.Behaviors>
+                    <core:EventTriggerBehavior EventName="Tapped">
+                        <core:InvokeCommandAction Command="{Binding ShareViaWeChat, Mode=OneWay}"/>
+                    </core:EventTriggerBehavior>
+                </interactivity:Interaction.Behaviors>
+            </AppBarButton>            
+            <!-- Open with Edge Button-->
+            <AppBarButton Icon="NewWindow" Label="Edge 打开"
+                          Visibility="{Binding Path=Theme.OpenWithEdgeButtonVisiblity, Source={StaticResource ThemeHelper}}">
+                <interactivity:Interaction.Behaviors>
+                    <core:EventTriggerBehavior EventName="Tapped">
+                        <core:InvokeCommandAction Command="{Binding OpenWithEdge, Mode=OneWay}"/>
+                    </core:EventTriggerBehavior>
+                </interactivity:Interaction.Behaviors>
+            </AppBarButton>
 
             <CommandBar.SecondaryCommands>
-                <AppBarButton Icon="Globe" Label="分享至微信">
+                <!-- share to wechat button -->    
+                <AppBarButton Icon="Globe" Label="分享至微信"
+                              Visibility="{Binding Path=Theme.SecondaryShareToWechatButtonVisiblity, Source={StaticResource ThemeHelper}}">
                     <interactivity:Interaction.Behaviors>
                         <core:EventTriggerBehavior EventName="Tapped">
                             <core:InvokeCommandAction Command="{Binding ShareViaWeChat, Mode=OneWay}"/>
                         </core:EventTriggerBehavior>
                     </interactivity:Interaction.Behaviors>
                 </AppBarButton>
-                <AppBarButton Icon="NewWindow" Label="Open with Edge">
+                <!-- Open With Edge Button -->
+                <AppBarButton Icon="NewWindow" Label="Edge 打开"
+                              Visibility="{Binding Path=Theme.SecondaryOpenWithEdgeButtonVisiblity, Source={StaticResource ThemeHelper}}">
                     <interactivity:Interaction.Behaviors>
                         <core:EventTriggerBehavior EventName="Tapped">
                             <core:InvokeCommandAction Command="{Binding OpenWithEdge, Mode=OneWay}"/>
                         </core:EventTriggerBehavior>
                     </interactivity:Interaction.Behaviors>
                 </AppBarButton>
-                <AppBarButton Icon="Like" Label="{Binding Path=Relationship.IsThanked, Converter={StaticResource ThankedConverter}}">
-<!--                   <AppBarButton.Foreground>-->
-<!--                       <SolidColorBrush Color="{Binding Path=Relationship.IsThanked, Converter={StaticResource BoolToHighlightConverter}}"/>-->
-<!--                   </AppBarButton.Foreground>-->
-                   <interactivity:Interaction.Behaviors>
+                <!-- Like Button -->
+                <AppBarButton Label="{Binding Path=Relationship.IsThanked, Converter={StaticResource ThankedConverter}}"
+                              Visibility="{Binding Path=Theme.SecondaryThanksButtonVisiblity, Source={StaticResource ThemeHelper}}">
+                    <interactivity:Interaction.Behaviors>
                        <core:EventTriggerBehavior EventName="Tapped">
                            <core:InvokeCommandAction Command="{Binding AnswerThankTapped, Mode=OneWay}"/>
                        </core:EventTriggerBehavior>
                    </interactivity:Interaction.Behaviors>
                 </AppBarButton>
-                <AppBarButton Icon="Flag" Label="{Binding Path=Relationship.IsNotHelp, Converter={StaticResource NoHelpConverter}}">
-<!--                    <AppBarButton.Foreground>-->
-<!--                        <SolidColorBrush Color="{Binding Path=Relationship.IsNotHelp, Converter={StaticResource BoolToHighlightConverter}}"/>-->
-<!--                    </AppBarButton.Foreground>-->
+                <!-- Not Helpful Button -->
+                <AppBarButton Icon="Flag" Label="{Binding Path=Relationship.IsNotHelp, Converter={StaticResource NoHelpConverter}}"
+                              Visibility="{Binding Path=Theme.SecondaryNotHelpfulButtonVisiblity, Source={StaticResource ThemeHelper}}">
                     <interactivity:Interaction.Behaviors>
                         <core:EventTriggerBehavior EventName="Tapped">
                             <core:InvokeCommandAction Command="{Binding AnswerNoHelpTapped, Mode=OneWay}"/>
                         </core:EventTriggerBehavior>
                     </interactivity:Interaction.Behaviors>
                 </AppBarButton>
-                <AppBarButton Icon="OutlineStar" Label="加入收藏" Flyout="{StaticResource CollectionFlyout}">
-<!--                    <AppBarButton.Foreground>-->
-<!--                        <SolidColorBrush Color="{Binding Path=Relationship.IsFavorited, Converter={StaticResource BoolToHighlightConverter}}"/>-->
-<!--                    </AppBarButton.Foreground>-->
-                </AppBarButton>
+                <!-- add to collection Button-->
+                <AppBarButton Icon="OutlineStar" Label="加入收藏" Flyout="{StaticResource CollectionFlyout}"
+                              Visibility="{Binding Path=Theme.SecondaryAddToCollectionButtonVisiblity, Source={StaticResource ThemeHelper}}"/>
+                <!-- comment button -->
+                <AppBarButton Icon="Comment" Label="{Binding Path=Detail.CommentCount, Converter={StaticResource CommentsCountConverter}}"
+                          Foreground="{StaticResource AppBarForeBrush}"
+                          Tapped="ShowComments_OnTapped"
+                          Visibility="{Binding Path=Theme.SecondaryCommentButtonVisiblity, Source={StaticResource ThemeHelper}}"/>
             </CommandBar.SecondaryCommands>
         </CommandBar>   
     </Grid>

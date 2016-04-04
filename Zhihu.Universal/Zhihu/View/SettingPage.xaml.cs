@@ -162,5 +162,6 @@ namespace Zhihu.View
         {
             NavHelper.OpenLinkWithEdge = !NavHelper.OpenLinkWithEdge;
         }
+
     }
 }
