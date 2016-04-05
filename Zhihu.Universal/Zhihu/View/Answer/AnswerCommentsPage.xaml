@@ -62,13 +62,15 @@
                     <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
                 <TextBlock Grid.Column="0" Grid.ColumnSpan="2" Text="评论" FontSize="22" Foreground="{StaticResource FeedTitleBrush}" HorizontalAlignment="Center"/>
-                <TextBlock Grid.Column="1" Margin="0 0 20 0" Text="写评论" FontSize="22" Foreground="{StaticResource FeedSummaryBrush}"
-                           Tapped="CommentButton_Tapped"/>
-            </Grid>
+             </Grid>
         </DataTemplate>
     </Page.Resources>
     
     <Grid Background="{StaticResource PageBackBrush}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
@@ -96,5 +98,13 @@
                 </ListView.ItemTemplate>
             </ListView>
         </Grid>
+        <CommandBar Grid.Row="1" ClosedDisplayMode="Compact" 
+                    IsTapEnabled="True" IsOpen="False" IsSticky="False"
+                    Background="{StaticResource AppBarBackBrush}"
+                    Foreground="{StaticResource AppBarForeBrush}"
+                    HorizontalAlignment="Stretch" 
+                    HorizontalContentAlignment="Stretch">
+            <AppBarButton Icon="Send" Label="发评论" Tapped="CommentButton_Tapped" />
+        </CommandBar>
     </Grid>
 </Page>
