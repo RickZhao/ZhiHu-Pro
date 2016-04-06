@@ -50,6 +50,11 @@ namespace Zhihu.Common.Helper
             },
             new VerbModel()
             {
+                Verbs = new List<string>() {"QUESTION_ASK_PEOPLE_ANSWER", },
+                Display = "邀请你回答问题"
+            },
+            new VerbModel()
+            {
                 Verbs = new List<string>() { "QUESTION_SUGGEST_EDIT", },
                 Display ="提问被建议重新编辑",
             },
