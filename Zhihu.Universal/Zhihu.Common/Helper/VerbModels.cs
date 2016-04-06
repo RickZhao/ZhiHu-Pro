@@ -50,6 +50,11 @@ namespace Zhihu.Common.Helper
             },
             new VerbModel()
             {
+                Verbs = new List<string>() { "COMMENT_LIKE_IN_ARTICLE", },
+                Display = "赞了你文章中的评论",
+            },
+            new VerbModel()
+            {
                 Verbs = new List<string>() {"QUESTION_ASK_PEOPLE_ANSWER", },
                 Display = "邀请你回答问题"
             },
