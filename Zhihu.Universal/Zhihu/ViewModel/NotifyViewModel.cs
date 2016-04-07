@@ -134,6 +134,7 @@ namespace Zhihu.ViewModel
         public RelayCommand<NotifyItem> HasReadContent { get; private set; }
 
         public RelayCommand RefreshNotifies { get; private set; }
+        public RelayCommand HasReadLikes { get; private set; }
         public RelayCommand RefreshLikes { get; private set; }
         public RelayCommand RefreshChats { get; private set; }
 
@@ -149,6 +150,7 @@ namespace Zhihu.ViewModel
             CheckUnreadFollows = new RelayCommand(CheckUnreadFollowsMethod);
             HasReadContents = new RelayCommand(HasReadContentsMethod);
             HasReadFollows = new RelayCommand(HasReadFollowsMethod);
+            HasReadLikes = new RelayCommand(HasReadLikesMethod);
             HasReadContent = new RelayCommand<NotifyItem>(HasReadContentMethod);
 
             RefreshNotifies = new RelayCommand(RefreshNotifiesMethod);
