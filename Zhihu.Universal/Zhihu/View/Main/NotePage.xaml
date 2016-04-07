@@ -116,6 +116,11 @@
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
+                    <interactivity:Interaction.Behaviors>
+                        <core:EventTriggerBehavior EventName="Loaded">
+                            <core:InvokeCommandAction Command="{Binding Notify.HasReadLikes, Mode=OneWay}"/>
+                        </core:EventTriggerBehavior>
+                    </interactivity:Interaction.Behaviors>
 
                     <ProgressBar Grid.Row="0" 
                                  Background="{StaticResource ProgressBackBrush}"
@@ -139,7 +144,7 @@
                                     <itemView:NotifyView>
                                         <interactivity:Interaction.Behaviors>
                                             <core:EventTriggerBehavior EventName="Tapped">
-                                                <core:InvokeCommandAction Command="{Binding Notify.HasReadContent}"
+                                                <core:InvokeCommandAction Command="{Binding Notify.HasReadLikes}"
                                                                                   CommandParameter="{Binding}"/>
                                             </core:EventTriggerBehavior>
                                         </interactivity:Interaction.Behaviors>
