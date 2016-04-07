@@ -18,7 +18,7 @@ namespace Zhihu.Common.Service.Design
             throw new NotImplementedException();
         }
 
-        public Task<OperationResult> HasReadContentsAsync(String access)
+        public Task<OperationResult> DismissContentsNotifyAsync(String access)
         {
             throw new NotImplementedException();
         }
@@ -28,17 +28,17 @@ namespace Zhihu.Common.Service.Design
             throw new NotImplementedException();
         }
 
-        public Task<OperationResult> HasReadFollowsAsync(string access)
+        public Task<OperationResult> DismissFollowsNotifyAsync(string access)
         {
             throw new NotImplementedException();
         }
 
-        public Task<OperationResult> HasReadLikeAsync(string access)
+        public Task<OperationResult> DismissLikeNotifyAsync(string access)
         {
             throw new NotImplementedException();
         }
 
-        public Task<NotifyItemResult> HasReadContentAsync(String access, String contentId)
+        public Task<NotifyItemResult> DismissContentNotifyAsync(String access, String contentId)
         {
             throw new NotImplementedException();
         }
