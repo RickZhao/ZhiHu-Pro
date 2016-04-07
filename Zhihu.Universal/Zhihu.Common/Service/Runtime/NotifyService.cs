@@ -50,6 +50,14 @@ namespace Zhihu.Common.Service.Runtime
             return result;
         }
 
+        public async Task<OperationResult> HasReadLikeAsync(string access)
+        {
+            var api = new NotifyApi();
+            var result = await api.HasReadLikessAsync(access);
+
+            return result;
+        } 
+
         public async Task<NotifyItemResult> HasReadContentAsync(String access, String contentId)
         {
             var api = new NotifyApi();

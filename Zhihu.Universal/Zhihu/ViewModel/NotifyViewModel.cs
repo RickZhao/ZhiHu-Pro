@@ -288,6 +288,8 @@ namespace Zhihu.ViewModel
 
             Debug.WriteLine(Regex.Unescape(result.Error.Message));
 
+            HasReadLikesMethod();
+
             return null;
         }
 
@@ -341,6 +343,8 @@ namespace Zhihu.ViewModel
             {
                 Likes.Insert(i, newLikes[i]);
             }
+
+            HasReadLikesMethod();
         }
 
         private async Task<ListResultBase> GetMoreChats(String request)
@@ -426,6 +430,13 @@ namespace Zhihu.ViewModel
             if (null == _notify) return;
 
             var result = await _notify.HasReadContentsAsync(LoginUser.Current.Token);
+        }
+
+        private async void HasReadLikesMethod()
+        {
+            if (null == _notify) return;
+
+            var result = await _notify.HasReadLikeAsync(LoginUser.Current.Token);
         }
 
         private async void HasReadContentMethod(NotifyItem notifyItem)
