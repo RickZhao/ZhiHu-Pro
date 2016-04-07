@@ -13,6 +13,7 @@ namespace Zhihu.Common.Service
         Task<NotifiesResult> CheckLikesAync(String access, String request, Boolean autoCache = false);
         Task<OperationResult> HasReadContentsAsync(String access);
         Task<OperationResult> HasReadFollowsAsync(String access);
+        Task<OperationResult> HasReadLikeAsync(String access);
         Task<NotifyItemResult> HasReadContentAsync(String access, String contentId);
     }
 }
