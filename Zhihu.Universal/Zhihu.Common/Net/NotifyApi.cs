@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
@@ -89,12 +90,15 @@ namespace Zhihu.Common.Net
 
             var response = await http.PutAsync(Utility.Instance.BaseUri, "notifications/contents", access, body);
 
+            Debug.WriteLine("requesting notifications/content to dismiss all content notifications");
+
             if (false == String.IsNullOrEmpty(response.Json))
             {
                 var json = response.Json;
 
                 var obj = JsonConvert.DeserializeObject<Operation>(json);
 
+                Debug.WriteLine("Content notification dismissed successfully");
                 return new OperationResult(obj);
             }
             else
@@ -114,12 +118,15 @@ namespace Zhihu.Common.Net
 
             var response = await http.PutAsync(Utility.Instance.BaseUri, "notifications/unread_follows", access, body);
 
+            Debug.WriteLine("requesting notifications/unread_follows to dismiss all follows notifications");
+
             if (false == String.IsNullOrEmpty(response.Json))
             {
                 var json = response.Json;
 
                 var obj = JsonConvert.DeserializeObject<Operation>(json);
 
+                Debug.WriteLine("follows notification dismissed successfully");
                 return new OperationResult(obj);
             }
             else
@@ -139,12 +146,15 @@ namespace Zhihu.Common.Net
 
             var response = await http.PutAsync(Utility.Instance.BaseUri, "notifications/likes", access, body);
 
+            Debug.WriteLine("requesting notifications/likes to dismiss all likes notifications");
+
             if (false == String.IsNullOrEmpty(response.Json))
             {
                 var json = response.Json;
 
                 var obj = JsonConvert.DeserializeObject<Operation>(json);
 
+                Debug.WriteLine("likes notification dismissed successfully");
                 return new OperationResult(obj);
             }
             else
