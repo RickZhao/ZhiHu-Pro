@@ -11,9 +11,9 @@ namespace Zhihu.Common.Service
         Task<NotifiesResult> CheckFollowsAsync(String access, String request, Boolean autoCache = false);
         Task<NotifiesResult> CheckNotifiesAsync(String access, String request, Boolean autoCache = false);
         Task<NotifiesResult> CheckLikesAync(String access, String request, Boolean autoCache = false);
-        Task<OperationResult> HasReadContentsAsync(String access);
-        Task<OperationResult> HasReadFollowsAsync(String access);
-        Task<OperationResult> HasReadLikeAsync(String access);
-        Task<NotifyItemResult> HasReadContentAsync(String access, String contentId);
+        Task<OperationResult> DismissContentsNotifyAsync(String access);
+        Task<OperationResult> DismissFollowsNotifyAsync(String access);
+        Task<OperationResult> DismissLikeNotifyAsync(String access);
+        Task<NotifyItemResult> DismissContentNotifyAsync(String access, String contentId);
     }
 }

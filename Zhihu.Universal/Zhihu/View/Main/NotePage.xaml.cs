@@ -182,9 +182,9 @@ namespace Zhihu.View.Main
             var notifyVm = mainVm.Notify as NotifyViewModel;
             if (notifyVm == null) return;
 
-            if (notifyVm.HasReadContent.CanExecute(item))
+            if (notifyVm.DismissContentNotify.CanExecute(item))
             {
-                notifyVm.HasReadContent.Execute(item);
+                notifyVm.DismissContentNotify.Execute(item);
             }
         }
 

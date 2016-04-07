@@ -80,7 +80,7 @@ namespace Zhihu.Common.Net
             }
         }
 
-        internal async Task<OperationResult> HasReadContentsAsync(String access)
+        internal async Task<OperationResult> DismissContentsNotifyAsync(String access)
         {
             var http = new HttpUtility();
 
@@ -105,7 +105,7 @@ namespace Zhihu.Common.Net
             }
         }
 
-        internal async Task<OperationResult> HasReadFollowsAsync(String access)
+        internal async Task<OperationResult> DismissFollowsNotifyAsync(String access)
         {
             var http = new HttpUtility();
 
@@ -130,7 +130,7 @@ namespace Zhihu.Common.Net
             }
         }
 
-        internal async Task<OperationResult> HasReadLikessAsync(String access)
+        internal async Task<OperationResult> DismissLikesNotifyAsync(String access)
         {
             var http = new HttpUtility();
 
@@ -155,7 +155,7 @@ namespace Zhihu.Common.Net
             }
         }
 
-        internal async Task<NotifyItemResult> HasReadContentAsync(String access, String contentId)
+        internal async Task<NotifyItemResult> DismissContentNotifyAsync(String access, String contentId)
         {
             var http = new HttpUtility();
 
