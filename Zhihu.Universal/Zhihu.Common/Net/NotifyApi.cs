@@ -130,6 +130,31 @@ namespace Zhihu.Common.Net
             }
         }
 
+        internal async Task<OperationResult> HasReadLikessAsync(String access)
+        {
+            var http = new HttpUtility();
+
+            var body = new StringContent("action=read_all");
+            body.Headers.ContentType = new MediaTypeHeaderValue("application/x-www-form-urlencoded");
+
+            var response = await http.PutAsync(Utility.Instance.BaseUri, "notifications/likes", access, body);
+
+            if (false == String.IsNullOrEmpty(response.Json))
+            {
+                var json = response.Json;
+
+                var obj = JsonConvert.DeserializeObject<Operation>(json);
+
+                return new OperationResult(obj);
+            }
+            else
+            {
+                var json = response.Error;
+
+                return new OperationResult(new Exception(json));
+            }
+        }
+
         internal async Task<NotifyItemResult> HasReadContentAsync(String access, String contentId)
         {
             var http = new HttpUtility();

@@ -33,9 +33,15 @@ namespace Zhihu.Common.Service.Design
             throw new NotImplementedException();
         }
 
+        public Task<OperationResult> HasReadLikeAsync(string access)
+        {
+            throw new NotImplementedException();
+        }
+
         public Task<NotifyItemResult> HasReadContentAsync(String access, String contentId)
         {
             throw new NotImplementedException();
         }
+
     }
 }
