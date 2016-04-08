@@ -181,7 +181,7 @@ namespace Zhihu.View
         {
             var mainStatus = new MainStatus(AdaptiveStates.CurrentState != DefaultState, GetNavFrame());
 
-            await Task.Delay(1000);
+            await Task.Delay(200);
 
             Messenger.Default.Send(mainStatus);
         }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 
 using Windows.UI.Core;
 using Windows.UI.Xaml;
@@ -84,9 +85,11 @@ namespace Zhihu.View.Answer
             UpdateBackButton();
         }
 
-        private void VoteFlyout_OnTapped(object sender, TappedRoutedEventArgs e)
+        private async void VoteFlyout_OnTapped(object sender, TappedRoutedEventArgs e)
         {
-            //VoteFlyout.Hide();
+            await Task.Delay(400);
+
+            VoteFlyout.Hide();
         }
 
         private void CollectCancel_OnTapped(object sender, TappedRoutedEventArgs e)
