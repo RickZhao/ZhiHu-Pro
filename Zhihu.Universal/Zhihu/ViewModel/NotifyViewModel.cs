@@ -286,6 +286,8 @@ namespace Zhihu.ViewModel
 
             Debug.WriteLine(Regex.Unescape(result.Error.Message));
 
+            HasReadLikesMethod();
+
             return null;
         }
 
@@ -339,6 +341,7 @@ namespace Zhihu.ViewModel
             {
                 Likes.Insert(i, newLikes[i]);
             }
+
         }
 
         private async Task<ListResultBase> GetMoreChats(String request)
