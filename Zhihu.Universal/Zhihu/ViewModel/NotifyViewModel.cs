@@ -129,11 +129,12 @@ namespace Zhihu.ViewModel
 
         public RelayCommand CheckUnreadFollows { get; private set; }
 
-        public RelayCommand HasReadFollows { get; private set;}
-        public RelayCommand HasReadContents { get; private set; }
-        public RelayCommand<NotifyItem> HasReadContent { get; private set; }
+        public RelayCommand DismissFollowsNotify { get; private set;}
+        public RelayCommand DismissContentsNotify { get; private set; }
+        public RelayCommand<NotifyItem> DismissContentNotify { get; private set; }
 
         public RelayCommand RefreshNotifies { get; private set; }
+        public RelayCommand DismissLikesNotify { get; private set; }
         public RelayCommand RefreshLikes { get; private set; }
         public RelayCommand RefreshChats { get; private set; }
 
@@ -147,9 +148,10 @@ namespace Zhihu.ViewModel
             Chats = new IncrementalLoading<Chat>(GetMoreChats, "inbox", "limit=20&after_id=", false);
 
             CheckUnreadFollows = new RelayCommand(CheckUnreadFollowsMethod);
-            HasReadContents = new RelayCommand(HasReadContentsMethod);
-            HasReadFollows = new RelayCommand(HasReadFollowsMethod);
-            HasReadContent = new RelayCommand<NotifyItem>(HasReadContentMethod);
+            DismissContentsNotify = new RelayCommand(DismissContentsNotifyMethod);
+            DismissFollowsNotify = new RelayCommand(DismissFollowsNotifyMethod);
+            DismissLikesNotify = new RelayCommand(DismissLikesNotifyMethod);
+            DismissContentNotify = new RelayCommand<NotifyItem>(DismissContentNotifyMethod);
 
             RefreshNotifies = new RelayCommand(RefreshNotifiesMethod);
             RefreshLikes = new RelayCommand(RefreshLikesMethod);
@@ -191,8 +193,6 @@ namespace Zhihu.ViewModel
             }
 
             FollowsVisible = Follows.Count > 0 ? Visibility.Visible : Visibility.Collapsed;
-            
-            HasReadFollowsMethod();
         }
 
         private async Task<ListResultBase> GetMoreNotifies(String request)
@@ -212,8 +212,6 @@ namespace Zhihu.ViewModel
             ToasteIndicator.Instance.Show(String.Empty, result.Error.Message, null, 3);
 
             Debug.WriteLine(Regex.Unescape(result.Error.Message));
-
-            HasReadContentsMethod();
 
             return null;
         }
@@ -288,8 +286,6 @@ namespace Zhihu.ViewModel
 
             Debug.WriteLine(Regex.Unescape(result.Error.Message));
 
-            HasReadLikesMethod();
-
             return null;
         }
 
@@ -344,7 +340,6 @@ namespace Zhihu.ViewModel
                 Likes.Insert(i, newLikes[i]);
             }
 
-            HasReadLikesMethod();
         }
 
         private async Task<ListResultBase> GetMoreChats(String request)
@@ -418,32 +413,32 @@ namespace Zhihu.ViewModel
             }
         }
 
-        private async void HasReadFollowsMethod()
+        private async void DismissFollowsNotifyMethod()
         {
             if (null == _notify) return;
 
-            var result = await _notify.HasReadFollowsAsync(LoginUser.Current.Token);
+            var result = await _notify.DismissFollowsNotifyAsync(LoginUser.Current.Token);
         }
 
-        private async void HasReadContentsMethod()
+        private async void DismissContentsNotifyMethod()
         {
             if (null == _notify) return;
 
-            var result = await _notify.HasReadContentsAsync(LoginUser.Current.Token);
+            var result = await _notify.DismissContentsNotifyAsync(LoginUser.Current.Token);
         }
 
-        private async void HasReadLikesMethod()
+        private async void DismissLikesNotifyMethod()
         {
             if (null == _notify) return;
 
-            var result = await _notify.HasReadLikeAsync(LoginUser.Current.Token);
+            var result = await _notify.DismissLikeNotifyAsync(LoginUser.Current.Token);
         }
 
-        private async void HasReadContentMethod(NotifyItem notifyItem)
+        private async void DismissContentNotifyMethod(NotifyItem notifyItem)
         {
             if (null == _notify) return;
 
-            var result = await _notify.HasReadContentAsync(LoginUser.Current.Token, notifyItem.Id);
+            var result = await _notify.DismissContentNotifyAsync(LoginUser.Current.Token, notifyItem.Id);
 
             if (result.Error != null)
             {

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
@@ -80,7 +81,7 @@ namespace Zhihu.Common.Net
             }
         }
 
-        internal async Task<OperationResult> HasReadContentsAsync(String access)
+        internal async Task<OperationResult> DismissContentsNotifyAsync(String access)
         {
             var http = new HttpUtility();
 
@@ -89,12 +90,15 @@ namespace Zhihu.Common.Net
 
             var response = await http.PutAsync(Utility.Instance.BaseUri, "notifications/contents", access, body);
 
+            Debug.WriteLine("requesting notifications/content to dismiss all content notifications");
+
             if (false == String.IsNullOrEmpty(response.Json))
             {
                 var json = response.Json;
 
                 var obj = JsonConvert.DeserializeObject<Operation>(json);
 
+                Debug.WriteLine("Content notification dismissed successfully");
                 return new OperationResult(obj);
             }
             else
@@ -105,7 +109,7 @@ namespace Zhihu.Common.Net
             }
         }
 
-        internal async Task<OperationResult> HasReadFollowsAsync(String access)
+        internal async Task<OperationResult> DismissFollowsNotifyAsync(String access)
         {
             var http = new HttpUtility();
 
@@ -114,12 +118,15 @@ namespace Zhihu.Common.Net
 
             var response = await http.PutAsync(Utility.Instance.BaseUri, "notifications/unread_follows", access, body);
 
+            Debug.WriteLine("requesting notifications/unread_follows to dismiss all follows notifications");
+
             if (false == String.IsNullOrEmpty(response.Json))
             {
                 var json = response.Json;
 
                 var obj = JsonConvert.DeserializeObject<Operation>(json);
 
+                Debug.WriteLine("follows notification dismissed successfully");
                 return new OperationResult(obj);
             }
             else
@@ -130,7 +137,7 @@ namespace Zhihu.Common.Net
             }
         }
 
-        internal async Task<OperationResult> HasReadLikessAsync(String access)
+        internal async Task<OperationResult> DismissLikesNotifyAsync(String access)
         {
             var http = new HttpUtility();
 
@@ -139,12 +146,15 @@ namespace Zhihu.Common.Net
 
             var response = await http.PutAsync(Utility.Instance.BaseUri, "notifications/likes", access, body);
 
+            Debug.WriteLine("requesting notifications/likes to dismiss all likes notifications");
+
             if (false == String.IsNullOrEmpty(response.Json))
             {
                 var json = response.Json;
 
                 var obj = JsonConvert.DeserializeObject<Operation>(json);
 
+                Debug.WriteLine("likes notification dismissed successfully");
                 return new OperationResult(obj);
             }
             else
@@ -155,7 +165,7 @@ namespace Zhihu.Common.Net
             }
         }
 
-        internal async Task<NotifyItemResult> HasReadContentAsync(String access, String contentId)
+        internal async Task<NotifyItemResult> DismissContentNotifyAsync(String access, String contentId)
         {
             var http = new HttpUtility();
 

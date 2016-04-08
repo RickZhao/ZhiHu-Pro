@@ -33,35 +33,35 @@ namespace Zhihu.Common.Service.Runtime
             return result;
         }
 
-        public async Task<OperationResult> HasReadContentsAsync(String access)
+        public async Task<OperationResult> DismissContentsNotifyAsync(String access)
         {
             var api = new NotifyApi();
-            var result = await api.HasReadContentsAsync(access);
+            var result = await api.DismissContentsNotifyAsync(access);
 
             return result;
         }
 
 
-        public async Task<OperationResult> HasReadFollowsAsync(String access)
+        public async Task<OperationResult> DismissFollowsNotifyAsync(String access)
         {
             var api = new NotifyApi();
-            var result = await api.HasReadFollowsAsync(access);
+            var result = await api.DismissFollowsNotifyAsync(access);
 
             return result;
         }
 
-        public async Task<OperationResult> HasReadLikeAsync(string access)
+        public async Task<OperationResult> DismissLikeNotifyAsync(string access)
         {
             var api = new NotifyApi();
-            var result = await api.HasReadLikessAsync(access);
+            var result = await api.DismissLikesNotifyAsync(access);
 
             return result;
-        } 
+        }
 
-        public async Task<NotifyItemResult> HasReadContentAsync(String access, String contentId)
+        public async Task<NotifyItemResult> DismissContentNotifyAsync(String access, String contentId)
         {
             var api = new NotifyApi();
-            var result = await api.HasReadContentAsync(access, contentId);
+            var result = await api.DismissContentNotifyAsync(access, contentId);
 
             return result;
         }
