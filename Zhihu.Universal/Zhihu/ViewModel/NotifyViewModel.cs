@@ -286,8 +286,6 @@ namespace Zhihu.ViewModel
 
             Debug.WriteLine(Regex.Unescape(result.Error.Message));
 
-            HasReadLikesMethod();
-
             return null;
         }
 
