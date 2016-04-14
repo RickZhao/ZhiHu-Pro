@@ -166,7 +166,7 @@ namespace Zhihu.Helper
 
         public void RemoveArticle(Int32 articleId)
         {
-            var vmKey = GetKey(typeof(QuestionViewModel), articleId);
+            var vmKey = GetKey(typeof(ArticleViewModel), articleId);
             RemoveViewModel(vmKey);
         }
     }
