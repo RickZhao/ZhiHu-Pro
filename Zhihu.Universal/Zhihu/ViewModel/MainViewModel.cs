@@ -498,7 +498,8 @@ namespace Zhihu.ViewModel
 
         private async void CheckLicenseMethod()
         {
-            IsFormalVip = await LoginUser.Current.IsVip();
+            IsFormalVip = true;
+            //IsFormalVip = await LoginUser.Current.IsVip();
 
             if (IsFormalVip)
             {
