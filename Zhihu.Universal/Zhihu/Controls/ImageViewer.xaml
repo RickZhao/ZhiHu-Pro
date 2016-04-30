@@ -13,21 +13,22 @@
     <Grid x:Name="Root">
         
         <Border Background="Black" Opacity="0.8" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
-
-        <FlipView x:Name="FlipView" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-            <FlipView.ItemTemplate>
-                <DataTemplate>
-                    <Border HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-                        <controls:PlaceholderImage ZoomMode="Enabled" 
-                                                   ImageContent="{Binding}"
-                                                   HorizontalAlignment="Stretch" 
-                                                   VerticalAlignment="Stretch"
-                                                   HorizontalScrollBarVisibility="Auto" 
-                                                   VerticalScrollBarVisibility="Auto"/>
-                    </Border>
-                </DataTemplate>
-            </FlipView.ItemTemplate>
-        </FlipView>
+        <ScrollViewer ZoomMode="Enabled" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <FlipView x:Name="FlipView">
+                <FlipView.ItemTemplate>
+                    <DataTemplate>
+                        <Border HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                            <controls:PlaceholderImage ZoomMode="Enabled" 
+                                                       ImageContent="{Binding}"
+                                                       HorizontalAlignment="Stretch" 
+                                                       VerticalAlignment="Stretch"
+                                                       HorizontalScrollBarVisibility="Auto" 
+                                                       VerticalScrollBarVisibility="Auto"/>
+                        </Border>
+                    </DataTemplate>
+                </FlipView.ItemTemplate>
+            </FlipView>
+        </ScrollViewer>
 
         <Button x:Name="SaveButton" Margin="0 0 0 50" Height="60" Width="60" 
                 Foreground="White" FontSize="32"
