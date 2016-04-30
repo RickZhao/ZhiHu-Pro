@@ -56,7 +56,7 @@ namespace Zhihu.Common.Service.Runtime
             var result = await api.DismissLikesNotifyAsync(access);
 
             return result;
-        } 
+        }
 
         public async Task<NotifyItemResult> DismissContentNotifyAsync(String access, String contentId)
         {

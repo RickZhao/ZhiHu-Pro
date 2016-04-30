@@ -339,6 +339,7 @@ namespace Zhihu.ViewModel
             {
                 Likes.Insert(i, newLikes[i]);
             }
+
         }
 
         private async Task<ListResultBase> GetMoreChats(String request)
