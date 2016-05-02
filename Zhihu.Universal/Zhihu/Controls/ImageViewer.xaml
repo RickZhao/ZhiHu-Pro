@@ -31,7 +31,7 @@
         </ScrollViewer>
 
         <Button x:Name="SaveButton" Margin="0 0 0 50" Height="60" Width="60" 
-                Foreground="White" FontSize="32"
+                Foreground="White" FontSize="32" Background="Black" Opacity=".6"
                 Content="&#xE105;" 
                 HorizontalAlignment="Center" VerticalAlignment="Bottom"
                 Style="{StaticResource BackButtonSmallStyle}">
