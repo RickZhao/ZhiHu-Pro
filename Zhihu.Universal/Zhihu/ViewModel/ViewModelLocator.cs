@@ -336,6 +336,9 @@ namespace Zhihu.ViewModel
                 SimpleIoc.Default.Register<TableViewModel>(
                     () => new TableViewModel(SimpleIoc.Default.GetInstance<ITable>()));
             }
+
+            //client_id=8d5227e0aaaa4797a763ac64e0c3b8&grant_type=password&password=wGDzw8gq&scope&signature=743e009e6824b366ddd49cca3bd82d2a4a6b1007&source=com.zhihu.android&timestamp=1464006542&username=%2B8615210046829&uuid
+            //client_id=8d5227e0aaaa4797a763ac64e0c3b8&grant_type=password&password=wGDzw8gq&scope&signature=0f126af361e29adee751e547f37650ea9c773099&source=com.zhihu.android&timestamp=1464006697&username=%2B8615210046829&uuid
             //var hmasha = new HMACSHA1(Encoding.UTF8.GetBytes("xiaoq931018"));
 
             //var hasValue = hmasha.ComputeHash(Encoding.UTF8.GetBytes("xiaoq416%40163.com5774b305d2ae4469a2c9258956ea49com.zhihu.ios1423568498"));
