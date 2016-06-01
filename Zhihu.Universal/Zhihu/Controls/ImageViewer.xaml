@@ -9,26 +9,23 @@
     mc:Ignorable="d"
     d:DesignHeight="300"
     d:DesignWidth="400">
-    
+
     <Grid x:Name="Root">
-        
+
         <Border Background="Black" Opacity="0.8" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
-        <ScrollViewer ZoomMode="Enabled" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" HorizontalAlignment="Center" VerticalAlignment="Center">
-            <FlipView x:Name="FlipView">
-                <FlipView.ItemTemplate>
-                    <DataTemplate>
-                        <Border HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-                            <controls:PlaceholderImage ZoomMode="Enabled" 
-                                                       ImageContent="{Binding}"
-                                                       HorizontalAlignment="Stretch" 
-                                                       VerticalAlignment="Stretch"
-                                                       HorizontalScrollBarVisibility="Auto" 
-                                                       VerticalScrollBarVisibility="Auto"/>
-                        </Border>
-                    </DataTemplate>
-                </FlipView.ItemTemplate>
-            </FlipView>
-        </ScrollViewer>
+
+        <FlipView x:Name="FlipView" ManipulationMode="TranslateX">
+            <FlipView.ItemTemplate>
+                <DataTemplate>
+                    <controls:PlaceholderImage ZoomMode="Enabled" 
+                                               ImageContent="{Binding}"
+                                               HorizontalAlignment="Center" 
+                                               VerticalAlignment="Center"
+                                               HorizontalScrollBarVisibility="Auto" 
+                                               VerticalScrollBarVisibility="Auto"/>
+                </DataTemplate>
+            </FlipView.ItemTemplate>
+        </FlipView>
 
         <Button x:Name="SaveButton" Margin="0 0 0 50" Height="60" Width="60" 
                 Foreground="White" FontSize="32" Background="Black" Opacity=".6"
